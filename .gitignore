@@ -2,4 +2,5 @@
 /backend/mvnw.cmd
 /backend/.mvnw
 /backend/target
+/frontend/node_modules
 */*.iml
