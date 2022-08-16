@@ -1,0 +1,10 @@
+/.idea/
+/backend/mvnw.cmd
+/backend/.mvnw
+/backend/target
+/frontend/node_modules
+*/*.iml
+/backend/mvnw
+/backend/.mvn/wrapper/maven-wrapper.properties
+/backend/.mvn/wrapper/maven-wrapper.jar
+/frontend.iml
