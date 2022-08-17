@@ -20,4 +20,9 @@ public class SgcController {
     List<Photo> getPhoto() {
         return service.getPhoto();
     }
+
+    @GetMapping("/nasaapi")
+    List<NasaResponse> getPlantsFromNasaApi() {
+        return service.getDataFromNasaApi();
+    }
 }
