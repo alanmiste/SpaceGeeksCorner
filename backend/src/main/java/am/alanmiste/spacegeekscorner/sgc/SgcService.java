@@ -21,7 +21,7 @@ public class SgcService {
         return repo.findAll();
     }
 
-    @Value("https://api.nasa.gov/planetary/apod?api_key=bMfdUJ0SzfYuFaMYYfTdOiFYhyVhgrNS50mbM0A2&count=25")
+    @Value("${nasaApiUrl}")
     private String nasaApiUrl;
     private final WebClient webClient = WebClient.create();
 
