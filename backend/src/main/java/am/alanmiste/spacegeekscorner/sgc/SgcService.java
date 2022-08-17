@@ -17,10 +17,6 @@ public class SgcService {
         this.repo = repo;
     }
 
-    public List<Photo> getPhoto() {
-        return repo.findAll();
-    }
-
     @Value("${nasaApiUrl}")
     private String nasaApiUrl;
     private final WebClient webClient = WebClient.create();

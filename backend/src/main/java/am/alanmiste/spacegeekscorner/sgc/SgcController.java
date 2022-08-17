@@ -16,11 +16,6 @@ public class SgcController {
         this.service = service;
     }
 
-    @GetMapping
-    List<Photo> getPhoto() {
-        return service.getPhoto();
-    }
-
     @GetMapping("/nasaapi")
     List<NasaResponse> getPlantsFromNasaApi() {
         return service.getDataFromNasaApi();

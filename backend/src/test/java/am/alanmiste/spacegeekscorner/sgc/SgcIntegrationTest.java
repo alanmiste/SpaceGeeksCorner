@@ -21,7 +21,6 @@ class SgcIntegrationTest {
     @Autowired
     MockMvc mockMvc;
 
-
     @DirtiesContext
     @Test
     void getDataFromNasaApiTest() throws Exception {
