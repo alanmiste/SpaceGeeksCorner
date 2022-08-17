@@ -17,7 +17,7 @@ public class SgcController {
     }
 
     @GetMapping("/nasaapi")
-    List<NasaResponse> getPlantsFromNasaApi() {
+    List<NasaResponse> getDataFromNasaApi() {
         return service.getDataFromNasaApi();
     }
 }
