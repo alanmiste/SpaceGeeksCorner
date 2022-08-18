@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
+import {HashRouter} from "react-router-dom";
+import Home from "./pages/Home";
 
 function App() {
-    return (
-        <div className="App">
-            <h1>Space Geeks Corner</h1>
-        </div>
-    );
+    return (<>
+        <HashRouter>
+            <Home/>
+        </HashRouter>
+    </>);
 }
 
 export default App;
