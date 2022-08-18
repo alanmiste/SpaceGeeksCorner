@@ -9,7 +9,7 @@ export default function AllRoutes() {
     const sgcHook = useSgc()
     return (<>
         <Routes>
-            <Route path={'/'} element={<Home/>}/>
+            <Route path={'/'} element={<Home sgcHook={sgcHook}/>}/>
             <Route path={'/favourite'} element={<Favourite/>}/>
             <Route path={'/shop'} element={<Shop/>}/>
             <Route path={'/myaccount'} element={<MyAccount/>}/>
