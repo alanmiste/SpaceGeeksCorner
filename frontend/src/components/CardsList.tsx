@@ -7,7 +7,7 @@ type CardsListProps = {
 
 export default function CardsList(props: CardsListProps) {
     return <>
-        {props.nasaApiDataList.map(card =>
+        {props.nasaApiDataList.length === 0 ? "Loading... " : props.nasaApiDataList.map(card =>
             <Card nasaApiData={card}/>
         )}
     </>
