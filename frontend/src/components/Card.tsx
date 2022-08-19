@@ -1,5 +1,7 @@
 import {NasaResponseType} from "../type/NasaResponseType";
 import "./Card.css";
+import {FaShoppingCart} from "react-icons/fa";
+import {MdFavorite} from "react-icons/md";
 
 type CardProps = {
     nasaApiData: NasaResponseType,
@@ -27,8 +29,14 @@ export default function Card(props: CardProps) {
             </div>
 
             <div className="cardContainerFooter">
-                <button>Add to favourite</button>
-                <button>To Shop</button>
+                <button className="cardBtn favouriteBtn">
+                    <MdFavorite/>
+                    <span className="btnHoverText">Add to favourite</span>
+                </button>
+                <button className="cardBtn cartBtn">
+                    <FaShoppingCart/>
+                    <span className="btnHoverText">Move it to cart</span>
+                </button>
             </div>
         </div>
     </>

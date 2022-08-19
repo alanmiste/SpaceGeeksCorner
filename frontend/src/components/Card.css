@@ -63,3 +63,58 @@
 .explanation {
     padding: 1em;
 }
+
+.cardContainerFooter {
+    display: flex;
+    justify-content: space-between;
+    width: 5em;
+}
+
+.cardBtn {
+    position: relative;
+    display: inline-block;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5em;
+}
+
+.favouriteBtn:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.cartBtn:hover {
+    color: lightseagreen;
+    cursor: pointer;
+}
+
+.cardBtn .btnHoverText {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgba(0, 0, 0, 0.47);
+    font-size: 0.5em;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 110%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.cardBtn .btnHoverText::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+.cardBtn:hover .btnHoverText {
+    visibility: visible;
+}
