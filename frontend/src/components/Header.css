@@ -12,7 +12,6 @@ nav {
     align-items: center;
 }
 
-
 .navLink {
     display: flex;
     justify-content: center;
@@ -20,7 +19,6 @@ nav {
     height: 2em;
     align-items: center;
     text-decoration: none;
-    /*border-bottom: #010b14 1px solid;*/
     border-radius: 40px 0 40px 0;
     transition: 0.7s;
 }
@@ -43,11 +41,9 @@ nav {
 .shop:hover, .active.shop {
     color: lightseagreen;
     box-shadow: 13px 13px 19px -13px lightseagreen;
-
 }
 
 .myaccount:hover, .active.myaccount {
     color: goldenrod;
     box-shadow: 13px 13px 19px -13px goldenrod;
-
 }
