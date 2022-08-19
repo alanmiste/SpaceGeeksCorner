@@ -1,0 +1,29 @@
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+}
+
+
+.navLink {
+    display: flex;
+    justify-content: center;
+    width: 8em;
+    height: 2em;
+    align-items: center;
+    text-decoration: none;
+    border-bottom: #010b14 1px solid;
+    border-radius: 40px 0 40px 0;
+}
+
+.navLink:hover {
+    box-shadow: 13px 13px 19px -5px rgba(123, 123, 123, 0.62);
+}

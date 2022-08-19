@@ -27,9 +27,8 @@ export default function Card(props: CardProps) {
             </div>
 
             <div className="cardContainerFooter">
-                <button>Click</button>
-                <button>Click</button>
-                <button>Click</button>
+                <button>Add to favourite</button>
+                <button>To Shop</button>
             </div>
         </div>
     </>
