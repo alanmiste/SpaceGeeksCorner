@@ -30,7 +30,6 @@ nav {
 .home:hover, .active.home {
     color: royalblue;
     box-shadow: 13px 13px 19px -13px royalblue;
-
 }
 
 .favourite:hover, .active.favourite {
