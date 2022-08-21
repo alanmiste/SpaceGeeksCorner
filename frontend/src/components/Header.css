@@ -1,0 +1,48 @@
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+}
+
+.navLink {
+    display: flex;
+    justify-content: center;
+    width: 8em;
+    height: 2em;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 40px 0 40px 0;
+    transition: 0.7s;
+}
+
+.navLink:hover {
+    box-shadow: 13px 13px 19px -5px rgba(123, 123, 123, 0.62);
+}
+
+.home:hover, .active.home {
+    color: royalblue;
+    box-shadow: 13px 13px 19px -13px royalblue;
+}
+
+.favourite:hover, .active.favourite {
+    color: red;
+    box-shadow: 13px 13px 19px -13px rgba(255, 56, 56, 0.43);
+}
+
+.shop:hover, .active.shop {
+    color: lightseagreen;
+    box-shadow: 13px 13px 19px -13px lightseagreen;
+}
+
+.myaccount:hover, .active.myaccount {
+    color: goldenrod;
+    box-shadow: 13px 13px 19px -13px goldenrod;
+}
