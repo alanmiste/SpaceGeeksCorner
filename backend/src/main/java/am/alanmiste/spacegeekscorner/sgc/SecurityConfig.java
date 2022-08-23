@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/users/me").authenticated()
                 .antMatchers("/api/users/**").authenticated()
                 .and().httpBasic();
+
     }
 
 }

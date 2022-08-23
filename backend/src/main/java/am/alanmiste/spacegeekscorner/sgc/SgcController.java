@@ -1,8 +1,8 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -10,14 +10,29 @@ import java.util.List;
 @RequestMapping(path = "api/sgc")
 public class SgcController {
 
-    private final SgcService service;
+    private final SgcService sgcService;
 
-    public SgcController(SgcService service) {
-        this.service = service;
+    public SgcController(SgcService sgcService) {
+        this.sgcService = sgcService;
     }
 
     @GetMapping("/nasaapi")
     List<NasaResponse> getDataFromNasaApi() {
-        return service.getDataFromNasaApi();
+        return sgcService.getDataFromNasaApi();
+    }
+
+    @PostMapping
+    public ResponseEntity<UserItem> addItem(
+            @RequestBody UserItem userItem
+    ) {
+        UserItem savedItem = sgcService.addItem(userItem);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(savedItem);
+    }
+
+    @GetMapping
+    public List<UserItem> listUserItems() {
+        return sgcService.listUserItems();
     }
 }

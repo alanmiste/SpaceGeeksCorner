@@ -2,5 +2,5 @@ package am.alanmiste.spacegeekscorner.sgc;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface SgcRepository extends MongoRepository<NasaResponse, String> {
+public interface SgcRepository extends MongoRepository<UserItem, String> {
 }
