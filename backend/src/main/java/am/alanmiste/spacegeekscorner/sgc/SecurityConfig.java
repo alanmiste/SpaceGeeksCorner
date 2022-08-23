@@ -30,7 +30,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
-                .antMatchers("/api/sgc").permitAll()
+                .antMatchers("/api/sgc/nasaapi").permitAll()
+                .antMatchers("/api/users/login").permitAll()
+                .antMatchers("/api/users/logout").permitAll()
+                .antMatchers("/api/users/me").authenticated()
                 .antMatchers("/api/users/**").authenticated()
                 .and().httpBasic();
     }
