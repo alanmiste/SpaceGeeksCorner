@@ -12,11 +12,6 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(path = "api/users")
 public class UserController {
 
-    @GetMapping
-    String sayHello() {
-        return "Hello!";
-    }
-
     @GetMapping("login")
     String login() {
         return getUsername();
