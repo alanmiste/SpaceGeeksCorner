@@ -1,8 +1,11 @@
 import Header from "../components/Header";
 
-export default function Favourite() {
+type FavouriteProps = {
+    me: string,
+}
+export default function Favourite(props: FavouriteProps) {
     return <>
-        <Header/>
+        <Header me={props.me}/>
         <p>you are in Favourite</p>
     </>
 }
