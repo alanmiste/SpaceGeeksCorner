@@ -47,7 +47,7 @@ export default function Registration() {
         {
             me ? (
                     me === "anonymousUser" ?
-                        <div className="login" id="loginContainer">
+                        <div className="login">
                             <form onSubmit={login} autoComplete='off' className='form'>
                                 <div className='control'>
                                     <h3>
@@ -90,9 +90,9 @@ export default function Registration() {
                                 </div>
 
                                 <button
-                                    onClick={login}
+                                    // onClick={login}
                                     className='btn block-cube block-cube-hover'
-                                    type='button'>
+                                    type='submit'>
 
                                     <div className='bg-top'>
                                         <div className='bg-inner'></div>
