@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/sgc/nasaapi").permitAll()
                 .antMatchers("/api/users/login").permitAll()
                 .antMatchers("/api/users/logout").permitAll()
-                .antMatchers("/api/users/me").authenticated()
+                .antMatchers("/api/users/me").permitAll()
                 .antMatchers("/api/users/**").authenticated()
                 .and().httpBasic().authenticationEntryPoint(new CustomAuthenticationEntryPoint());
     }

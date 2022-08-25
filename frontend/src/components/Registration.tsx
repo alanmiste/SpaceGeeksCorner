@@ -1,17 +1,22 @@
 import "./Registration.css";
+import {FormEvent, useState} from "react";
 
 type RegistrationProps = {
     me: string,
-    login: () => void,
+    login: (username: string, password: string) => void,
     logout: () => void,
-    setUsername: (username: string) => void,
-    setPassword: (password: string) => void,
 }
 export default function Registration(props: RegistrationProps) {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
+    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        props.login(username, password)
+    }
     return <>
         <div className="login">
-            <form onSubmit={props.login} autoComplete='off' className='form'>
+            <form onSubmit={onSubmit} autoComplete='off' className='form'>
                 <div className='control'>
                     <h3>
                         Sign In
@@ -22,7 +27,7 @@ export default function Registration(props: RegistrationProps) {
                     <input name='username'
                            placeholder='Username'
                            type='text'
-                           onChange={event => props.setUsername(event.target.value)}/>
+                           onChange={event => setUsername(event.target.value)}/>
 
                     <div className='bg-top'>
                         <div className='bg-inner'></div>
@@ -39,7 +44,7 @@ export default function Registration(props: RegistrationProps) {
                     <input name='password'
                            placeholder='Password'
                            type='password'
-                           onChange={event => props.setPassword(event.target.value)}/>
+                           onChange={event => setPassword(event.target.value)}/>
 
                     <div className='bg-top'>
                         <div className='bg-inner'></div>

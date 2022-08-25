@@ -7,8 +7,6 @@ export default function useSgc() {
 
     const [nasaApiData, setNasaApiData] = useState<NasaResponseType[]>([]);
     const [me, setMe] = useState<string>("anonymousUser");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
 
     const getDataFromNasaApi = () => {
         axios.get("/api/sgc/nasaapi")
@@ -26,11 +24,11 @@ export default function useSgc() {
         }, []
     )
 
-    const login = () => {
+    const login = (username: string, password: string) => {
         if (username === "" || password === "")
             toast("Please enter Username and Password")
         else
-            axios.get("api/users/login", {auth: {username, password}})
+            axios.get("/api/users/login", {auth: {username, password}})
                 .then(response => response.data)
                 .then(setMe)
                 .catch(() => toast("Username or password is incorrect."))
@@ -43,10 +41,10 @@ export default function useSgc() {
     }
 
     const logout = () => {
-        axios.get("api/users/logout")
+        axios.get("/api/users/logout")
             .then(response => response.data)
             .then(() => setMe("anonymousUser"))
     }
 
-    return {nasaApiData, me, login, logout, setUsername, setPassword}
+    return {nasaApiData, me, login, logout}
 }

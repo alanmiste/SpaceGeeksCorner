@@ -3,10 +3,8 @@ import Registration from "../components/Registration";
 
 type MyAccountProps = {
     me: string,
-    login: () => void,
+    login: (username: string, password: string) => void,
     logout: () => void,
-    setUsername: (username: string) => void,
-    setPassword: (password: string) => void,
 }
 
 export default function MyAccount(props: MyAccountProps) {
@@ -19,8 +17,7 @@ export default function MyAccount(props: MyAccountProps) {
                     login={props.login}
                     logout={props.logout}
                     me={props.me}
-                    setPassword={props.setPassword}
-                    setUsername={props.setUsername}/>
+                />
                 : <button onClick={props.logout}>Logout</button>
         }
 
