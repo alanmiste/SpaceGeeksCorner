@@ -5,6 +5,7 @@ import {MdFavorite} from "react-icons/md";
 
 type CardProps = {
     nasaApiData: NasaResponseType,
+    me: string,
 }
 
 export default function Card(props: CardProps) {
@@ -27,17 +28,22 @@ export default function Card(props: CardProps) {
                     </div>
                 </div>
             </div>
+            {
+                props.me !== "anonymousUser" ?
+                    <div className="cardContainerFooter">
+                        <button className="cardBtn favouriteBtn">
+                            <MdFavorite/>
+                            <span className="btnHoverText">Add to favourite</span>
+                        </button>
+                        <button className="cardBtn cartBtn">
+                            <FaShoppingCart/>
+                            <span className="btnHoverText">Move it to cart</span>
+                        </button>
+                    </div>
+                    :
+                    <></>
+            }
 
-            <div className="cardContainerFooter">
-                <button className="cardBtn favouriteBtn">
-                    <MdFavorite/>
-                    <span className="btnHoverText">Add to favourite</span>
-                </button>
-                <button className="cardBtn cartBtn">
-                    <FaShoppingCart/>
-                    <span className="btnHoverText">Move it to cart</span>
-                </button>
-            </div>
         </div>
     </>
 }

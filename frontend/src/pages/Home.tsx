@@ -12,6 +12,6 @@ export default function Home(props: HomeProps) {
     return <>
         <Header me={props.me}/>
         <p>you are in Home</p>
-        <CardsList nasaApiDataList={props.sgcHook.nasaApiData}/>
+        <CardsList nasaApiDataList={props.sgcHook.nasaApiData} me={props.me}/>
     </>
 }
