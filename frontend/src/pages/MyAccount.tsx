@@ -14,18 +14,15 @@ export default function MyAccount(props: MyAccountProps) {
         <Header me={props.me}/>
         <p>you are in My Account</p>
         {
-            props.me !== "anonymousUser" ?
-                <button onClick={props.logout}>Logout</button>
-                :
+            props.me === "anonymousUser" ?
                 <Registration
                     login={props.login}
                     logout={props.logout}
                     me={props.me}
                     setPassword={props.setPassword}
                     setUsername={props.setUsername}/>
+                : <button onClick={props.logout}>Logout</button>
         }
 
     </>
 }
-
-// <div className={"rocket"}></div>

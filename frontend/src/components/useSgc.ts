@@ -6,6 +6,9 @@ import {toast} from "react-toastify";
 export default function useSgc() {
 
     const [nasaApiData, setNasaApiData] = useState<NasaResponseType[]>([]);
+    const [me, setMe] = useState<string>("anonymousUser");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     const getDataFromNasaApi = () => {
         axios.get("/api/sgc/nasaapi")
@@ -17,18 +20,20 @@ export default function useSgc() {
     }
 
     useEffect(
-        () => getDataFromNasaApi(), []
+        () => {
+            getDataFromNasaApi()
+            fetchMe()
+        }, []
     )
 
-    const [me, setMe] = useState<string>("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-
     const login = () => {
-        axios.get("api/users/login", {auth: {username, password: password}})
-            .then(response => response.data)
-            .then(setMe)
-            .catch(() => toast("Username or password is incorrect."))
+        if (username === "" || password === "")
+            toast("Please enter Username and Password")
+        else
+            axios.get("api/users/login", {auth: {username, password}})
+                .then(response => response.data)
+                .then(setMe)
+                .catch(() => toast("Username or password is incorrect."))
     }
 
     const fetchMe = () => {
@@ -36,21 +41,6 @@ export default function useSgc() {
             .then(response => response.data)
             .then(setMe)
     }
-
-    useEffect(
-        () => {
-            fetchMe();
-            axios.interceptors.response.use(response => response, error => {
-                const status = error.response ? error.response.status : null;
-                if (status === 401 && !error.config.auth) {
-                    toast("Session timed out")
-                    fetchMe()
-                }
-                return Promise.reject(error)
-            })
-        },
-        []
-    )
 
     const logout = () => {
         axios.get("api/users/logout")
