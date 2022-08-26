@@ -8,13 +8,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SgcService {
-    private final SgcRepository repo;
+    private final SgcRepository sgcRepository;
 
-    public SgcService(SgcRepository repo) {
-        this.repo = repo;
+    public SgcService(SgcRepository sgcRepository) {
+        this.sgcRepository = sgcRepository;
     }
 
     @Value("${nasaApiUrl}")
@@ -31,5 +32,17 @@ public class SgcService {
             return Collections.emptyList();
         return getDataFromApiResult
                 .getBody();
+    }
+
+    public UserItem addItem(UserItem userItem) {
+        return sgcRepository.save(new UserItem(
+                UUID.randomUUID().toString(),
+                userItem.explanation(),
+                userItem.title(),
+                userItem.url()));
+    }
+
+    public List<UserItem> listUserItems() {
+        return sgcRepository.findAll();
     }
 }

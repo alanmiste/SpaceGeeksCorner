@@ -1,8 +1,11 @@
 import Header from "../components/Header";
 
-export default function Shop() {
+type ShopProps = {
+    me: string,
+}
+export default function Shop(props: ShopProps) {
     return <>
-        <Header/>
+        <Header me={props.me}/>
         <p>you are in Shop</p>
     </>
 }
