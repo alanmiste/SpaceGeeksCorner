@@ -23,12 +23,10 @@ export default function Registration(props: RegistrationProps) {
                     </h3>
                 </div>
                 <div className='control block-cube block-input'>
-
                     <input name='username'
                            placeholder='Username'
                            type='text'
                            onChange={event => setUsername(event.target.value)}/>
-
                     <div className='bg-top'>
                         <div className='bg-inner'></div>
                     </div>
@@ -40,12 +38,10 @@ export default function Registration(props: RegistrationProps) {
                     </div>
                 </div>
                 <div className='control block-cube block-input'>
-
                     <input name='password'
                            placeholder='Password'
                            type='password'
                            onChange={event => setPassword(event.target.value)}/>
-
                     <div className='bg-top'>
                         <div className='bg-inner'></div>
                     </div>
@@ -56,11 +52,9 @@ export default function Registration(props: RegistrationProps) {
                         <div className='bg-inner'></div>
                     </div>
                 </div>
-
                 <button
                     className='btn block-cube block-cube-hover'
                     type='submit'>
-
                     <div className='bg-top'>
                         <div className='bg-inner'></div>
                     </div>
@@ -74,7 +68,6 @@ export default function Registration(props: RegistrationProps) {
                         Log In
                     </div>
                 </button>
-
             </form>
         </div>
     </>

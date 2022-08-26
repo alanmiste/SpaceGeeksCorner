@@ -40,5 +40,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/users/**").authenticated()
                 .and().httpBasic().authenticationEntryPoint(new CustomAuthenticationEntryPoint());
     }
-
 }

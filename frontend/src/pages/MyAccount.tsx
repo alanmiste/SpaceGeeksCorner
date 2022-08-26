@@ -20,24 +20,24 @@ export default function MyAccount(props: MyAccountProps) {
                     logout={props.logout}
                     me={props.me}
                 />
-                : <span>
-                <button onClick={props.logout} className='btn block-cube block-cube-hover'
-                        type='submit'>
+                : <div className="logoutBtn">
+                    <button onClick={props.logout} className='btn block-cube block-cube-hover'
+                            type='submit'>
 
-                    <div className='bg-top'>
-                        <div className='bg-inner'></div>
-                    </div>
-                    <div className='bg-right'>
-                        <div className='bg-inner'></div>
-                    </div>
-                    <div className='bg'>
-                        <div className='bg-inner'></div>
-                    </div>
-                    <div className='text'>
-                        Logout
-                    </div>
-                </button>
-                </span>
+                        <div className='bg-top'>
+                            <div className='bg-inner'></div>
+                        </div>
+                        <div className='bg-right'>
+                            <div className='bg-inner'></div>
+                        </div>
+                        <div className='bg'>
+                            <div className='bg-inner'></div>
+                        </div>
+                        <div className='text'>
+                            Logout
+                        </div>
+                    </button>
+                </div>
         }
     </>
 }
