@@ -8,6 +8,15 @@ export default function useSgc() {
 
     const [nasaApiData, setNasaApiData] = useState<NasaResponseType[]>([]);
     const [me, setMe] = useState<string>("anonymousUser");
+    const [userItems, setUserItems] = useState<UserItemType[]>([]);
+    const filteredNasData: UserItemType[] = [];
+
+    const filterNasaData = () => {
+        nasaApiData.forEach(item => {
+            if (item.media_type === "image")
+                filteredNasData.push({explanation: item.explanation, title: item.title, url: item.url})
+        })
+    }
 
     const getDataFromNasaApi = () => {
         axios.get("/api/sgc/nasaapi")
@@ -15,12 +24,14 @@ export default function useSgc() {
                 return response.data
             })
             .then(data => setNasaApiData(data))
+            .then(filterNasaData)
             .catch(error => console.error(error))
     }
 
     useEffect(
         () => {
             getDataFromNasaApi()
+            listUserItems()
             fetchMe()
         }, []
     )
@@ -47,11 +58,16 @@ export default function useSgc() {
             .then(() => setMe("anonymousUser"))
     }
 
+    const listUserItems = () => {
+        axios.get("/api/sgc")
+            .then(response => response.data)
+            .then(data => setUserItems(data))
+    }
+
     const addItem = (explanation: string, title: string, url: string) => {
         const userItem: UserItemType = {explanation: explanation, title: title, url: url}
         return axios.post("/api/sgc", userItem)
-        // .then(getUserItems)
     }
 
-    return {nasaApiData, me, login, logout, addItem}
+    return {nasaApiData, filteredNasData, me, login, logout, addItem, userItems}
 }

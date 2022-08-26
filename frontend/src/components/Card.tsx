@@ -11,10 +11,6 @@ type CardProps = {
 }
 
 export default function Card(props: CardProps) {
-
-    // const handleFavourite = () =>{
-    //
-    // }
     return <>
         <div className="cardContainer">
             <div className="cardContainerHead">
