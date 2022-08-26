@@ -2,14 +2,19 @@ import {NasaResponseType} from "../type/NasaResponseType";
 import "./Card.css";
 import {FaShoppingCart} from "react-icons/fa";
 import {MdFavorite} from "react-icons/md";
+import {AxiosResponse} from "axios";
 
 type CardProps = {
     nasaApiData: NasaResponseType,
     me: string,
+    addItem: (explanation: string, title: string, url: string) => Promise<AxiosResponse<any, any>>,
 }
 
 export default function Card(props: CardProps) {
 
+    // const handleFavourite = () =>{
+    //
+    // }
     return <>
         <div className="cardContainer">
             <div className="cardContainerHead">
@@ -31,7 +36,8 @@ export default function Card(props: CardProps) {
             {
                 props.me !== "anonymousUser" ?
                     <div className="cardContainerFooter">
-                        <button className="cardBtn favouriteBtn">
+                        <button className="cardBtn favouriteBtn"
+                                onClick={() => props.addItem(props.nasaApiData.explanation, props.nasaApiData.title, props.nasaApiData.url)}>
                             <MdFavorite/>
                             <span className="btnHoverText">Add to favourite</span>
                         </button>

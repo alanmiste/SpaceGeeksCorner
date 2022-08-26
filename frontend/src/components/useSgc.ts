@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {NasaResponseType} from "../type/NasaResponseType";
 import {toast} from "react-toastify";
+import {UserItemType} from "../type/UserItemType";
 
 export default function useSgc() {
 
@@ -46,5 +47,11 @@ export default function useSgc() {
             .then(() => setMe("anonymousUser"))
     }
 
-    return {nasaApiData, me, login, logout}
+    const addItem = (explanation: string, title: string, url: string) => {
+        const userItem: UserItemType = {explanation: explanation, title: title, url: url}
+        return axios.post("/api/sgc", userItem)
+        // .then(getUserItems)
+    }
+
+    return {nasaApiData, me, login, logout, addItem}
 }
