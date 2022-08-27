@@ -64,5 +64,5 @@ export default function useSgc() {
         return axios.post("/api/sgc", userItem)
     }
 
-    return {filteredNasaData: filteredNasaData, me, login, logout, addItem, userItems}
+    return {filteredNasaData, me, login, logout, addItem, userItems}
 }
