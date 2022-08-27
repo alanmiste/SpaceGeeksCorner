@@ -3,3 +3,10 @@ export type UserItemType = {
     title: string,
     url: string,
 }
+
+export type UserItemToSave = {
+    username: string,
+    explanation: string,
+    title: string,
+    url: string,
+}

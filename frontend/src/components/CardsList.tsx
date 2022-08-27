@@ -6,7 +6,7 @@ import {UserItemType} from "../type/UserItemType";
 type CardsListProps = {
     filteredNasaData: UserItemType[],
     me: string,
-    addItem: (explanation: string, title: string, url: string) => Promise<AxiosResponse<any, any>>,
+    addItem: (username: string, explanation: string, title: string, url: string) => Promise<AxiosResponse<any, any>>,
 }
 
 export default function CardsList(props: CardsListProps) {

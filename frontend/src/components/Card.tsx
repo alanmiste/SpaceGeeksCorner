@@ -7,7 +7,7 @@ import {UserItemType} from "../type/UserItemType";
 type CardProps = {
     filteredNasaData: UserItemType,
     me: string,
-    addItem: (explanation: string, title: string, url: string) => Promise<AxiosResponse<any, any>>,
+    addItem: (username: string, explanation: string, title: string, url: string) => Promise<AxiosResponse<any, any>>,
 }
 
 export default function Card(props: CardProps) {
@@ -35,7 +35,7 @@ export default function Card(props: CardProps) {
                 props.me !== "anonymousUser" ?
                     <div className="cardContainerFooter">
                         <button className="cardBtn favouriteBtn"
-                                onClick={() => props.addItem(props.filteredNasaData.explanation, props.filteredNasaData.title, props.filteredNasaData.url)}>
+                                onClick={() => props.addItem(props.me, props.filteredNasaData.explanation, props.filteredNasaData.title, props.filteredNasaData.url)}>
                             <MdFavorite/>
                             <span className="btnHoverText">Add to favourite</span>
                         </button>

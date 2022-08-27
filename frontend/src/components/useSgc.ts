@@ -2,13 +2,13 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {NasaResponseType} from "../type/NasaResponseType";
 import {toast} from "react-toastify";
-import {UserItemType} from "../type/UserItemType";
+import {UserItemToSave, UserItemType} from "../type/UserItemType";
 
 export default function useSgc() {
 
     const [nasaApiData, setNasaApiData] = useState<NasaResponseType[]>([]);
     const [me, setMe] = useState<string>("anonymousUser");
-    const [userItems, setUserItems] = useState<UserItemType[]>([]);
+    const [userItems, setUserItems] = useState<UserItemToSave[]>([]);
     const filteredNasaData: UserItemType[] = nasaApiData.map(item => {
         return {explanation: item.explanation, title: item.title, url: item.url}
     });
@@ -59,8 +59,8 @@ export default function useSgc() {
             .then(data => setUserItems(data))
     }
 
-    const addItem = (explanation: string, title: string, url: string) => {
-        const userItem: UserItemType = {explanation: explanation, title: title, url: url}
+    const addItem = (username: string, explanation: string, title: string, url: string) => {
+        const userItem: UserItemToSave = {username: username, explanation: explanation, title: title, url: url}
         return axios.post("/api/sgc", userItem)
     }
 

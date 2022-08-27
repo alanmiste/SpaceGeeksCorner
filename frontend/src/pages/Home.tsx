@@ -8,7 +8,7 @@ type HomeProps = {
         filteredNasaData: UserItemType[],
     },
     me: string,
-    addItem: (explanation: string, title: string, url: string) => Promise<AxiosResponse<any, any>>,
+    addItem: (username: string, explanation: string, title: string, url: string) => Promise<AxiosResponse<any, any>>,
 }
 export default function Home(props: HomeProps) {
     return <>
