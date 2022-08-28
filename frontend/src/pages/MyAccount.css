@@ -1,17 +1,10 @@
-.logoutBtn {
+.logout {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 20vh;
+    padding-top: 10em;
 }
 
 .btn {
     width: 30%;
-    padding: 14px 16px;
-    border: 0;
-    color: #fff;
-    letter-spacing: 0.1em;
-    font-weight: bold;
-    font-family: monospace;
-    font-size: 16px;
 }

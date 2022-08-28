@@ -1,6 +1,8 @@
 import Header from "../components/Header";
 import Registration from "../components/Registration";
 import "./MyAccount.css"
+import {Button} from "@mui/material";
+import React from "react";
 
 type MyAccountProps = {
     me: string,
@@ -20,24 +22,11 @@ export default function MyAccount(props: MyAccountProps) {
                     logout={props.logout}
                     me={props.me}
                 />
-                : <div className="logoutBtn">
-                    <button onClick={props.logout} className='btn block-cube block-cube-hover'
-                            type='submit'>
-
-                        <div className='bg-top'>
-                            <div className='bg-inner'></div>
-                        </div>
-                        <div className='bg-right'>
-                            <div className='bg-inner'></div>
-                        </div>
-                        <div className='bg'>
-                            <div className='bg-inner'></div>
-                        </div>
-                        <div className='text'>
-                            Logout
-                        </div>
-                    </button>
+                : <div className="logout">
+                    <Button type="submit" variant="outlined"
+                            className='btn' onClick={props.logout}>Logout</Button>
                 </div>
+
         }
     </>
 }
