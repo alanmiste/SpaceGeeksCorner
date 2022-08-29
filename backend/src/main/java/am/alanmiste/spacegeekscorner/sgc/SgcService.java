@@ -37,6 +37,7 @@ public class SgcService {
     public UserItem addItem(UserItem userItem) {
         return sgcRepository.save(new UserItem(
                 UUID.randomUUID().toString(),
+                userItem.username(),
                 userItem.explanation(),
                 userItem.title(),
                 userItem.url()));

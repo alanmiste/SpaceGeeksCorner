@@ -1,5 +1,9 @@
 import "./Registration.css";
-import {FormEvent, useState} from "react";
+import React, {FormEvent, useState} from "react";
+import {Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField} from "@mui/material";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
 
 type RegistrationProps = {
     me: string,
@@ -14,60 +18,45 @@ export default function Registration(props: RegistrationProps) {
         event.preventDefault()
         props.login(username, password)
     }
+
+    const [showPassword, setShowPassword] = useState<boolean>(false)
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword)
+    };
+
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+    };
+
     return <>
-        <div className="login">
+        <div>
             <form onSubmit={onSubmit} autoComplete='off' className='form'>
-                <div className='control'>
-                    <h3>
-                        Sign In
-                    </h3>
-                </div>
-                <div className='control block-cube block-input'>
-                    <input name='username'
-                           placeholder='Username'
-                           type='text'
+
+                <h3>Sign In</h3>
+
+                <TextField className='formItem' fullWidth id="outlined-basic" label="Username" variant="outlined"
                            onChange={event => setUsername(event.target.value)}/>
-                    <div className='bg-top'>
-                        <div className='bg-inner'></div>
-                    </div>
-                    <div className='bg-right'>
-                        <div className='bg-inner'></div>
-                    </div>
-                    <div className='bg'>
-                        <div className='bg-inner'></div>
-                    </div>
-                </div>
-                <div className='control block-cube block-input'>
-                    <input name='password'
-                           placeholder='Password'
-                           type='password'
-                           onChange={event => setPassword(event.target.value)}/>
-                    <div className='bg-top'>
-                        <div className='bg-inner'></div>
-                    </div>
-                    <div className='bg-right'>
-                        <div className='bg-inner'></div>
-                    </div>
-                    <div className='bg'>
-                        <div className='bg-inner'></div>
-                    </div>
-                </div>
-                <button
-                    className='btn block-cube block-cube-hover'
-                    type='submit'>
-                    <div className='bg-top'>
-                        <div className='bg-inner'></div>
-                    </div>
-                    <div className='bg-right'>
-                        <div className='bg-inner'></div>
-                    </div>
-                    <div className='bg'>
-                        <div className='bg-inner'></div>
-                    </div>
-                    <div className='text'>
-                        Log In
-                    </div>
-                </button>
+
+                <FormControl fullWidth variant="outlined" className='formItem'>
+                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                    <OutlinedInput type={showPassword ? 'text' : 'password'} id="outlined-basic"
+                                   label="Password"
+                                   onChange={event => setPassword(event.target.value)}
+                                   endAdornment={
+                                       <InputAdornment position="end">
+                                           <IconButton
+                                               aria-label="toggle password visibility"
+                                               onClick={handleClickShowPassword}
+                                               onMouseDown={handleMouseDownPassword}
+                                               edge="end"
+                                           >
+                                               {showPassword ? <VisibilityOff/> : <Visibility/>}
+                                           </IconButton>
+                                       </InputAdornment>
+                                   }/>
+                </FormControl>
+
+                <Button fullWidth type="submit" variant="outlined" className='formItem'>Log In</Button>
             </form>
         </div>
     </>
