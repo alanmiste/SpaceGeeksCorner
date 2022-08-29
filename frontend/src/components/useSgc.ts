@@ -37,12 +37,28 @@ export default function useSgc() {
 
     const login = (username: string, password: string) => {
         if (username === "" || password === "")
-            toast("Please enter Username and Password")
+            toast.warn("Username and Password shouldn't be empty!", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            })
         else
             axios.get("/api/users/login", {auth: {username, password}})
                 .then(response => response.data)
                 .then(setMe)
-                .catch(() => toast("Username or password is incorrect."))
+                .catch(() => toast.error("Username or password is incorrect.", {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                }))
     }
 
     const fetchMe = () => {
@@ -65,6 +81,15 @@ export default function useSgc() {
 
     const addItem = (username: string, explanation: string, title: string, url: string) => {
         const userItem: UserItemToSave = {username: username, explanation: explanation, title: title, url: url}
+        toast.success('Added to favorites successfully!', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+        });
         return axios.post("/api/sgc", userItem)
     }
 
