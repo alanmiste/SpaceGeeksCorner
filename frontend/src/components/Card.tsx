@@ -8,6 +8,7 @@ type CardProps = {
     filteredNasaData: UserItemType,
     me: string,
     addItem: (username: string, explanation: string, title: string, url: string) => Promise<AxiosResponse<any, any>>,
+    favouriteBtnDisplay: boolean,
 }
 
 export default function Card(props: CardProps) {
@@ -35,6 +36,7 @@ export default function Card(props: CardProps) {
                 props.me !== "anonymousUser" ?
                     <div className="cardContainerFooter">
                         <button className="cardBtn favouriteBtn"
+                                style={{'display': `${props.favouriteBtnDisplay ? 'inline' : 'none'}`}}
                                 onClick={() => props.addItem(props.me, props.filteredNasaData.explanation, props.filteredNasaData.title, props.filteredNasaData.url)}>
                             <MdFavorite/>
                             <span className="btnHoverText">Add to favourite</span>

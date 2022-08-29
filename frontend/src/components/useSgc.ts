@@ -9,7 +9,7 @@ export default function useSgc() {
     const [nasaApiData, setNasaApiData] = useState<NasaResponseType[]>([]);
     const [me, setMe] = useState<string>("anonymousUser");
     const [userItems, setUserItems] = useState<UserItemToSave[]>([]);
-    const filteredNasaData: UserItemType[] = nasaApiData.map(item => {
+    const filteredNasaData: UserItemType[] = nasaApiData.filter(element => element.media_type === "image").map(item => {
         return {explanation: item.explanation, title: item.title, url: item.url}
     });
 
@@ -29,6 +29,10 @@ export default function useSgc() {
             listUserItems()
             fetchMe()
         }, []
+    )
+
+    useEffect(
+        () => listUserItems, [userItems]
     )
 
     const login = (username: string, password: string) => {

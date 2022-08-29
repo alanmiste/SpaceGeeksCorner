@@ -24,7 +24,7 @@ export default function SgcNavBar(props: SgcNavBarProps) {
                     <NavLink className="navLink myaccount" to={'/myaccount'}><Avatar
                         sx={{bgcolor: blueGrey[200]}}
                         alt={props.me}
-                        src="/broken-image.jpg"
+                        src="/"
                     />. My Account</NavLink>
                 </nav>
         }
