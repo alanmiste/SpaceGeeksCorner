@@ -9,9 +9,11 @@ export default function useSgc() {
     const [nasaApiData, setNasaApiData] = useState<NasaResponseType[]>([]);
     const [me, setMe] = useState<string>("anonymousUser");
     const [userItems, setUserItems] = useState<UserItemToSave[]>([]);
-    const filteredNasaData: UserItemType[] = nasaApiData.filter(element => element.media_type === "image").map(item => {
-        return {explanation: item.explanation, title: item.title, url: item.url}
-    }).filter(nasaItem => !userItems.find(userItem => userItem.url === nasaItem.url));
+    const filteredNasaData: UserItemType[] = nasaApiData.filter(element => element.media_type === "image")
+        .map(item => {
+            return {explanation: item.explanation, title: item.title, url: item.url}
+        })
+        .filter(nasaItem => !userItems.find(userItem => userItem.url === nasaItem.url));
 
 
     const getDataFromNasaApi = () => {
