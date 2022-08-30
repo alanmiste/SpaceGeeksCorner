@@ -1,6 +1,10 @@
 # Space Geeks Corner
+---
+- Backend: [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=alanmiste_SpaceGeeksCorner-backend&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=alanmiste_SpaceGeeksCorner-backend) 
+- Frontend: [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=alanmiste_SpaceGeeksCorner-frontend&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=alanmiste_SpaceGeeksCorner-frontend)
+- [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=alanmiste_SpaceGeeksCorner-backend&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=alanmiste_SpaceGeeksCorner-backend)
 
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=alanmiste_SpaceGeeksCorner-backend&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=alanmiste_SpaceGeeksCorner-backend) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=alanmiste_SpaceGeeksCorner-backend&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=alanmiste_SpaceGeeksCorner-backend) [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=alanmiste_SpaceGeeksCorner-backend)
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=alanmiste_SpaceGeeksCorner-backend)
 
 Since I am interested in programming, space and design, through this application I try to combine my interests.
 The application will display images from space fetched by the **NASA API** ( you can read more about it in the [Space
