@@ -46,4 +46,12 @@ public class SgcService {
     public List<UserItem> listUserItems() {
         return sgcRepository.findAll();
     }
+
+    public boolean deleteItem(String id) {
+        if (sgcRepository.existsById(id)) {
+            sgcRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }
