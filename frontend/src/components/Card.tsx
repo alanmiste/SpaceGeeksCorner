@@ -2,7 +2,7 @@ import "./Card.css";
 import {FaShoppingCart} from "react-icons/fa";
 import {MdFavorite} from "react-icons/md";
 import {AxiosResponse} from "axios";
-import {UserItemType} from "../type/UserItemType";
+import {UserItemToSave, UserItemType} from "../type/UserItemType";
 import {useState} from "react";
 
 type CardProps = {
@@ -10,6 +10,7 @@ type CardProps = {
     me: string,
     addItem: (username: string, explanation: string, title: string, url: string) => Promise<AxiosResponse<any, any>>,
     favouriteBtnDisplay: boolean,
+    userItemsList: UserItemToSave[],
 }
 
 export default function Card(props: CardProps) {
@@ -17,8 +18,18 @@ export default function Card(props: CardProps) {
     const [cardDisplay, setCardDisplay] = useState<boolean>(true);
 
     const handleAddToFavourite = () => {
-        props.addItem(props.me, props.filteredNasaData.explanation, props.filteredNasaData.title, props.filteredNasaData.url)
-            .then(() => setCardDisplay(!cardDisplay))
+        const userItem: UserItemToSave = {
+            username: props.me, explanation: props.filteredNasaData.explanation,
+            title: props.filteredNasaData.title, url: props.filteredNasaData.url
+        }
+        if (props.userItemsList.includes(userItem))
+            console.log("you have this photo!")
+        else {
+            // userItem.username.push(props.me)
+            props.addItem(props.me, props.filteredNasaData.explanation, props.filteredNasaData.title, props.filteredNasaData.url)
+                .then(() => setCardDisplay(!cardDisplay))
+            console.log("photo added")
+        }
     }
 
     return <>

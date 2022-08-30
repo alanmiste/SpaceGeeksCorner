@@ -8,10 +8,13 @@ export default function useSgc() {
 
     const [nasaApiData, setNasaApiData] = useState<NasaResponseType[]>([]);
     const [me, setMe] = useState<string>("anonymousUser");
-    const [userItems, setUserItems] = useState<UserItemToSave[]>([]);
+    const [userItemsList, setUserItemsList] = useState<UserItemToSave[]>([]);
     const filteredNasaData: UserItemType[] = nasaApiData.filter(element => element.media_type === "image").map(item => {
         return {explanation: item.explanation, title: item.title, url: item.url}
     });
+    const whoLiked: string[] = userItemsList.map(item => {
+        return item.username
+    })
 
 
     const getDataFromNasaApi = () => {
@@ -28,12 +31,13 @@ export default function useSgc() {
             getDataFromNasaApi()
             listUserItems()
             fetchMe()
+            console.log(whoLiked)
         }, []
     )
 
-    useEffect(
-        () => listUserItems, [userItems]
-    )
+    /*  useEffect(
+          () => listUserItems, [userItems]
+      )*/
 
     const login = (username: string, password: string) => {
         if (username === "" || password === "")
@@ -76,10 +80,11 @@ export default function useSgc() {
     const listUserItems = () => {
         axios.get("/api/sgc")
             .then(response => response.data)
-            .then(data => setUserItems(data))
+            .then(data => setUserItemsList(data))
     }
 
     const addItem = (username: string, explanation: string, title: string, url: string) => {
+
         const userItem: UserItemToSave = {username: username, explanation: explanation, title: title, url: url}
         toast.success('Added to favorites successfully!', {
             position: "top-center",
@@ -93,5 +98,5 @@ export default function useSgc() {
         return axios.post("/api/sgc", userItem)
     }
 
-    return {filteredNasaData, me, login, logout, addItem, userItems}
+    return {filteredNasaData, me, login, logout, addItem, userItemsList}
 }

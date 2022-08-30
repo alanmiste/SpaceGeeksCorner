@@ -10,3 +10,10 @@ export type UserItemToSave = {
     title: string,
     url: string,
 }
+
+// export type OneUserItem = {
+//     username: string,
+//     explanation: string,
+//     title: string,
+//     url: string,
+// }
