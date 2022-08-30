@@ -1,5 +1,6 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class SgcIntegrationTest {
     @Autowired
     MockMvc mockMvc;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     @DirtiesContext
     @Test
@@ -92,6 +96,17 @@ class SgcIntegrationTest {
                 .andExpect(content().json("""
                         []
                         """));
+    }
+
+    @DirtiesContext
+    @Test
+    void deleteItemDoesNotExist() throws Exception {
+
+        String id = "123";
+        mockMvc.perform(MockMvcRequestBuilders.delete("http://localhost:8080/api/sgc/" + id)
+                        .with(testUser()).with(csrf()))
+                .andExpect(status().is(404))
+        ;
     }
 
 }
