@@ -3,17 +3,26 @@ import {FaShoppingCart} from "react-icons/fa";
 import {MdFavorite} from "react-icons/md";
 import {AxiosResponse} from "axios";
 import {UserItemType} from "../type/UserItemType";
+import {useState} from "react";
 
 type CardProps = {
     filteredNasaData: UserItemType,
     me: string,
     addItem: (username: string, explanation: string, title: string, url: string) => Promise<AxiosResponse<any, any>>,
+    favouriteBtnDisplay: boolean,
 }
 
 export default function Card(props: CardProps) {
 
+    const [cardDisplay, setCardDisplay] = useState<boolean>(true);
+
+    const handleAddToFavourite = () => {
+        props.addItem(props.me, props.filteredNasaData.explanation, props.filteredNasaData.title, props.filteredNasaData.url)
+            .then(() => setCardDisplay(!cardDisplay))
+    }
+
     return <>
-        <div className="cardContainer">
+        <div className="cardContainer" style={{'display': `${cardDisplay ? 'inherit' : 'none'}`}}>
             <div className="cardContainerHead">
                 <h3>{props.filteredNasaData.title}</h3>
             </div>
@@ -35,7 +44,8 @@ export default function Card(props: CardProps) {
                 props.me !== "anonymousUser" ?
                     <div className="cardContainerFooter">
                         <button className="cardBtn favouriteBtn"
-                                onClick={() => props.addItem(props.me, props.filteredNasaData.explanation, props.filteredNasaData.title, props.filteredNasaData.url)}>
+                                style={{'display': `${props.favouriteBtnDisplay ? 'inline' : 'none'}`}}
+                                onClick={handleAddToFavourite}>
                             <MdFavorite/>
                             <span className="btnHoverText">Add to favourite</span>
                         </button>

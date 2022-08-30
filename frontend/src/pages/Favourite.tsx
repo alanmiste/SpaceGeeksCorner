@@ -13,6 +13,7 @@ export default function Favourite(props: FavouriteProps) {
     return <>
         <Header me={props.me}/>
         <p>you are in Favourite</p>
-        <CardsList filteredNasaData={filteredUserItems} me={props.me} addItem={props.addItem}/>
+        <CardsList filteredNasaData={filteredUserItems} me={props.me}
+                   addItem={props.addItem} favouriteBtnDisplay={false}/>
     </>
 }
