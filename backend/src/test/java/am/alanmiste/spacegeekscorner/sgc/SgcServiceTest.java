@@ -6,8 +6,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class SgcServiceTest {
 
@@ -60,5 +59,19 @@ class SgcServiceTest {
 
         assertThat(actual).hasSameElementsAs(expected);
     }
+
+    @Test
+    void deleteItem() {
+        UserItem userItem = new UserItem("123", "user1",
+                "The planet Mercury resembles a moon.", "Southwest Mercury",
+                "https://apod.nasa.gov/apod/image/0002/merc4_m10.gif");
+
+        when(sgcRepository.existsById(userItem.id())).thenReturn(true);
+        doNothing().when(sgcRepository).deleteById(userItem.id());
+
+        sgcService.deleteItem(userItem.id());
+        verify(sgcRepository).deleteById(userItem.id());
+    }
+
 
 }
