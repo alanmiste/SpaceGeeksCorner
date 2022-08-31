@@ -73,5 +73,16 @@ class SgcServiceTest {
         verify(sgcRepository).deleteById(userItem.id());
     }
 
+    @Test
+    void deleteItemDoseNotExist() {
+        UserItem userItem = new UserItem("123", "user1",
+                "The planet Mercury resembles a moon.", "Southwest Mercury",
+                "https://apod.nasa.gov/apod/image/0002/merc4_m10.gif");
 
+        when(sgcRepository.existsById(userItem.id())).thenReturn(false);
+        doNothing().when(sgcRepository).deleteById(userItem.id());
+
+        sgcService.deleteItem(userItem.id());
+        verify(sgcRepository, times(0)).deleteById(userItem.id());
+    }
 }
