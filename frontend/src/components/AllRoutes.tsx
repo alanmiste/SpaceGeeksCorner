@@ -12,10 +12,12 @@ export default function AllRoutes() {
             <Route path={'/'} element={<Home sgcHook={sgcHook}
                                              me={sgcHook.me}
                                              addItem={sgcHook.addItem}
-                                             favouriteBtnDisplay={true}/>}/>
+                                             favouriteBtnDisplay={true}
+                                             deleteItem={sgcHook.deleteItem}/>}/>
             <Route path={'/favourite'} element={<Favourite me={sgcHook.me}
                                                            addItem={sgcHook.addItem}
-                                                           userItems={sgcHook.userItems}/>}/>
+                                                           userItems={sgcHook.userItems}
+                                                           deleteItem={sgcHook.deleteItem}/>}/>
             <Route path={'/shop'} element={<Shop me={sgcHook.me}/>}/>
             <Route path={'/myaccount'} element={<MyAccount login={sgcHook.login}
                                                            logout={sgcHook.logout}

@@ -4,9 +4,12 @@ export type UserItemType = {
     url: string,
 }
 
-export type UserItemToSave = {
+export type SavedUserItemType = {
+    id: string,
     username: string,
     explanation: string,
     title: string,
     url: string,
 }
+
+export type UserItemToSave = Omit<SavedUserItemType, "id">

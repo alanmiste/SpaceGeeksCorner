@@ -1,6 +1,6 @@
 import "./Card.css";
 import {FaShoppingCart} from "react-icons/fa";
-import {MdFavorite} from "react-icons/md";
+import {MdDeleteForever, MdFavorite} from "react-icons/md";
 import {AxiosResponse} from "axios";
 import {UserItemType} from "../type/UserItemType";
 import {useState} from "react";
@@ -8,8 +8,9 @@ import {useState} from "react";
 type CardProps = {
     filteredNasaData: UserItemType,
     me: string,
-    addItem: (username: string, explanation: string, title: string, url: string) => Promise<AxiosResponse<any, any>>,
+    addItem: (username: string, explanation: string, title: string, url: string) => Promise<AxiosResponse<any>>,
     favouriteBtnDisplay: boolean,
+    deleteItem: (id: string) => void,
 }
 
 export default function Card(props: CardProps) {
@@ -52,6 +53,13 @@ export default function Card(props: CardProps) {
                         <button className="cardBtn cartBtn">
                             <FaShoppingCart/>
                             <span className="btnHoverText">Move it to cart</span>
+                        </button>
+                        <button className="cardBtn deleteBtn"
+                                style={{'display': `${!props.favouriteBtnDisplay ? 'inline' : 'none'}`}}
+                                onClick={() => props.deleteItem(props.filteredNasaData.url)}
+                        >
+                            <MdDeleteForever/>
+                            <span className="btnHoverText">Delete from favourite</span>
                         </button>
                     </div>
                     :
