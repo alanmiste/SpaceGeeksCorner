@@ -98,7 +98,7 @@ export default function useSgc() {
     }
 
     const deleteItem = (url: string) => {
-        const selectedItem = userItems.find(i => i.url === url)
+        const selectedItem = userItems.find(i => i.url === url && i.username === me)
         const id = selectedItem?.id
         return axios.delete(`/api/sgc/${id}`)
             .then(listUserItems)
