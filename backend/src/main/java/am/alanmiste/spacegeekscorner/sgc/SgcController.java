@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/sgc")
+@RequestMapping(path = "/api/sgc")
 public class SgcController {
 
     private final SgcService sgcService;
@@ -34,5 +34,11 @@ public class SgcController {
     @GetMapping
     public List<UserItem> listUserItems() {
         return sgcService.listUserItems();
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteItem(@PathVariable String id) {
+        boolean deleteSuccess = sgcService.deleteItem(id);
+        return new ResponseEntity<>(deleteSuccess ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND);
     }
 }

@@ -10,12 +10,14 @@ type HomeProps = {
     me: string,
     addItem: (username: string, explanation: string, title: string, url: string) => Promise<AxiosResponse<any, any>>,
     favouriteBtnDisplay: boolean,
+    deleteItem: (id: string) => void,
 }
 export default function Home(props: HomeProps) {
     return <>
         <Header me={props.me}/>
         <p>you are in Home</p>
         <CardsList filteredNasaData={props.sgcHook.filteredNasaData} me={props.me}
-                   addItem={props.addItem} favouriteBtnDisplay={props.favouriteBtnDisplay}/>
+                   addItem={props.addItem} favouriteBtnDisplay={props.favouriteBtnDisplay}
+                   deleteItem={props.deleteItem}/>
     </>
 }

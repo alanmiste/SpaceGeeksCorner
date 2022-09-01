@@ -2,13 +2,13 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {NasaResponseType} from "../type/NasaResponseType";
 import {toast} from "react-toastify";
-import {UserItemToSave, UserItemType} from "../type/UserItemType";
+import {SavedUserItemType, UserItemToSave, UserItemType} from "../type/UserItemType";
 
 export default function useSgc() {
 
     const [nasaApiData, setNasaApiData] = useState<NasaResponseType[]>([]);
     const [me, setMe] = useState<string>("anonymousUser");
-    const [userItems, setUserItems] = useState<UserItemToSave[]>([]);
+    const [userItems, setUserItems] = useState<SavedUserItemType[]>([]);
     const filteredNasaData: UserItemType[] = nasaApiData.filter(element => element.media_type === "image")
         .map(item => {
             return {explanation: item.explanation, title: item.title, url: item.url}
@@ -92,10 +92,26 @@ export default function useSgc() {
         });
         return axios.post("/api/sgc", userItem)
             .then((savedUserItem) => {
-                setUserItems([...userItems, userItem])
+                setUserItems([...userItems, savedUserItem.data])
                 return savedUserItem
             })
     }
 
-    return {filteredNasaData, me, login, logout, addItem, userItems}
+    const deleteItem = (url: string) => {
+        const selectedItem = userItems.find(i => i.url === url)
+        const id = selectedItem?.id
+        return axios.delete(`/api/sgc/${id}`)
+            .then(listUserItems)
+            .catch(error => toast.error(error.message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            }))
+    }
+
+    return {filteredNasaData, me, login, logout, addItem, userItems, deleteItem}
 }

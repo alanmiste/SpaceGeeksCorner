@@ -1,5 +1,6 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ class SgcIntegrationTest {
     @Autowired
     MockMvc mockMvc;
 
+    @Autowired
+    ObjectMapper objectMapper;
+
     @DirtiesContext
     @Test
     void getDataFromNasaApiTest() throws Exception {
@@ -31,34 +35,29 @@ class SgcIntegrationTest {
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withBody("""
-                                [
-                                { "copyright": null,
+                                [{ "copyright": null,
                                 "date": "2000-02-13",
-                                "explanation": "The planet Mercury resembles a moon. Mercury's old surface is heavily cratered like many moons.  Mercury is larger than most moons but smaller than Jupiter's moon Ganymede and Saturn's moon Titan.  Mercury is much denser and more massive than any moon, though, because it is made mostly of iron. In fact, the Earth is the only planet more dense.  A visitor to Mercury's surface would see some strange sights.  Because Mercury rotates exactly three times every two orbits around the Sun, and because Mercury's orbit is so elliptical, a visitor to Mercury might see the Sun rise, stop in the sky, go back toward the rising horizon, stop again, and then set quickly over the other horizon.   From Earth, Mercury's proximity to the Sun cause it to be visible only for a short time just after sunset or just before sunrise.",
+                                "explanation": "The planet Mercury resembles a moon. Mercury's old surface is heavily cratered like many moons.",
                                 "hdurl": "https://apod.nasa.gov/apod/image/0002/merc4_m10_big.gif",
                                 "media_type": "image",
                                 "service_version": "v1",
                                 "title": "Southwest Mercury",
-                                "url": "https://apod.nasa.gov/apod/image/0002/merc4_m10.gif"}
-                                ]
+                                "url": "https://apod.nasa.gov/apod/image/0002/merc4_m10.gif"}]
                                 """)
                         .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/sgc/nasaapi"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
-                        [
-                                { "copyright": null,
-                                "date": "2000-02-13",
-                                "explanation": "The planet Mercury resembles a moon. Mercury's old surface is heavily cratered like many moons.  Mercury is larger than most moons but smaller than Jupiter's moon Ganymede and Saturn's moon Titan.  Mercury is much denser and more massive than any moon, though, because it is made mostly of iron. In fact, the Earth is the only planet more dense.  A visitor to Mercury's surface would see some strange sights.  Because Mercury rotates exactly three times every two orbits around the Sun, and because Mercury's orbit is so elliptical, a visitor to Mercury might see the Sun rise, stop in the sky, go back toward the rising horizon, stop again, and then set quickly over the other horizon.   From Earth, Mercury's proximity to the Sun cause it to be visible only for a short time just after sunset or just before sunrise.",
-                                "hdurl": "https://apod.nasa.gov/apod/image/0002/merc4_m10_big.gif",
-                                "media_type": "image",
-                                "service_version": "v1",
-                                "title": "Southwest Mercury",
-                                "url": "https://apod.nasa.gov/apod/image/0002/merc4_m10.gif"}
-                                ]
+                        [{ "copyright": null,
+                        "date": "2000-02-13",
+                        "explanation": "The planet Mercury resembles a moon. Mercury's old surface is heavily cratered like many moons.",
+                        "hdurl": "https://apod.nasa.gov/apod/image/0002/merc4_m10_big.gif",
+                        "media_type": "image",
+                        "service_version": "v1",
+                        "title": "Southwest Mercury",
+                        "url": "https://apod.nasa.gov/apod/image/0002/merc4_m10.gif"}]
                         """));
-
     }
 
     protected RequestPostProcessor testUser() {
@@ -71,16 +70,16 @@ class SgcIntegrationTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/sgc")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                { "explanation": "The planet Mercury resembles a moon. Mercury's old surface is heavily cratered like many moons.  Mercury is larger than most moons but smaller than Jupiter's moon Ganymede and Saturn's moon Titan.  Mercury is much denser and more massive than any moon, though, because it is made mostly of iron. In fact, the Earth is the only planet more dense.  A visitor to Mercury's surface would see some strange sights.  Because Mercury rotates exactly three times every two orbits around the Sun, and because Mercury's orbit is so elliptical, a visitor to Mercury might see the Sun rise, stop in the sky, go back toward the rising horizon, stop again, and then set quickly over the other horizon.   From Earth, Mercury's proximity to the Sun cause it to be visible only for a short time just after sunset or just before sunrise.",                                        
-                                  "title": "Southwest Mercury",
-                                  "url": "https://apod.nasa.gov/apod/image/0002/merc4_m10.gif"}
+                                { "explanation": "The planet Mercury resembles a moon. Mercury's old surface is heavily cratered like many moons.",
+                                "title": "Southwest Mercury",
+                                "url": "https://apod.nasa.gov/apod/image/0002/merc4_m10.gif"}
                                 """)
                         .with(testUser()).with(csrf())
                 ).andExpect(status().is(201))
                 .andExpect(content().json("""
-                        { "explanation": "The planet Mercury resembles a moon. Mercury's old surface is heavily cratered like many moons.  Mercury is larger than most moons but smaller than Jupiter's moon Ganymede and Saturn's moon Titan.  Mercury is much denser and more massive than any moon, though, because it is made mostly of iron. In fact, the Earth is the only planet more dense.  A visitor to Mercury's surface would see some strange sights.  Because Mercury rotates exactly three times every two orbits around the Sun, and because Mercury's orbit is so elliptical, a visitor to Mercury might see the Sun rise, stop in the sky, go back toward the rising horizon, stop again, and then set quickly over the other horizon.   From Earth, Mercury's proximity to the Sun cause it to be visible only for a short time just after sunset or just before sunrise.",                                        
-                                  "title": "Southwest Mercury",
-                                  "url": "https://apod.nasa.gov/apod/image/0002/merc4_m10.gif"}
+                        { "explanation": "The planet Mercury resembles a moon. Mercury's old surface is heavily cratered like many moons.",
+                        "title": "Southwest Mercury",
+                        "url": "https://apod.nasa.gov/apod/image/0002/merc4_m10.gif"}
                         """));
     }
 
@@ -94,4 +93,43 @@ class SgcIntegrationTest {
                         """));
     }
 
+    @DirtiesContext
+    @Test
+    void deleteItemDoesNotExist() throws Exception {
+
+        String id = "123";
+        mockMvc.perform(MockMvcRequestBuilders.delete("http://localhost:8080/api/sgc/" + id)
+                        .with(testUser()).with(csrf()))
+                .andExpect(status().is(404))
+        ;
+    }
+
+    @DirtiesContext
+    @Test
+    void deleteItem() throws Exception {
+        String saveResult = mockMvc.perform(MockMvcRequestBuilders.post(
+                                "/api/sgc")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                { "explanation": "The planet Mercury resembles a moon. Mercury's old surface is heavily cratered like many moons.",
+                                "title": "Southwest Mercury",
+                                "url": "https://apod.nasa.gov/apod/image/0002/merc4_m10.gif"}
+                                """).with(testUser()).with(csrf())
+                ).andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        UserItem userItemResult = objectMapper.readValue(saveResult, UserItem.class);
+        String id = userItemResult.id();
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("http://localhost:8080/api/sgc/" + id)
+                        .with(testUser()).with(csrf()))
+                .andExpect(status().is(204));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080/api/sgc"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        []
+                        """));
+    }
 }

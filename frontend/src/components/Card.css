@@ -89,6 +89,11 @@
     cursor: pointer;
 }
 
+.deleteBtn:hover {
+    color: #f57f00;
+    cursor: pointer;
+}
+
 .cardBtn .btnHoverText {
     visibility: hidden;
     width: 120px;
