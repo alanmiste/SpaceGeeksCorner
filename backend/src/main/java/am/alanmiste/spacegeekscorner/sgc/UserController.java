@@ -1,5 +1,7 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,8 +41,10 @@ public class UserController {
     }
 
     @PostMapping
-    public String register(@RequestBody NewUser newUser) {
-        appUserDetailsService.register(newUser);
-        return "Done!";
+    public ResponseEntity<String> register(@RequestBody NewUser newUser) {
+        AppUser savedUser = appUserDetailsService.register(newUser);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(savedUser.username());
     }
 }

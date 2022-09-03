@@ -33,7 +33,10 @@ public class AppUserDetailsService implements UserDetailsService {
         return users.stream().map(AppUser::username);
     }
 
-    public void register(NewUser newUser) {
-        appUserRepository.save(new AppUser(newUser.username(), new BCryptPasswordEncoder().encode(newUser.password())));
+    public AppUser register(NewUser newUser) {
+        return appUserRepository.save(new AppUser(
+                newUser.username(),
+                new BCryptPasswordEncoder()
+                        .encode(newUser.password())));
     }
 }
