@@ -4,9 +4,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.request.RequestPostProcessor;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -42,5 +48,32 @@ class AuthenticationIntegrationTest {
     void logoutTest() throws Exception {
         mockMvc.perform(get("/api/users/logout"))
                 .andExpect(status().isOk());
+    }
+
+    protected RequestPostProcessor testUser() {
+        return user("user").password("userPass").roles("USER");
+    }
+
+    @Test
+    void listusers() throws Exception {
+        mockMvc.perform(get("/api/users/listusers"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        []
+                        """));
+    }
+
+    @DirtiesContext
+    @Test
+    void register() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                { "username": "testuser",
+                                "password": "password"}
+                                """).with(testUser()).with(csrf())
+
+                ).andExpect(status().is(201))
+                .andExpect(content().string("testuser"));
     }
 }
