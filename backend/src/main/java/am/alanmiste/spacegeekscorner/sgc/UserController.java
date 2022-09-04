@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/users")
@@ -36,7 +37,7 @@ public class UserController {
     }
 
     @GetMapping("listusers")
-    Object listUsername() {
+    List<String> listUsername() {
         return appUserDetailsService.listUsers();
     }
 

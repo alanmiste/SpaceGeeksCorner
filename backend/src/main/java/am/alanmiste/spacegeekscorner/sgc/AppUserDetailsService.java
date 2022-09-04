@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 @Service
 public class AppUserDetailsService implements UserDetailsService {
@@ -28,9 +27,9 @@ public class AppUserDetailsService implements UserDetailsService {
         return new User(appUser.username(), appUser.passwordHash(), Collections.emptyList());
     }
 
-    public Stream<String> listUsers() throws UsernameNotFoundException {
+    public List<String> listUsers() throws UsernameNotFoundException {
         List<AppUser> users = appUserRepository.findAll();
-        return users.stream().map(AppUser::username);
+        return users.stream().map(AppUser::username).toList();
     }
 
     public AppUser register(NewUser newUser) {
