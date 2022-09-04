@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -31,7 +32,14 @@ class AppUserDetailsServiceTest {
         assertThat(actual).hasSameElementsAs(expected);
     }
 
-//    @Test
-//    void register() {
-//    }
+    @Test
+    void register() {
+        AppUser appUser = new AppUser("testUser", "$2a$10$ixrnlZtPwYEv4Ye/FZJdaueeFzvvCCXL8rgFLcVPirIhUHxRLWVDC");
+
+        when(appUserRepository.save(any(AppUser.class))).thenReturn(appUser);
+
+        AppUser actual = appUserDetailsService.register(new NewUser("testUser", "password"));
+
+        assertThat(actual).isEqualTo(appUser);
+    }
 }
