@@ -13,20 +13,20 @@ type MyAccountProps = {
 export default function MyAccount(props: MyAccountProps) {
     return <>
         <Header me={props.me}/>
-        <p>you are in My Account</p>
+        <div className="myAccountContainer">
+            {
+                props.me === "anonymousUser" ?
+                    <Registration
+                        login={props.login}
+                        logout={props.logout}
+                        me={props.me}
+                    />
+                    : <div className="logout">
+                        <Button type="submit" variant="outlined"
+                                className='btn' onClick={props.logout}>Logout</Button>
+                    </div>
 
-        {
-            props.me === "anonymousUser" ?
-                <Registration
-                    login={props.login}
-                    logout={props.logout}
-                    me={props.me}
-                />
-                : <div className="logout">
-                    <Button type="submit" variant="outlined"
-                            className='btn' onClick={props.logout}>Logout</Button>
-                </div>
-
-        }
+            }
+        </div>
     </>
 }
