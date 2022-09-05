@@ -8,6 +8,7 @@ type MyAccountProps = {
     me: string,
     login: (username: string, password: string) => void,
     logout: () => void,
+    usernames: string[],
 }
 
 export default function MyAccount(props: MyAccountProps) {
@@ -20,6 +21,7 @@ export default function MyAccount(props: MyAccountProps) {
                         login={props.login}
                         logout={props.logout}
                         me={props.me}
+                        usernames={props.usernames}
                     />
                     : <div className="logout">
                         <Button type="submit" variant="outlined"

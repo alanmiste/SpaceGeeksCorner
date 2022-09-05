@@ -15,6 +15,8 @@ export default function useSgc() {
         })
         .filter(nasaItem => !userItems.find(userItem => userItem.url === nasaItem.url));
 
+    const [usernames, setUsernames] = useState<string[]>([]);
+
 
     const getDataFromNasaApi = () => {
         axios.get("/api/sgc/nasaapi")
@@ -30,6 +32,7 @@ export default function useSgc() {
             getDataFromNasaApi()
             listUserItems()
             fetchMe()
+            fetchUsernames()
         }, []
     )
 
@@ -113,5 +116,11 @@ export default function useSgc() {
             }))
     }
 
-    return {filteredNasaData, me, login, logout, addItem, userItems, deleteItem}
+    const fetchUsernames = () => {
+        axios.get("/api/users/listusers")
+            .then(response => response.data)
+            .then(setUsernames)
+    }
+
+    return {filteredNasaData, me, login, logout, addItem, userItems, deleteItem, usernames}
 }

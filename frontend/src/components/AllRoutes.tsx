@@ -22,6 +22,7 @@ export default function AllRoutes() {
             <Route path={'/myaccount'} element={<MyAccount login={sgcHook.login}
                                                            logout={sgcHook.logout}
                                                            me={sgcHook.me}
+                                                           usernames={sgcHook.usernames}
             />}/>
         </Routes>
     </>)
