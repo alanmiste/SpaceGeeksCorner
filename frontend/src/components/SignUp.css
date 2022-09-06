@@ -1,0 +1,44 @@
+.infoBtn .infoSpan {
+    visibility: hidden;
+    width: 15em;
+    background-color: rgba(0, 0, 0, 0.47);
+    font-size: 0.5em;
+    color: #ffffff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 1;
+    top: 110%;
+    left: 50%;
+    margin-left: -180px;
+}
+
+.infoBtn .infoSpan::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 80%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+.infoBtn:hover .infoSpan {
+    visibility: visible;
+    font-size: 0.8em;
+}
+
+.infoBtn {
+    position: relative;
+    display: inline-block;
+    background-color: transparent;
+    border: none;
+}
+
+.labelText {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1em;
+}

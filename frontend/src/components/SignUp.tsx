@@ -1,8 +1,10 @@
 import {Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField} from "@mui/material";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import * as React from "react";
 import {FormEvent, useState} from "react";
+import "./SignUp.css";
 
 type SignUpProps = {
     usernames: string[],
@@ -51,7 +53,7 @@ export default function SignUp(props: SignUpProps) {
             setUsernameCheckTextColor('red')
             if (props.usernames.includes(e.target.value))
                 setUsernameValidationText('Username is unavailable.');
-            else setUsernameValidationText('Invalid username. only [a-z0-9_] min-max 5-20');
+            else setUsernameValidationText('Invalid username. only [a-z0-9_] min-max 4-20');
         }
     }
 
@@ -73,30 +75,44 @@ export default function SignUp(props: SignUpProps) {
     }
 
     const handleConfirmPassword = (e: any) => {
-        if (e.target.value === password) {
-            setConfirmPasswordTextColor('green')
-            setConfirmPasswordText('Passwords match.')
-            setConfirmPassword(e.target.value)
+        if (password !== '') {
+            if (e.target.value === password) {
+                setConfirmPasswordTextColor('green')
+                setConfirmPasswordText('Passwords match.')
+                setConfirmPassword(e.target.value)
+            } else {
+                setConfirmPasswordTextColor('red')
+                setConfirmPasswordText('Passwords don\'t match!')
+                setConfirmPassword('')
+            }
         } else {
             setConfirmPasswordTextColor('red')
-            setConfirmPasswordText('Passwords don\'t match!')
-            setConfirmPassword('')
+            setConfirmPasswordText('Please enter new password first!')
         }
-
-
     }
 
     return <>
         <form onSubmit={onSubmit} autoComplete='off' className='form'>
             <h3>Sign Up</h3>
-
-            <label>Enter a unique username with a minimum of 4 characters: </label>
+            <label className="labelText">Enter a username :
+                <span className="infoBtn">
+                    <InfoOutlinedIcon/>
+                    <span className="infoSpan">
+                    Minimum requirements: <br/>4 characters: a-z.<br/>Start with character.<br/>NO symbol.</span>
+                </span>
+            </label>
             <TextField className='formItem' fullWidth id="outlined-basic" label="New Username" variant="outlined"
                        onChange={handleUsernameChange}/>
             <span style={{display: "block", color: usernameCheckTextColor}}>{usernameValidationText}</span>
 
 
-            <label>Enter a password with minimum of: 7 characters, one number, one symbol.</label>
+            <label className="labelText">Enter a password :
+                <span className="infoBtn">
+                    <InfoOutlinedIcon/>
+                    <span className="infoSpan">
+                    Minimum requirements: <br/>7 characters: a-z.<br/>One number: 0-9.<br/>One symbol: !@#$%^&*</span>
+                </span>
+            </label>
             <FormControl fullWidth variant="outlined" className='formItem'>
                 <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
                 <OutlinedInput type={showPassword ? 'text' : 'password'} id="outlined-basic"
@@ -114,10 +130,10 @@ export default function SignUp(props: SignUpProps) {
                                        </IconButton>
                                    </InputAdornment>
                                }/>
-                                <span style={{
-                                    display: "block",
-                                    color: passwordCheckTextColor
-                                }}>{passwordValidationText}</span>
+                <span style={{
+                    display: "block",
+                    color: passwordCheckTextColor
+                }}>{passwordValidationText}</span>
             </FormControl>
 
             <FormControl fullWidth variant="outlined" className='formItem'>
