@@ -6,6 +6,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import {NewUserType} from "../type/NewUserType";
 
 
 type RegistrationProps = {
@@ -13,6 +14,7 @@ type RegistrationProps = {
     login: (username: string, password: string) => void,
     logout: () => void,
     usernames: string[],
+    register: (newUser: NewUserType) => void,
 }
 export default function Registration(props: RegistrationProps) {
 
@@ -70,7 +72,7 @@ export default function Registration(props: RegistrationProps) {
                     <SignIn me={props.me} login={props.login} logout={props.logout}/>
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
-                    <SignUp usernames={props.usernames}/>
+                    <SignUp usernames={props.usernames} register={props.register}/>
                 </TabPanel>
             </Box>
         </div>

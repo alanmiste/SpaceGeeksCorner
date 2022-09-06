@@ -23,6 +23,7 @@ export default function AllRoutes() {
                                                            logout={sgcHook.logout}
                                                            me={sgcHook.me}
                                                            usernames={sgcHook.usernames}
+                                                           register={sgcHook.register}
             />}/>
         </Routes>
     </>)

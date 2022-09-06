@@ -5,9 +5,12 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import * as React from "react";
 import {FormEvent, useState} from "react";
 import "./SignUp.css";
+import {toast} from "react-toastify";
+import {NewUserType} from "../type/NewUserType";
 
 type SignUpProps = {
     usernames: string[],
+    register: (newUser: NewUserType) => void,
 }
 
 export default function SignUp(props: SignUpProps) {
@@ -27,7 +30,19 @@ export default function SignUp(props: SignUpProps) {
 
     const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        // props.login(username, password)
+        if (username !== '' &&
+            password !== '' &&
+            password === confirmPassword) {
+            props.register({username, password})
+        } else toast.error('Please check the Username and Password!', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+        })
     }
 
     const [showPassword, setShowPassword] = useState<boolean>(false)
@@ -45,6 +60,7 @@ export default function SignUp(props: SignUpProps) {
     }
 
     const handleUsernameChange = (e: any) => {
+        setUsername('')
         if (validateUsername(e.target.value) && !props.usernames.includes(e.target.value)) {
             setUsernameCheckTextColor('green')
             setUsername(e.target.value)
@@ -64,6 +80,11 @@ export default function SignUp(props: SignUpProps) {
     }
 
     const handlePasswordChange = (e: any) => {
+        setPassword('')
+        if (confirmPassword) {
+            setConfirmPasswordTextColor('red')
+            setConfirmPasswordText('Passwords don\'t match!')
+        }
         if (validatePassword(e.target.value)) {
             setPasswordCheckTextColor('green')
             setPasswordValidationText('Password is good!')
@@ -75,6 +96,7 @@ export default function SignUp(props: SignUpProps) {
     }
 
     const handleConfirmPassword = (e: any) => {
+        setConfirmPassword('')
         if (password !== '') {
             if (e.target.value === password) {
                 setConfirmPasswordTextColor('green')

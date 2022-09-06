@@ -3,6 +3,7 @@ import axios from "axios";
 import {NasaResponseType} from "../type/NasaResponseType";
 import {toast} from "react-toastify";
 import {SavedUserItemType, UserItemToSave, UserItemType} from "../type/UserItemType";
+import {NewUserType} from "../type/NewUserType";
 
 export default function useSgc() {
 
@@ -122,5 +123,10 @@ export default function useSgc() {
             .then(setUsernames)
     }
 
-    return {filteredNasaData, me, login, logout, addItem, userItems, deleteItem, usernames}
+    const register = (newUser: NewUserType) => {
+        axios.post("/api/users", newUser)
+            .then(response => response)
+    }
+
+    return {filteredNasaData, me, login, logout, addItem, userItems, deleteItem, usernames, register}
 }
