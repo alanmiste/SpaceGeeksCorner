@@ -28,42 +28,33 @@ export default function SignUp(props: SignUpProps) {
         event.preventDefault();
     };
 
-    const validateUsername = (username: string) => {
-        const regex = /^[a-z][a-z0-9_]{3,20}$/gi;
-        return regex.test(username);
+    const validateUsername = (usernameToCheck: string) => {
+        const usernameRegex = /^[a-z][a-z0-9_]{3,20}$/gi;
+        return usernameRegex.test(usernameToCheck);
     }
 
     const [usernameValidationText, setUsernameValidationText] = useState('');
     const [spanColor, setSpanColor] = useState('red');
 
-    const handleUsernameChange = () => {
-
-        const result = validateUsername(username);
-        if (result) {
-            if (!props.usernames.includes(username)) {
-                setSpanColor('green')
-                setUsernameValidationText('username is available')
-            } else {
-                setSpanColor('red')
-                setUsernameValidationText('username is unavailable')
-            }
-        } else {
-            setSpanColor('red')
-            setUsernameValidationText('Invalid username. only [a-z0-9_] min-max 5-20');
-        }
-    }
 
     return <>
         <form onSubmit={onSubmit} autoComplete='off' className='form'>
-
             <h3>Sign Up</h3>
             <span>
                 <label>Enter a unique username: </label>
-            <TextField className='formItem' fullWidth id="outlined-basic" label="New Username" variant="outlined"
-                       onChange={event => {
-                           setUsername(event.target.value)
-                           handleUsernameChange()
-                       }}/>
+                <TextField className='formItem' fullWidth id="outlined-basic" label="New Username" variant="outlined"
+                           onChange={event => {
+                               if (validateUsername(event.target.value) && !props.usernames.includes(event.target.value)) {
+                                   setSpanColor('green')
+                                   setUsername(event.target.value)
+                                   setUsernameValidationText(event.target.value + ' is available')
+                               } else {
+                                   setSpanColor('red')
+                                   if (props.usernames.includes(event.target.value))
+                                       setUsernameValidationText('Username is unavailable.');
+                                   else setUsernameValidationText('Invalid username. only [a-z0-9_] min-max 5-20');
+                               }
+                           }}/>
                 <span style={{display: "block", color: spanColor}}>{usernameValidationText}</span>
             </span>
 
