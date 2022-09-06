@@ -39,6 +39,19 @@ export default function SignUp(props: SignUpProps) {
         return usernameRegex.test(usernameToCheck);
     }
 
+    const handleUsernameChange = (e: any) => {
+        if (validateUsername(e.target.value) && !props.usernames.includes(e.target.value)) {
+            setUsernameCheckTextColor('green')
+            setUsername(e.target.value)
+            setUsernameValidationText(e.target.value + ' is available')
+        } else {
+            setUsernameCheckTextColor('red')
+            if (props.usernames.includes(e.target.value))
+                setUsernameValidationText('Username is unavailable.');
+            else setUsernameValidationText('Invalid username. only [a-z0-9_] min-max 5-20');
+        }
+    }
+
 
     const validatePassword = (passwordToCheck: string) => {
         const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,20}$/;
@@ -51,18 +64,7 @@ export default function SignUp(props: SignUpProps) {
             <span>
                 <label>Enter a unique username with a minimum of 4 characters: </label>
                 <TextField className='formItem' fullWidth id="outlined-basic" label="New Username" variant="outlined"
-                           onChange={event => {
-                               if (validateUsername(event.target.value) && !props.usernames.includes(event.target.value)) {
-                                   setUsernameCheckTextColor('green')
-                                   setUsername(event.target.value)
-                                   setUsernameValidationText(event.target.value + ' is available')
-                               } else {
-                                   setUsernameCheckTextColor('red')
-                                   if (props.usernames.includes(event.target.value))
-                                       setUsernameValidationText('Username is unavailable.');
-                                   else setUsernameValidationText('Invalid username. only [a-z0-9_] min-max 5-20');
-                               }
-                           }}/>
+                           onChange={handleUsernameChange}/>
                 <span style={{display: "block", color: usernameCheckTextColor}}>{usernameValidationText}</span>
             </span>
 
