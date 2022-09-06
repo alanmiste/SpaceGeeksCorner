@@ -14,6 +14,12 @@ export default function SignUp(props: SignUpProps) {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
+    const [usernameValidationText, setUsernameValidationText] = useState('');
+    const [usernameCheckTextColor, setUsernameCheckTextColor] = useState('red');
+
+    const [passwordValidationText, setPasswordValidationText] = useState('');
+    const [passwordCheckTextColor, setPasswordCheckTextColor] = useState('red');
+
     const onSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         // props.login(username, password)
@@ -33,29 +39,31 @@ export default function SignUp(props: SignUpProps) {
         return usernameRegex.test(usernameToCheck);
     }
 
-    const [usernameValidationText, setUsernameValidationText] = useState('');
-    const [spanColor, setSpanColor] = useState('red');
 
+    const validatePassword = (passwordToCheck: string) => {
+        const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,20}$/;
+        return passwordRegex.test(passwordToCheck)
+    }
 
     return <>
         <form onSubmit={onSubmit} autoComplete='off' className='form'>
             <h3>Sign Up</h3>
             <span>
-                <label>Enter a unique username: </label>
+                <label>Enter a unique username with a minimum of 4 characters: </label>
                 <TextField className='formItem' fullWidth id="outlined-basic" label="New Username" variant="outlined"
                            onChange={event => {
                                if (validateUsername(event.target.value) && !props.usernames.includes(event.target.value)) {
-                                   setSpanColor('green')
+                                   setUsernameCheckTextColor('green')
                                    setUsername(event.target.value)
                                    setUsernameValidationText(event.target.value + ' is available')
                                } else {
-                                   setSpanColor('red')
+                                   setUsernameCheckTextColor('red')
                                    if (props.usernames.includes(event.target.value))
                                        setUsernameValidationText('Username is unavailable.');
                                    else setUsernameValidationText('Invalid username. only [a-z0-9_] min-max 5-20');
                                }
                            }}/>
-                <span style={{display: "block", color: spanColor}}>{usernameValidationText}</span>
+                <span style={{display: "block", color: usernameCheckTextColor}}>{usernameValidationText}</span>
             </span>
 
             <span>
@@ -64,7 +72,17 @@ export default function SignUp(props: SignUpProps) {
                 <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
                 <OutlinedInput type={showPassword ? 'text' : 'password'} id="outlined-basic"
                                label="New Password"
-                               onChange={event => setPassword(event.target.value)}
+                               onChange={event => {
+                                   setPassword(event.target.value)
+                                   if (validatePassword(event.target.value)) {
+                                       setPasswordCheckTextColor('green')
+                                       setPassword(event.target.value)
+                                       setPasswordValidationText('Password is good!')
+                                   } else {
+                                       setPasswordCheckTextColor('red')
+                                       setPasswordValidationText('Invalid password. only [a-z, A-Z, 0-9, !@#$%^&*] min-max 7-20');
+                                   }
+                               }}
                                endAdornment={
                                    <InputAdornment position="end">
                                        <IconButton
@@ -77,6 +95,11 @@ export default function SignUp(props: SignUpProps) {
                                        </IconButton>
                                    </InputAdornment>
                                }/>
+                                <span style={{
+                                    display: "block",
+                                    color: passwordCheckTextColor
+                                }}>{passwordValidationText}</span>
+
             </FormControl>
             <FormControl fullWidth variant="outlined" className='formItem'>
                 <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
