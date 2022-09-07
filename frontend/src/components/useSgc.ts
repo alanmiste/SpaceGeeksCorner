@@ -125,7 +125,18 @@ export default function useSgc() {
 
     const register = (newUser: NewUserType) => {
         axios.post("/api/users", newUser)
-            .then(response => response)
+            .then(response => setUsernames([...usernames, response.data]))
+            .then(() => toast.success('Congratulations 🚀' + newUser.username + ' You Signed up successfully! ✅', {
+                position: "top-center",
+                autoClose: 10000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            }))
+
+
     }
 
     return {filteredNasaData, me, login, logout, addItem, userItems, deleteItem, usernames, register}
