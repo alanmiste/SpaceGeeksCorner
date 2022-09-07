@@ -3,6 +3,7 @@ import axios from "axios";
 import {NasaResponseType} from "../type/NasaResponseType";
 import {toast} from "react-toastify";
 import {SavedUserItemType, UserItemToSave, UserItemType} from "../type/UserItemType";
+import {NewUserType} from "../type/NewUserType";
 
 export default function useSgc() {
 
@@ -14,6 +15,8 @@ export default function useSgc() {
             return {explanation: item.explanation, title: item.title, url: item.url}
         })
         .filter(nasaItem => !userItems.find(userItem => userItem.url === nasaItem.url));
+
+    const [usernames, setUsernames] = useState<string[]>([]);
 
 
     const getDataFromNasaApi = () => {
@@ -30,6 +33,7 @@ export default function useSgc() {
             getDataFromNasaApi()
             listUserItems()
             fetchMe()
+            fetchUsernames()
         }, []
     )
 
@@ -113,5 +117,27 @@ export default function useSgc() {
             }))
     }
 
-    return {filteredNasaData, me, login, logout, addItem, userItems, deleteItem}
+    const fetchUsernames = () => {
+        axios.get("/api/users/listusers")
+            .then(response => response.data)
+            .then(setUsernames)
+    }
+
+    const register = (newUser: NewUserType) => {
+        axios.post("/api/users", newUser)
+            .then(response => setUsernames([...usernames, response.data]))
+            .then(() => toast.success('Congratulations 🚀' + newUser.username + ' You Signed up successfully! ✅', {
+                position: "top-center",
+                autoClose: 10000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            }))
+
+
+    }
+
+    return {filteredNasaData, me, login, logout, addItem, userItems, deleteItem, usernames, register}
 }

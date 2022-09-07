@@ -1,63 +1,80 @@
 import "./Registration.css";
-import React, {FormEvent, useState} from "react";
-import {Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField} from "@mui/material";
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import React from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import SignIn from "./SignIn";
+import SignUp from "./SignUp";
+import {NewUserType} from "../type/NewUserType";
 
 
 type RegistrationProps = {
     me: string,
     login: (username: string, password: string) => void,
     logout: () => void,
+    usernames: string[],
+    register: (newUser: NewUserType) => void,
 }
 export default function Registration(props: RegistrationProps) {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
 
-    const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        props.login(username, password)
+    //---MUI things---
+    interface TabPanelProps {
+        children?: React.ReactNode;
+        index: number;
+        value: number;
     }
 
-    const [showPassword, setShowPassword] = useState<boolean>(false)
-    const handleClickShowPassword = () => {
-        setShowPassword(!showPassword)
-    };
+    function TabPanel(props: TabPanelProps) {
+        const {children, value, index, ...other} = props;
 
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
+        return (
+            <div
+                role="tabpanel"
+                hidden={value !== index}
+                id={`simple-tabpanel-${index}`}
+                aria-labelledby={`simple-tab-${index}`}
+                {...other}
+            >
+                {value === index && (
+                    <Box sx={{p: 3}}>
+                        <Typography>{children}</Typography>
+                    </Box>
+                )}
+            </div>
+        );
+    }
+
+    function a11yProps(index: number) {
+        return {
+            id: `simple-tab-${index}`,
+            'aria-controls': `simple-tabpanel-${index}`,
+        };
+    }
+
+    const [tabValue, setTabValue] = React.useState(0);
+
+    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        setTabValue(newValue);
     };
+    //---------
 
     return <>
-        <div>
-            <form onSubmit={onSubmit} autoComplete='off' className='form'>
-
-                <h3>Sign In</h3>
-
-                <TextField className='formItem' fullWidth id="outlined-basic" label="Username" variant="outlined"
-                           onChange={event => setUsername(event.target.value)}/>
-
-                <FormControl fullWidth variant="outlined" className='formItem'>
-                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                    <OutlinedInput type={showPassword ? 'text' : 'password'} id="outlined-basic"
-                                   label="Password"
-                                   onChange={event => setPassword(event.target.value)}
-                                   endAdornment={
-                                       <InputAdornment position="end">
-                                           <IconButton
-                                               aria-label="toggle password visibility"
-                                               onClick={handleClickShowPassword}
-                                               onMouseDown={handleMouseDownPassword}
-                                               edge="end"
-                                           >
-                                               {showPassword ? <VisibilityOff/> : <Visibility/>}
-                                           </IconButton>
-                                       </InputAdornment>
-                                   }/>
-                </FormControl>
-
-                <Button fullWidth type="submit" variant="outlined" className='formItem'>Log In</Button>
-            </form>
+        <div className="registrationContainer">
+            <Box sx={{width: '100%'}}>
+                <Box sx={{borderBottom: 1, borderColor: 'divider'}} className="boxTabsContainer">
+                    <Tabs value={tabValue} onChange={handleChange} aria-label="basic tabs example">
+                        <Tab label="Sign In" {...a11yProps(0)} />
+                        <Tab label="Sign Up" {...a11yProps(1)} />
+                    </Tabs>
+                </Box>
+                <TabPanel value={tabValue} index={0}>
+                    <SignIn me={props.me} login={props.login} logout={props.logout}/>
+                </TabPanel>
+                <TabPanel value={tabValue} index={1}>
+                    <SignUp usernames={props.usernames} register={props.register}/>
+                </TabPanel>
+            </Box>
         </div>
     </>
 }

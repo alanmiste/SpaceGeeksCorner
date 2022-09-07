@@ -1,15 +1,22 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/users/")
+@RequestMapping(path = "/api/users")
 public class UserController {
+
+    private final AppUserDetailsService appUserDetailsService;
+
+    public UserController(AppUserDetailsService appUserDetailsService) {
+        this.appUserDetailsService = appUserDetailsService;
+    }
 
     @GetMapping("login")
     String login() {
@@ -27,5 +34,18 @@ public class UserController {
     @GetMapping("logout")
     void logout(HttpSession session) {
         session.invalidate();
+    }
+
+    @GetMapping("listusers")
+    List<String> listUsername() {
+        return appUserDetailsService.listUsers();
+    }
+
+    @PostMapping
+    public ResponseEntity<String> register(@RequestBody NewUser newUser) {
+        AppUser savedUser = appUserDetailsService.register(newUser);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(savedUser.username());
     }
 }

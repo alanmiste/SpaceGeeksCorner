@@ -4,9 +4,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class AppUserDetailsService implements UserDetailsService {
@@ -23,5 +25,17 @@ public class AppUserDetailsService implements UserDetailsService {
         if (appUser == null)
             return null;
         return new User(appUser.username(), appUser.passwordHash(), Collections.emptyList());
+    }
+
+    public List<String> listUsers() throws UsernameNotFoundException {
+        List<AppUser> users = appUserRepository.findAll();
+        return users.stream().map(AppUser::username).toList();
+    }
+
+    public AppUser register(NewUser newUser) {
+        return appUserRepository.save(new AppUser(
+                newUser.username(),
+                new BCryptPasswordEncoder()
+                        .encode(newUser.password())));
     }
 }

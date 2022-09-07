@@ -9,6 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
+import static org.springframework.http.HttpMethod.POST;
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -37,6 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/users/login").permitAll()
                 .antMatchers("/api/users/logout").permitAll()
                 .antMatchers("/api/users/me").permitAll()
+                .antMatchers("/api/users/listusers").permitAll()
+                .antMatchers(POST, "/api/users").permitAll()
                 .antMatchers("/api/users/**").authenticated()
                 .and().httpBasic().authenticationEntryPoint(new CustomAuthenticationEntryPoint());
     }
