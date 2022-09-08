@@ -41,4 +41,9 @@ public class SgcController {
         boolean deleteSuccess = sgcService.deleteItem(id);
         return new ResponseEntity<>(deleteSuccess ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND);
     }
+
+    @GetMapping("/make-mockups")
+    public PrintfulResponse makeMockups() {
+        return sgcService.makeMockups();
+    }
 }
