@@ -1,4 +1,4 @@
-package am.alanmiste.spacegeekscorner.sgc;
+package am.alanmiste.spacegeekscorner.sgc.model;
 
 public record PrintfulResponse(
         int code,

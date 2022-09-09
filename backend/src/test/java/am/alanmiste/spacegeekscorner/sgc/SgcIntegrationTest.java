@@ -1,5 +1,6 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
+import am.alanmiste.spacegeekscorner.sgc.model.UserItem;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import org.junit.jupiter.api.Test;

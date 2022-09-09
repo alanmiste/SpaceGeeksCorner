@@ -1,7 +1,13 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
+import am.alanmiste.spacegeekscorner.sgc.model.ImageObject;
+import am.alanmiste.spacegeekscorner.sgc.model.NasaResponse;
+import am.alanmiste.spacegeekscorner.sgc.model.PrintfulResponse;
+import am.alanmiste.spacegeekscorner.sgc.model.UserItem;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -56,62 +62,64 @@ public class SgcService {
         return false;
     }
 
-    private String printfulOauth = "https://api.printful.com/mockup-generator/create-task/71";
     @Value("${printfulAccessToken}")
     private String printfulAccessToken;
-    String body = """
-            {
-              "variant_ids": [
-                4012,
-                4013,
-                4014,
-                4017,
-                4018,
-                4019
-              ],
-              "format": "jpg",
-              "files": [
-                {
-                  "placement": "front",
-                  "image_url": "https://apod.nasa.gov/apod/image/0611/m51_hst_90x.jpg",
-                  "position": {
-                    "area_width": 1800,
-                    "area_height": 2400,
-                    "width": 1800,
-                    "height": 1800,
-                    "top": 300,
-                    "left": 0
-                  }
-                },
-                {
-                  "placement": "back",
-                  "image_url": "https://apod.nasa.gov/apod/image/0611/m51_hst_90x.jpg",
-                  "position": {
-                    "area_width": 1800,
-                    "area_height": 2400,
-                    "width": 1800,
-                    "height": 1800,
-                    "top": 300,
-                    "left": 0
-                  }
-                }
-              ]
-            }
-            """;
 
-    public PrintfulResponse makeMockups() {
+    public PrintfulResponse makeMockups(ImageObject photoUrl) {
+        String body = """
+                {
+                  "variant_ids": [
+                    4012,
+                    4013,
+                    4014,
+                    4017,
+                    4018,
+                    4019
+                  ],
+                  "format": "jpg",
+                  "files": [
+                    {
+                      "placement": "front",
+                      "image_url": "<PHOTOURL>",
+                      "position": {
+                        "area_width": 1800,
+                        "area_height": 2400,
+                        "width": 1800,
+                        "height": 1800,
+                        "top": 300,
+                        "left": 0
+                      }
+                    },
+                    {
+                      "placement": "back",
+                      "image_url": "<PHOTOURL>",
+                      "position": {
+                        "area_width": 1800,
+                        "area_height": 2400,
+                        "width": 1800,
+                        "height": 1800,
+                        "top": 300,
+                        "left": 0
+                      }
+                    }
+                  ]
+                }
+                """.replace("<PHOTOURL>", photoUrl.image_url());
+
+        String printfulMockupGeneratorUrl = "https://api.printful.com/mockup-generator/create-task/71";
         ResponseEntity<PrintfulResponse> getOAuth = webClient.post()
-                .uri(printfulOauth)
+                .uri(printfulMockupGeneratorUrl)
                 .header("Authorization", "Bearer " + printfulAccessToken)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(BodyInserters.fromValue(body))
                 .retrieve()
-                .toEntity(new ParameterizedTypeReference<PrintfulResponse>() {
-                })
+                .toEntity(PrintfulResponse.class)
                 .block();
         if (getOAuth == null)
             return null;
         return getOAuth
                 .getBody();
     }
+
 
 }

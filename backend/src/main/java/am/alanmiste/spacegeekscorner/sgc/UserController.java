@@ -1,5 +1,7 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
+import am.alanmiste.spacegeekscorner.sgc.model.AppUser;
+import am.alanmiste.spacegeekscorner.sgc.model.NewUser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
