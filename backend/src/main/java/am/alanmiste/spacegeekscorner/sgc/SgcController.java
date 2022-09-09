@@ -1,6 +1,7 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
 import am.alanmiste.spacegeekscorner.sgc.model.ImageObject;
+import am.alanmiste.spacegeekscorner.sgc.model.MockupResponse;
 import am.alanmiste.spacegeekscorner.sgc.model.NasaResponse;
 import am.alanmiste.spacegeekscorner.sgc.model.UserItem;
 import org.springframework.http.HttpStatus;
@@ -46,9 +47,9 @@ public class SgcController {
     }
 
     @PostMapping("/make-mockups")
-    public String makeMockups(
+    public MockupResponse makeMockups(
             @RequestBody ImageObject photoUrl
-    ) {
-        return sgcService.makeMockups(photoUrl).result().task_key();
+    ) throws InterruptedException {
+        return sgcService.makeMockups(photoUrl);
     }
 }

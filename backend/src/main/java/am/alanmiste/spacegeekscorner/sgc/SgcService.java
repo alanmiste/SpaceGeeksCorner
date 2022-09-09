@@ -13,6 +13,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class SgcService {
@@ -62,7 +63,7 @@ public class SgcService {
     @Value("${printfulAccessToken}")
     private String printfulAccessToken;
 
-    public PrintfulResponse makeMockups(ImageObject photoUrl) {
+    public MockupResponse makeMockups(ImageObject photoUrl) throws InterruptedException {
         int[] variantIds = new int[]{4012, 4013, 4014, 4017, 4018, 4019};
         PrintfulBodyFilePosition position = new PrintfulBodyFilePosition(1800, 2400, 1800, 1800, 300, 0);
         PrintfulBodyFiles[] files = new PrintfulBodyFiles[]{
@@ -72,20 +73,39 @@ public class SgcService {
 
         PrintfulBody printfulBody = new PrintfulBody(variantIds, "jpg", files);
 
-        String printfulMockupGeneratorUrl = "https://api.printful.com/mockup-generator/create-task/71";
+        String printfulTaskKeyGeneratorUri = "https://api.printful.com/mockup-generator/create-task/71";
         ResponseEntity<PrintfulResponse> getOAuth = webClient.post()
-                .uri(printfulMockupGeneratorUrl)
+                .uri(printfulTaskKeyGeneratorUri)
                 .header("Authorization", "Bearer " + printfulAccessToken)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(BodyInserters.fromValue(printfulBody))
                 .retrieve()
                 .toEntity(PrintfulResponse.class)
                 .block();
-        if (getOAuth == null)
-            return null;
-        return getOAuth
-                .getBody();
+        TimeUnit.SECONDS.sleep(10);
+//        MockupResponse resutl = getTshirts(getOAuth.getBody().result().task_key());
+
+//        if (getOAuth == null)
+//            return null;
+//        return getOAuth
+//                .getBody();
+        return getTshirts(getOAuth.getBody().result().task_key());
     }
 
+    public MockupResponse getTshirts(String taskKey) {
+        String mockupGeneratorUri = "https://api.printful.com/mockup-generator/task?task_key=" + taskKey;
 
+        ResponseEntity<MockupResponse> mockupGenerator = webClient.get()
+                .uri(mockupGeneratorUri)
+                .header("Authorization", "Bearer " + printfulAccessToken)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .retrieve()
+                .toEntity(new ParameterizedTypeReference<MockupResponse>() {
+                })
+                .block();
+
+        if (mockupGenerator == null)
+            return null;
+        return mockupGenerator.getBody();
+    }
 }
