@@ -1,9 +1,6 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
-import am.alanmiste.spacegeekscorner.sgc.model.ImageObject;
-import am.alanmiste.spacegeekscorner.sgc.model.NasaResponse;
-import am.alanmiste.spacegeekscorner.sgc.model.PrintfulResponse;
-import am.alanmiste.spacegeekscorner.sgc.model.UserItem;
+import am.alanmiste.spacegeekscorner.sgc.model.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -66,52 +63,21 @@ public class SgcService {
     private String printfulAccessToken;
 
     public PrintfulResponse makeMockups(ImageObject photoUrl) {
-        String body = """
-                {
-                  "variant_ids": [
-                    4012,
-                    4013,
-                    4014,
-                    4017,
-                    4018,
-                    4019
-                  ],
-                  "format": "jpg",
-                  "files": [
-                    {
-                      "placement": "front",
-                      "image_url": "<PHOTOURL>",
-                      "position": {
-                        "area_width": 1800,
-                        "area_height": 2400,
-                        "width": 1800,
-                        "height": 1800,
-                        "top": 300,
-                        "left": 0
-                      }
-                    },
-                    {
-                      "placement": "back",
-                      "image_url": "<PHOTOURL>",
-                      "position": {
-                        "area_width": 1800,
-                        "area_height": 2400,
-                        "width": 1800,
-                        "height": 1800,
-                        "top": 300,
-                        "left": 0
-                      }
-                    }
-                  ]
-                }
-                """.replace("<PHOTOURL>", photoUrl.image_url());
+        int[] variantIds = new int[]{4012, 4013, 4014, 4017, 4018, 4019};
+        PrintfulBodyFilePosition position = new PrintfulBodyFilePosition(1800, 2400, 1800, 1800, 300, 0);
+        PrintfulBodyFiles[] files = new PrintfulBodyFiles[]{
+                new PrintfulBodyFiles("front", photoUrl.image_url(), position),
+                new PrintfulBodyFiles("back", photoUrl.image_url(), position)
+        };
+
+        PrintfulBody printfulBody = new PrintfulBody(variantIds, "jpg", files);
 
         String printfulMockupGeneratorUrl = "https://api.printful.com/mockup-generator/create-task/71";
         ResponseEntity<PrintfulResponse> getOAuth = webClient.post()
                 .uri(printfulMockupGeneratorUrl)
                 .header("Authorization", "Bearer " + printfulAccessToken)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .body(BodyInserters.fromValue(body))
+                .body(BodyInserters.fromValue(printfulBody))
                 .retrieve()
                 .toEntity(PrintfulResponse.class)
                 .block();
