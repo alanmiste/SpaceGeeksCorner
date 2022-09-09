@@ -12,6 +12,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -83,13 +84,10 @@ public class SgcService {
                 .toEntity(PrintfulResponse.class)
                 .block();
         TimeUnit.SECONDS.sleep(10);
-//        MockupResponse resutl = getTshirts(getOAuth.getBody().result().task_key());
 
-//        if (getOAuth == null)
-//            return null;
-//        return getOAuth
-//                .getBody();
-        return getTshirts(getOAuth.getBody().result().task_key());
+        if (getOAuth == null)
+            return null;
+        return getTshirts(Objects.requireNonNull(getOAuth.getBody()).result().task_key());
     }
 
     public MockupResponse getTshirts(String taskKey) {
