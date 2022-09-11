@@ -8,6 +8,7 @@ type FavouriteProps = {
     addItem: (username: string, explanation: string, title: string, url: string) => Promise<AxiosResponse<any, any>>,
     userItems: SavedUserItemType[],
     deleteItem: (id: string) => void,
+    makeMockup: (imageUrl: string) => void,
 }
 export default function Favourite(props: FavouriteProps) {
     const filteredUserItems = props.userItems.filter(item => item.username === props.me)
@@ -16,6 +17,6 @@ export default function Favourite(props: FavouriteProps) {
         <p>you are in Favourite</p>
         <CardsList filteredNasaData={filteredUserItems} me={props.me}
                    addItem={props.addItem} favouriteBtnDisplay={false}
-                   deleteItem={props.deleteItem}/>
+                   deleteItem={props.deleteItem} makeMockup={props.makeMockup}/>
     </>
 }

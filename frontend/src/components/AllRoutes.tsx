@@ -13,11 +13,13 @@ export default function AllRoutes() {
                                              me={sgcHook.me}
                                              addItem={sgcHook.addItem}
                                              favouriteBtnDisplay={true}
-                                             deleteItem={sgcHook.deleteItem}/>}/>
+                                             deleteItem={sgcHook.deleteItem}
+                                             makeMockup={sgcHook.makeMockup}/>}/>
             <Route path={'/favourite'} element={<Favourite me={sgcHook.me}
                                                            addItem={sgcHook.addItem}
                                                            userItems={sgcHook.userItems}
-                                                           deleteItem={sgcHook.deleteItem}/>}/>
+                                                           deleteItem={sgcHook.deleteItem}
+                                                           makeMockup={sgcHook.makeMockup}/>}/>
             <Route path={'/shop'} element={<Tshirts me={sgcHook.me} mockup={sgcHook.mockup}/>}/>
             <Route path={'/myaccount'} element={<MyAccount login={sgcHook.login}
                                                            logout={sgcHook.logout}

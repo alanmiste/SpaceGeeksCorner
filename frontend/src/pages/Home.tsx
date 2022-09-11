@@ -11,6 +11,7 @@ type HomeProps = {
     addItem: (username: string, explanation: string, title: string, url: string) => Promise<AxiosResponse<any, any>>,
     favouriteBtnDisplay: boolean,
     deleteItem: (id: string) => void,
+    makeMockup: (imageUrl: string) => void,
 }
 export default function Home(props: HomeProps) {
     return <>
@@ -18,6 +19,6 @@ export default function Home(props: HomeProps) {
         <p>you are in Home</p>
         <CardsList filteredNasaData={props.sgcHook.filteredNasaData} me={props.me}
                    addItem={props.addItem} favouriteBtnDisplay={props.favouriteBtnDisplay}
-                   deleteItem={props.deleteItem}/>
+                   deleteItem={props.deleteItem} makeMockup={props.makeMockup}/>
     </>
 }

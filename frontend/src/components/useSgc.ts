@@ -239,7 +239,8 @@ export default function useSgc() {
     }
 
     const makeMockup = (imageUrl: string) => {
-        axios.post("api/sgc/make-mockups", imageUrl)
+        const imageOgject = {"image_url": imageUrl}
+        axios.post("api/sgc/make-mockups", imageOgject)
             .then(response => response.data)
             .then(setMockup)
     }

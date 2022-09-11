@@ -9,6 +9,7 @@ type CardsListProps = {
     addItem: (username: string, explanation: string, title: string, url: string) => Promise<AxiosResponse<any, any>>,
     favouriteBtnDisplay: boolean,
     deleteItem: (id: string) => void,
+    makeMockup: (imageUrl: string) => void,
 }
 
 export default function CardsList(props: CardsListProps) {
@@ -16,7 +17,7 @@ export default function CardsList(props: CardsListProps) {
         {props.filteredNasaData.length === 0 ? <div className={"rocket"}></div> : props.filteredNasaData.map(card =>
             <Card key={card.url} filteredNasaData={card} me={props.me}
                   addItem={props.addItem} favouriteBtnDisplay={props.favouriteBtnDisplay}
-                  deleteItem={props.deleteItem}/>
+                  deleteItem={props.deleteItem} makeMockup={props.makeMockup}/>
         )}
     </div>
 }
