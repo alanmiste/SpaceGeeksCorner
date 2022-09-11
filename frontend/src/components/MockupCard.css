@@ -1,0 +1,18 @@
+.mockupCardListContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 2em;
+}
+
+.CardContainer {
+    width: 15em;
+    height: auto;
+    padding: 1em;
+}
+
+img {
+    width: 100%;
+}
