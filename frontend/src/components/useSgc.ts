@@ -4,6 +4,7 @@ import {NasaResponseType} from "../type/NasaResponseType";
 import {toast} from "react-toastify";
 import {SavedUserItemType, UserItemToSave, UserItemType} from "../type/UserItemType";
 import {NewUserType} from "../type/NewUserType";
+import {MockupResponse} from "../type/MockupResponse";
 
 export default function useSgc() {
 
@@ -17,6 +18,8 @@ export default function useSgc() {
         .filter(nasaItem => !userItems.find(userItem => userItem.url === nasaItem.url));
 
     const [usernames, setUsernames] = useState<string[]>([]);
+
+    const [mockup, setMockup] = useState<MockupResponse>();
 
 
     const getDataFromNasaApi = () => {
@@ -135,9 +138,25 @@ export default function useSgc() {
                 draggable: true,
                 progress: undefined,
             }))
-
-
     }
 
-    return {filteredNasaData, me, login, logout, addItem, userItems, deleteItem, usernames, register}
+    const makeMockup = (imageUrl: string) => {
+        axios.post("api/sgc/make-mockups", imageUrl)
+            .then(response => response.data)
+            .then(setMockup)
+    }
+
+    return {
+        filteredNasaData,
+        me,
+        login,
+        logout,
+        addItem,
+        userItems,
+        deleteItem,
+        usernames,
+        register,
+        mockup,
+        makeMockup
+    }
 }
