@@ -20,7 +20,7 @@ export default function SgcNavBar(props: SgcNavBarProps) {
                 <nav>
                     <NavLink className="navLink home" to={'/'}><MdHome/>. Home</NavLink>
                     <NavLink className="navLink favourite" to={'/favourite'}><MdFavorite/>. Favourite</NavLink>
-                    <NavLink className="navLink shop" to={'/shop'}><FaShoppingCart/>. Shop</NavLink>
+                    <NavLink className="navLink shop" to={'/shop'}><FaShoppingCart/>. T-Shirts</NavLink>
                     <NavLink className="navLink myaccount" to={'/myaccount'}><Avatar
                         sx={{bgcolor: blueGrey[200]}}
                         alt={props.me}
