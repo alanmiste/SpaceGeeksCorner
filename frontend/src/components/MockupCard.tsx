@@ -1,7 +1,11 @@
 import "./MockupCard.css";
 import {Button, Card, CardActions, CardContent, CardMedia, Typography} from "@mui/material";
 
-export default function MockupCard() {
+type MockupCardProps = {
+    imageUrl: string,
+    imageAlt: string,
+}
+export default function MockupCard(props: MockupCardProps) {
 
     return <div className="CardContainer">
 
@@ -9,8 +13,8 @@ export default function MockupCard() {
             <CardMedia
                 component="img"
                 height="auto"
-                image="https://printful-upload.s3-accelerate.amazonaws.com/tmp/ca7d9467be42df7cef5ef1b77c2b0e02/unisex-staple-t-shirt-black-front-631a233580e16.jpg"
-                alt="Front Mockup"
+                image={props.imageUrl}
+                alt={props.imageAlt + "view of the shirt"}
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">

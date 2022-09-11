@@ -2,14 +2,18 @@ import "./ShowMockup.css";
 import {Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
 import {useState} from "react";
 
-export default function ShowMockup() {
+type ShowMockupProps = {
+    imageUrl: string,
+    placement: string,
+}
+
+export default function ShowMockup(props: ShowMockupProps) {
 
     const [size, setSize] = useState('');
 
     const handleChange = (event: SelectChangeEvent) => {
         setSize(event.target.value);
     };
-
 
     const [color, setColor] = useState('black');
     const [colorChecked, setColorChecked] = useState(false);
@@ -21,8 +25,8 @@ export default function ShowMockup() {
 
     return <div className="showMockupContainer">
         <img className="showMockupBigImage"
-             src={"https://printful-upload.s3-accelerate.amazonaws.com/tmp/ca7d9467be42df7cef5ef1b77c2b0e02/unisex-staple-t-shirt-black-front-631a233580e16.jpg"}
-             alt={"Front Mockup"}/>
+             src={props.imageUrl}
+             alt={props.placement + "view of the shirt"}/>
         <div className="showMockupDetails">
             <p>The Unisex Staple T-Shirt feels soft and light with just the right amount of stretch. It's comfortable
                 and flattering for all. We can't compliment this shirt enough–it's one of our crowd favorites, and it's
