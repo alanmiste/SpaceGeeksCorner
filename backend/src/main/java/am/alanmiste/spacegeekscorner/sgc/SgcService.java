@@ -29,7 +29,6 @@ public class SgcService {
 
     @Value("${printfulTaskKeyGeneratorUri}")
     private String printfulTaskKeyGeneratorUri;
-    //    https://api.printful.com/mockup-generator/create-task/71
     @Value("${mockupGeneratorUri}")
     private String mockupGeneratorUri;
     private final WebClient webClient = WebClient.create();
@@ -96,7 +95,6 @@ public class SgcService {
     }
 
     public MockupResponse getTshirts(String taskKey) {
-//        String mockupGeneratorUri = "https://api.printful.com/mockup-generator/task?task_key=" + taskKey;
 
         ResponseEntity<MockupResponse> mockupGenerator = webClient.get()
                 .uri(mockupGeneratorUri + taskKey)
