@@ -44,4 +44,9 @@ class MockupResponseTest {
     void testHashCode() {
         assertThat(mockupResponse.hashCode()).hasSameHashCodeAs(mockupResponse2.hashCode());
     }
+
+    @Test
+    void testDifferentHashCode() {
+        assertThat(mockupResponse.hashCode()).isNotSameAs(mockupResponse3.hashCode());
+    }
 }
