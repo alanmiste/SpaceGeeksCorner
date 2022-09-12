@@ -31,6 +31,11 @@ class MockupResultMockupsTest {
     }
 
     @Test
+    void testEquals() {
+        Assertions.assertThat(mockupResultMockups.equals(mockupResultMockups2)).isTrue();
+    }
+
+    @Test
     void testNotEquals() {
         Assertions.assertThat(mockupResultMockups.equals(mockupResultMockups3)).isFalse();
     }
