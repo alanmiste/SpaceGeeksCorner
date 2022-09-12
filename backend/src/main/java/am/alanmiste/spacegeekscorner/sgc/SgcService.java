@@ -26,6 +26,12 @@ public class SgcService {
 
     @Value("${nasaApiUrl}")
     private String nasaApiUrl;
+
+    @Value("${printfulTaskKeyGeneratorUri}")
+    private String printfulTaskKeyGeneratorUri;
+    //    https://api.printful.com/mockup-generator/create-task/71
+    @Value("${mockupGeneratorUri}")
+    private String mockupGeneratorUri;
     private final WebClient webClient = WebClient.create();
 
     public List<NasaResponse> getDataFromNasaApi() {
@@ -74,7 +80,6 @@ public class SgcService {
 
         PrintfulBody printfulBody = new PrintfulBody(variantIds, "jpg", files);
 
-        String printfulTaskKeyGeneratorUri = "https://api.printful.com/mockup-generator/create-task/71";
         ResponseEntity<PrintfulResponse> getOAuth = webClient.post()
                 .uri(printfulTaskKeyGeneratorUri)
                 .header("Authorization", "Bearer " + printfulAccessToken)
@@ -91,10 +96,10 @@ public class SgcService {
     }
 
     public MockupResponse getTshirts(String taskKey) {
-        String mockupGeneratorUri = "https://api.printful.com/mockup-generator/task?task_key=" + taskKey;
+//        String mockupGeneratorUri = "https://api.printful.com/mockup-generator/task?task_key=" + taskKey;
 
         ResponseEntity<MockupResponse> mockupGenerator = webClient.get()
-                .uri(mockupGeneratorUri)
+                .uri(mockupGeneratorUri + taskKey)
                 .header("Authorization", "Bearer " + printfulAccessToken)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .retrieve()
