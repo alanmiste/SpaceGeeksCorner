@@ -1,7 +1,7 @@
 import {NavLink} from "react-router-dom";
 import {FaRegUserCircle, FaShoppingCart} from "react-icons/fa";
 import {MdFavorite, MdHome} from "react-icons/md";
-import {blueGrey} from "@mui/material/colors";
+import {blue} from "@mui/material/colors";
 import {Avatar} from "@mui/material";
 
 type SgcNavBarProps = {
@@ -13,16 +13,16 @@ export default function SgcNavBar(props: SgcNavBarProps) {
         {
             props.me === "anonymousUser" ?
                 <nav>
-                    <NavLink className="navLink home" to={'/'}><MdHome/>. Home</NavLink>
-                    <NavLink className="navLink myaccount" to={'/myaccount'}><FaRegUserCircle/>. My Account</NavLink>
+                    <NavLink className="navLink" to={'/'}><MdHome/>. Home</NavLink>
+                    <NavLink className="navLink" to={'/myaccount'}><FaRegUserCircle/>. My Account</NavLink>
                 </nav>
                 :
                 <nav>
-                    <NavLink className="navLink home" to={'/'}><MdHome/>. Home</NavLink>
-                    <NavLink className="navLink favourite" to={'/favourite'}><MdFavorite/>. Favourite</NavLink>
-                    <NavLink className="navLink shop" to={'/shop'}><FaShoppingCart/>. T-Shirts</NavLink>
-                    <NavLink className="navLink myaccount" to={'/myaccount'}><Avatar
-                        sx={{bgcolor: blueGrey[200]}}
+                    <NavLink className="navLink" to={'/'}><MdHome/>. Home</NavLink>
+                    <NavLink className="navLink" to={'/favourite'}><MdFavorite/>. Favourite</NavLink>
+                    <NavLink className="navLink" to={'/shop'}><FaShoppingCart/>. T-Shirts</NavLink>
+                    <NavLink className="navLink" to={'/myaccount'}><Avatar
+                        sx={{fontSize: 15, width: 25, height: 25, bgcolor: blue[300]}}
                         alt={props.me}
                         src="/"
                     />. My Account</NavLink>

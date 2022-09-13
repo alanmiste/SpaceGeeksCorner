@@ -25,9 +25,8 @@ export default function Card(props: CardProps) {
 
     return <>
         <div className="cardContainer" style={{'display': `${cardDisplay ? 'inherit' : 'none'}`}}>
-            <div className="cardContainerHead">
-                <h3>{props.filteredNasaData.title}</h3>
-            </div>
+
+            <h3 className="cardTitle">{props.filteredNasaData.title}</h3>
 
             <div className="flip-card">
                 <div className="flip-card-inner">
