@@ -26,8 +26,9 @@ class PrintfulBodyTest {
     }
 
     @Test
-    void testEqualsGetClassIsNotEqual() {
-        assertThat(getClass()).isNotEqualTo(printfulBody.getClass());
+    void testSelfEquals() {
+        PrintfulBody newPrintfulBody = printfulBody;
+        Assertions.assertThat(printfulBody.equals(newPrintfulBody)).isTrue();
     }
 
     @Test
