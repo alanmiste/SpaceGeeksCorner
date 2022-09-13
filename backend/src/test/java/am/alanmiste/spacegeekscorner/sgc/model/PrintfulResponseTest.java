@@ -25,6 +25,12 @@ class PrintfulResponseTest {
     }
 
     @Test
+    void testSelfEquals() {
+        PrintfulResponse newPrintfulResponse = printfulResponse;
+        Assertions.assertThat(printfulResponse.equals(newPrintfulResponse)).isTrue();
+    }
+
+    @Test
     void testNotEquals() {
         Assertions.assertThat(printfulResponse.equals(printfulResponse3)).isFalse();
     }

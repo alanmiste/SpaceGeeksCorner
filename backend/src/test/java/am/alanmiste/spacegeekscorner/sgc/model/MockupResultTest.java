@@ -1,5 +1,6 @@
 package am.alanmiste.spacegeekscorner.sgc.model;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,6 +31,12 @@ class MockupResultTest {
     @Test
     void testEquals() {
         assertThat(mockupResult.equals(mockupResult2)).isTrue();
+    }
+
+    @Test
+    void testSelfEquals() {
+        MockupResult newMockupResult = mockupResult;
+        Assertions.assertThat(mockupResult.equals(newMockupResult)).isTrue();
     }
 
     @Test
