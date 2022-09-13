@@ -27,7 +27,7 @@ class PrintfulBodyTest {
 
     @Test
     void testEqualsIsNotNull() {
-        Assertions.assertThatObject(printfulBody).isNotNull();
+        assertThat(printfulBody == null).isFalse();
     }
 
     @Test
