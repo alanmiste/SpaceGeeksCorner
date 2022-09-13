@@ -26,8 +26,8 @@ class PrintfulBodyTest {
     }
 
     @Test
-    void testEqualsIsNotNull() {
-        assertThat(printfulBody == null).isFalse();
+    void testEqualsGetClassIsNotEqual() {
+        assertThat(getClass()).isNotEqualTo(printfulBody.getClass());
     }
 
     @Test
