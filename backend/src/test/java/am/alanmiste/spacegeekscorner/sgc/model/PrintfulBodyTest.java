@@ -26,6 +26,11 @@ class PrintfulBodyTest {
     }
 
     @Test
+    void testEqualsToNull() {
+        Assertions.assertThat(printfulBody == null).isFalse();
+    }
+
+    @Test
     void testNotEquals() {
         Assertions.assertThat(printfulBody.equals(printfulBody3)).isFalse();
     }
