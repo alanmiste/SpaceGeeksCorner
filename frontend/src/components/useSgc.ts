@@ -32,13 +32,13 @@ export default function useSgc() {
                         4018,
                         4019
                     ],
-                    "mockup_url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/ca7d9467be42df7cef5ef1b77c2b0e02/unisex-staple-t-shirt-black-front-631a233580e16.jpg",
+                    "mockup_url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtBF.jpeg",
                     "extra": [
                         {
                             "title": "Front",
                             "option": "Front",
                             "option_group": "Flat",
-                            "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/9f32b8fe690974e896476b62b3b7be49/unisex-staple-t-shirt-black-front-631a233582e19.jpg"
+                            "url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtBF1.jpeg"
                         }
                     ]
                 },
@@ -49,13 +49,13 @@ export default function useSgc() {
                         4018,
                         4019
                     ],
-                    "mockup_url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/76e7f4884e6a389b638113ca7536f34a/unisex-staple-t-shirt-black-back-631a2335831f3.jpg",
+                    "mockup_url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtBB.jpeg",
                     "extra": [
                         {
                             "title": "Back",
                             "option": "Back",
                             "option_group": "Flat",
-                            "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/c42f423120d1ec0f1c14542e403fe387/unisex-staple-t-shirt-black-back-631a23358347e.jpg"
+                            "url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtBB1.jpeg"
                         }
                     ]
                 },
@@ -66,13 +66,13 @@ export default function useSgc() {
                         4013,
                         4014
                     ],
-                    "mockup_url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/442196c9c2fb2b22b31e5c46cb442b8f/unisex-staple-t-shirt-white-front-631a2335836c3.jpg",
+                    "mockup_url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtWF.jpeg",
                     "extra": [
                         {
                             "title": "Front",
                             "option": "Front",
                             "option_group": "Flat",
-                            "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/04278d0e21cb89fd544653766c2fab6d/unisex-staple-t-shirt-white-front-631a233583b71.jpg"
+                            "url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtWF1.jpeg"
                         }
                     ]
                 },
@@ -83,13 +83,13 @@ export default function useSgc() {
                         4013,
                         4014
                     ],
-                    "mockup_url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/f47f911f520aab0bb32ee449ec524f69/unisex-staple-t-shirt-white-back-631a233584075.jpg",
+                    "mockup_url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtWB.jpeg",
                     "extra": [
                         {
                             "title": "Back",
                             "option": "Back",
                             "option_group": "Flat",
-                            "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/24b4e874663cc97828ddd3f8d1c00564/unisex-staple-t-shirt-white-back-631a2335844ad.jpg"
+                            "url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtWB1.jpeg"
                         }
                     ]
                 }
@@ -102,7 +102,7 @@ export default function useSgc() {
                         4014
                     ],
                     "placement": "front",
-                    "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/a3ff31152ccd1e6294153d6cef952353/printfile_front.png"
+                    "url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtPrintfileFront.png"
                 },
                 {
                     "variant_ids": [
@@ -111,7 +111,7 @@ export default function useSgc() {
                         4014
                     ],
                     "placement": "back",
-                    "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/fdb375b3407096c93f0aebef86a6b26c/printfile_back.png"
+                    "url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtPrintfileBack.png"
                 }
             ]
         },
