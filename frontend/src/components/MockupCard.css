@@ -4,6 +4,7 @@
     align-items: center;
     flex-wrap: wrap;
     padding-top: 2em;
+    margin-bottom: 3em;
 }
 
 .CardContainer {
@@ -14,4 +15,9 @@
 
 img {
     width: 100%;
+}
+
+.MockupCardAction {
+    display: flex;
+    justify-content: space-around;
 }

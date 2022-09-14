@@ -18,14 +18,15 @@ export default function MockupCard(props: MockupCardProps) {
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                    Black- Front
+                    {props.imageAlt}
                 </Typography>
                 <Typography gutterBottom variant="h4" component="div">
                     0.00 €
                 </Typography>
             </CardContent>
-            <CardActions>
-                <Button size="small">Add to Basket</Button>
+            <CardActions className="MockupCardAction">
+                <Button size="small">Add to Cart</Button>
+                <Button size="small">Show</Button>
             </CardActions>
         </Card>
     </div>

@@ -63,7 +63,7 @@ export default function ShowMockup(props: ShowMockupProps) {
                 <input checked={!colorChecked} type="radio" onChange={handleColorChange} value="black"
                        className="radioBlackBtn radioBtn"/>
             </div>
-            <Button size="small" onClick={() => console.log(color, size)}>Share</Button>
+            <Button size="small" onClick={() => console.log(color, size)}>Add to Cart</Button>
         </div>
     </div>
 }
