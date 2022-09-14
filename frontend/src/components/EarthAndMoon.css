@@ -1,0 +1,78 @@
+.earth-moon {
+    position: absolute;
+    top: 10em;
+    right: 0;
+    bottom: 0;
+    left: 8em;
+}
+
+.earth-moon:before {
+    background-size: cover;
+    content: "";
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.earth {
+    position: absolute;
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+}
+
+.earthImg {
+    height: 100px;
+    position: center;
+    width: 100px;
+}
+
+.moon-container {
+    position: absolute;
+    top: calc(40% - 25px);
+    left: calc(44% - 25px);
+}
+
+.moon {
+    animation: spin 5s linear infinite;
+    background: none;
+    height: 25px;
+    pointer-events: none;
+    transform-origin: 25px;
+    width: 25px;
+    z-index: 0;
+}
+
+.moonImg {
+    transform: translateX(-80px) translateY(-80px);
+    width: 35px;
+}
+
+.earth img,
+.moon img {
+    border-radius: 50%;
+}
+
+@keyframes spin {
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .earth-moon {
+        position: absolute;
+        top: 5em;
+        right: 0;
+        bottom: 0;
+        left: 8em;
+    }
+
+    .moon-container {
+        position: absolute;
+        top: calc(45% - 25px);
+        left: calc(30% - 25px);
+    }
+}

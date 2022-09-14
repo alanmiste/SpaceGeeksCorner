@@ -25,9 +25,3 @@ h3 {
 .form .formItem {
     margin-top: 1em;
 }
-
-.rocket {
-    height: 200px;
-    width: 200px;
-    background: url("../materials/rocket.svg") 50% 50% no-repeat;
-}
