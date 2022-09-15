@@ -2,6 +2,7 @@
     border-radius: 10px;
     box-shadow: 8px 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 2em;
+    background: var(--sgcTransparentGray);
 }
 
 .boxTabsContainer {

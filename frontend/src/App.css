@@ -7,6 +7,7 @@
     --sgcMediumBlue: #347EBF;
     --sgcDarkBlue: #0E3659;
     --sgcWhite: #F2E7DC;
+    --sgcTransparentGray: rgba(241, 241, 241, 0.64);
 }
 
 body {
