@@ -5,6 +5,7 @@ import {toast} from "react-toastify";
 import {SavedUserItemType, UserItemToSave, UserItemType} from "../type/UserItemType";
 import {NewUserType} from "../type/NewUserType";
 import {MockupResponse} from "../type/MockupResponse";
+import {TshirtsType} from "../type/TshirtsType";
 
 export default function useSgc() {
 
@@ -119,6 +120,10 @@ export default function useSgc() {
     };
     const [mockup, setMockup] = useState<MockupResponse>(initialMockup);
 
+    const mockupList: TshirtsType[] = mockup.result.mockups.map((item, key) => {
+        return {id: key, mockupUrl: item.mockup_url, placement: item.placement}
+    });
+    const [tshirtNumber, setTshirtNumber] = useState<number>(0);
 
     const getDataFromNasaApi = () => {
         axios.get("/api/sgc/nasaapi")
@@ -256,6 +261,9 @@ export default function useSgc() {
         usernames,
         register,
         mockup,
-        makeMockup
+        makeMockup,
+        mockupList,
+        tshirtNumber,
+        setTshirtNumber
     }
 }
