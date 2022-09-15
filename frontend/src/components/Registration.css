@@ -2,7 +2,6 @@
     border-radius: 10px;
     box-shadow: 8px 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 2em;
-    margin-top: 5em;
 }
 
 .boxTabsContainer {
@@ -16,7 +15,7 @@ h3 {
 }
 
 .form {
-    font-family: monospace, serif;
+    font-family: 'MuseoModerno', cursive;
     letter-spacing: 0.05em;
     width: 300px;
     margin: 0 auto;
