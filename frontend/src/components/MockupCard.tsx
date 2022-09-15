@@ -4,6 +4,8 @@ import {Button, Card, CardActions, CardContent, CardMedia, Typography} from "@mu
 type MockupCardProps = {
     imageUrl: string,
     imageAlt: string,
+    imageId: number,
+    setTshirtNumber: (id: number) => void,
 }
 export default function MockupCard(props: MockupCardProps) {
 
@@ -26,7 +28,7 @@ export default function MockupCard(props: MockupCardProps) {
             </CardContent>
             <CardActions className="MockupCardAction">
                 <Button size="small">Add to Cart</Button>
-                <Button size="small">Show</Button>
+                <Button size="small" onClick={() => props.setTshirtNumber(props.imageId)}>Show</Button>
             </CardActions>
         </Card>
     </div>

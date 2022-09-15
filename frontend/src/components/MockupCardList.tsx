@@ -1,13 +1,15 @@
 import MockupCard from "./MockupCard";
-import {MockupResponse} from "../type/MockupResponse";
+import {TshirtsType} from "../type/TshirtsType";
 
 type MockupCardListProps = {
-    mockup: MockupResponse,
+    mockupList: TshirtsType[],
+    setTshirtNumber: (id: number) => void,
 }
 export default function MockupCardList(props: MockupCardListProps) {
     return <span className="mockupCardListContainer">
-        {props.mockup.result.mockups.map((item, key) =>
-            <MockupCard imageUrl={item.mockup_url} imageAlt={item.placement} key={key}/>)}
+        {props.mockupList.map((item, key) =>
+            <MockupCard imageUrl={item.mockupUrl} imageAlt={item.placement} imageId={item.id}
+                        setTshirtNumber={props.setTshirtNumber} key={key}/>)}
 
     </span>
 }
