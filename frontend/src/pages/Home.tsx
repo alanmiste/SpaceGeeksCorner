@@ -17,6 +17,7 @@ type HomeProps = {
 export default function Home(props: HomeProps) {
     return <>
         <Header me={props.me}/>
+        <p>Hello World!</p>
         <CardsList filteredNasaData={props.sgcHook.filteredNasaData} me={props.me}
                    addItem={props.addItem} favouriteBtnDisplay={props.favouriteBtnDisplay}
                    deleteItem={props.deleteItem} makeMockup={props.makeMockup}/>

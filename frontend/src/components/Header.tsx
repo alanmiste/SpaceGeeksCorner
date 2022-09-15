@@ -10,7 +10,7 @@ export default function Header(props: HeaderProps) {
             <img className="logoImg"
                  src="https://raw.githubusercontent.com/alanmiste/SpaceGeeksCorner/main/frontend/src/materials/SgcLogo.gif"
                  alt="Space Geeks Corner Logo"/>
-            <h1>Space Geeks Corner</h1>
+            <h1 className="h1Animation"> Space Geeks Corner</h1>
         </div>
         <SgcNavBar me={props.me}/>
     </header>)
