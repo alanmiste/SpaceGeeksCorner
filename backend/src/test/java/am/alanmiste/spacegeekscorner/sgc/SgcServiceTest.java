@@ -1,5 +1,6 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
+import am.alanmiste.spacegeekscorner.sgc.model.UserItem;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -17,13 +18,13 @@ class SgcServiceTest {
     void addItem() {
         UserItem userItem = new UserItem("123", "user1",
                 "The planet Mercury resembles a moon.", "Southwest Mercury",
-                "https://apod.nasa.gov/apod/image/0002/merc4_m10.gif");
+                "https://apod.nasa.gov/apod/image/0002/merc4_m10.jpg");
 
         when(sgcRepository.save(any(UserItem.class))).thenReturn(userItem);
 
         UserItem actual = sgcService.addItem(new UserItem("123", "user1",
                 "The planet Mercury resembles a moon.", "Southwest Mercury",
-                "https://apod.nasa.gov/apod/image/0002/merc4_m10.gif"));
+                "https://apod.nasa.gov/apod/image/0002/merc4_m10.jpg"));
 
         assertThat(actual).isEqualTo(userItem);
     }
@@ -64,7 +65,7 @@ class SgcServiceTest {
     void deleteItem() {
         UserItem userItem = new UserItem("123", "user1",
                 "The planet Mercury resembles a moon.", "Southwest Mercury",
-                "https://apod.nasa.gov/apod/image/0002/merc4_m10.gif");
+                "https://apod.nasa.gov/apod/image/0002/merc4_m10.jpg");
 
         when(sgcRepository.existsById(userItem.id())).thenReturn(true);
         doNothing().when(sgcRepository).deleteById(userItem.id());
@@ -77,7 +78,7 @@ class SgcServiceTest {
     void deleteItemDoseNotExist() {
         UserItem userItem = new UserItem("123", "user1",
                 "The planet Mercury resembles a moon.", "Southwest Mercury",
-                "https://apod.nasa.gov/apod/image/0002/merc4_m10.gif");
+                "https://apod.nasa.gov/apod/image/0002/merc4_m10.jpg");
 
         when(sgcRepository.existsById(userItem.id())).thenReturn(false);
         doNothing().when(sgcRepository).deleteById(userItem.id());

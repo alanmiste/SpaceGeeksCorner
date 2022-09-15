@@ -1,5 +1,7 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
+import am.alanmiste.spacegeekscorner.sgc.model.AppUser;
+import am.alanmiste.spacegeekscorner.sgc.model.NewUser;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

@@ -1,5 +1,6 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
+import am.alanmiste.spacegeekscorner.sgc.model.UserItem;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import org.junit.jupiter.api.Test;
@@ -130,6 +131,239 @@ class SgcIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         []
+                        """));
+    }
+
+    @DirtiesContext
+    @Test
+    void makeMockupsTest() throws Exception {
+        stubFor(post("/mockup-generator/create-task/71")
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("""
+                                {
+                                    "code": 200,
+                                    "result": {
+                                        "task_key": "gt-406203453",
+                                        "status": "pending"
+                                    },
+                                    "extra": []
+                                }
+                                """)));
+
+        stubFor(get("/mockup-generator/task?task_key=gt-406203453")
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("""
+                                        {
+                                    "code": 200,
+                                    "result": {
+                                        "task_key": "gt-406202711",
+                                        "status": "completed",
+                                        "mockups": [
+                                            {
+                                                "placement": "front",
+                                                "variant_ids": [
+                                                    4017,
+                                                    4018,
+                                                    4019
+                                                ],
+                                                "mockup_url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/9e8ca9db6676ee8c22a981df64fb699e/unisex-staple-t-shirt-black-front-631f189742aef.jpg",
+                                                "extra": [
+                                                    {
+                                                        "title": "Front",
+                                                        "option": "Front",
+                                                        "option_group": "Flat",
+                                                        "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/f3bd1904de17ec5eb5004553b1bb2df2/unisex-staple-t-shirt-black-front-631f189744290.jpg"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "placement": "back",
+                                                "variant_ids": [
+                                                    4017,
+                                                    4018,
+                                                    4019
+                                                ],
+                                                "mockup_url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/8949df2d5855b904bbd237523b3ad723/unisex-staple-t-shirt-black-back-631f189744752.jpg",
+                                                "extra": [
+                                                    {
+                                                        "title": "Back",
+                                                        "option": "Back",
+                                                        "option_group": "Flat",
+                                                        "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/3edcbb324fe839f0f05036208b090eed/unisex-staple-t-shirt-black-back-631f189744a81.jpg"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "placement": "front",
+                                                "variant_ids": [
+                                                    4012,
+                                                    4013,
+                                                    4014
+                                                ],
+                                                "mockup_url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/ae7f71f6e80b6914e98d2692dcc9265d/unisex-staple-t-shirt-white-front-631f189744da6.jpg",
+                                                "extra": [
+                                                    {
+                                                        "title": "Front",
+                                                        "option": "Front",
+                                                        "option_group": "Flat",
+                                                        "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/cd9b12e890f6e6f57a251d2220cf4749/unisex-staple-t-shirt-white-front-631f189745404.jpg"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "placement": "back",
+                                                "variant_ids": [
+                                                    4012,
+                                                    4013,
+                                                    4014
+                                                ],
+                                                "mockup_url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/a709f5eb907903ee43349313d4de463a/unisex-staple-t-shirt-white-back-631f189745b4a.jpg",
+                                                "extra": [
+                                                    {
+                                                        "title": "Back",
+                                                        "option": "Back",
+                                                        "option_group": "Flat",
+                                                        "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/1c5f5cced38486f9a6a5f7334523d072/unisex-staple-t-shirt-white-back-631f189747731.jpg"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "printfiles": [
+                                            {
+                                                "variant_ids": [
+                                                    4012,
+                                                    4013,
+                                                    4014
+                                                ],
+                                                "placement": "front",
+                                                "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/c2df9dc03de596d5db21ea306ac5b654/printfile_front.png"
+                                            },
+                                            {
+                                                "variant_ids": [
+                                                    4012,
+                                                    4013,
+                                                    4014
+                                                ],
+                                                "placement": "back",
+                                                "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/70e93e662e28eb934ae450c0e8d13942/printfile_back.png"
+                                            }
+                                        ]
+                                    },
+                                    "extra": []
+                                }
+                                        """)));
+
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/sgc/make-mockups")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"image_url":"https://apod.nasa.gov/apod/image/1812/ana03BennuVantuyne1024c.jpg"}
+                                """)
+                        .with(testUser()).with(csrf())
+                ).andExpect(status().is(200))
+                .andExpect(content().json("""
+                        {
+                            "code": 200,
+                            "result": {
+                                "task_key": "gt-406202711",
+                                "status": "completed",
+                                "mockups": [
+                                    {
+                                        "placement": "front",
+                                        "variant_ids": [
+                                            4017,
+                                            4018,
+                                            4019
+                                        ],
+                                        "mockup_url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/9e8ca9db6676ee8c22a981df64fb699e/unisex-staple-t-shirt-black-front-631f189742aef.jpg",
+                                        "extra": [
+                                            {
+                                                "title": "Front",
+                                                "option": "Front",
+                                                "option_group": "Flat",
+                                                "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/f3bd1904de17ec5eb5004553b1bb2df2/unisex-staple-t-shirt-black-front-631f189744290.jpg"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "placement": "back",
+                                        "variant_ids": [
+                                            4017,
+                                            4018,
+                                            4019
+                                        ],
+                                        "mockup_url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/8949df2d5855b904bbd237523b3ad723/unisex-staple-t-shirt-black-back-631f189744752.jpg",
+                                        "extra": [
+                                            {
+                                                "title": "Back",
+                                                "option": "Back",
+                                                "option_group": "Flat",
+                                                "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/3edcbb324fe839f0f05036208b090eed/unisex-staple-t-shirt-black-back-631f189744a81.jpg"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "placement": "front",
+                                        "variant_ids": [
+                                            4012,
+                                            4013,
+                                            4014
+                                        ],
+                                        "mockup_url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/ae7f71f6e80b6914e98d2692dcc9265d/unisex-staple-t-shirt-white-front-631f189744da6.jpg",
+                                        "extra": [
+                                            {
+                                                "title": "Front",
+                                                "option": "Front",
+                                                "option_group": "Flat",
+                                                "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/cd9b12e890f6e6f57a251d2220cf4749/unisex-staple-t-shirt-white-front-631f189745404.jpg"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "placement": "back",
+                                        "variant_ids": [
+                                            4012,
+                                            4013,
+                                            4014
+                                        ],
+                                        "mockup_url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/a709f5eb907903ee43349313d4de463a/unisex-staple-t-shirt-white-back-631f189745b4a.jpg",
+                                        "extra": [
+                                            {
+                                                "title": "Back",
+                                                "option": "Back",
+                                                "option_group": "Flat",
+                                                "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/1c5f5cced38486f9a6a5f7334523d072/unisex-staple-t-shirt-white-back-631f189747731.jpg"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "printfiles": [
+                                    {
+                                        "variant_ids": [
+                                            4012,
+                                            4013,
+                                            4014
+                                        ],
+                                        "placement": "front",
+                                        "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/c2df9dc03de596d5db21ea306ac5b654/printfile_front.png"
+                                    },
+                                    {
+                                        "variant_ids": [
+                                            4012,
+                                            4013,
+                                            4014
+                                        ],
+                                        "placement": "back",
+                                        "url": "https://printful-upload.s3-accelerate.amazonaws.com/tmp/70e93e662e28eb934ae450c0e8d13942/printfile_back.png"
+                                    }
+                                ]
+                            },
+                            "extra": []
+                        }
                         """));
     }
 }

@@ -4,6 +4,7 @@ import {NasaResponseType} from "../type/NasaResponseType";
 import {toast} from "react-toastify";
 import {SavedUserItemType, UserItemToSave, UserItemType} from "../type/UserItemType";
 import {NewUserType} from "../type/NewUserType";
+import {MockupResponse} from "../type/MockupResponse";
 
 export default function useSgc() {
 
@@ -17,6 +18,106 @@ export default function useSgc() {
         .filter(nasaItem => !userItems.find(userItem => userItem.url === nasaItem.url));
 
     const [usernames, setUsernames] = useState<string[]>([]);
+
+    const initialMockup: MockupResponse = {
+        "code": 200,
+        "result": {
+            "task_key": "gt-404733720",
+            "status": "completed",
+            "mockups": [
+                {
+                    "placement": "front",
+                    "variant_ids": [
+                        4017,
+                        4018,
+                        4019
+                    ],
+                    "mockup_url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtBF.jpeg",
+                    "extra": [
+                        {
+                            "title": "Front",
+                            "option": "Front",
+                            "option_group": "Flat",
+                            "url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtBF1.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "placement": "back",
+                    "variant_ids": [
+                        4017,
+                        4018,
+                        4019
+                    ],
+                    "mockup_url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtBB.jpeg",
+                    "extra": [
+                        {
+                            "title": "Back",
+                            "option": "Back",
+                            "option_group": "Flat",
+                            "url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtBB1.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "placement": "front",
+                    "variant_ids": [
+                        4012,
+                        4013,
+                        4014
+                    ],
+                    "mockup_url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtWF.jpeg",
+                    "extra": [
+                        {
+                            "title": "Front",
+                            "option": "Front",
+                            "option_group": "Flat",
+                            "url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtWF1.jpeg"
+                        }
+                    ]
+                },
+                {
+                    "placement": "back",
+                    "variant_ids": [
+                        4012,
+                        4013,
+                        4014
+                    ],
+                    "mockup_url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtWB.jpeg",
+                    "extra": [
+                        {
+                            "title": "Back",
+                            "option": "Back",
+                            "option_group": "Flat",
+                            "url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtWB1.jpeg"
+                        }
+                    ]
+                }
+            ],
+            "printfiles": [
+                {
+                    "variant_ids": [
+                        4012,
+                        4013,
+                        4014
+                    ],
+                    "placement": "front",
+                    "url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtPrintfileFront.png"
+                },
+                {
+                    "variant_ids": [
+                        4012,
+                        4013,
+                        4014
+                    ],
+                    "placement": "back",
+                    "url": "https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtPrintfileBack.png"
+                }
+            ]
+        },
+        "extra": []
+    };
+    const [mockup, setMockup] = useState<MockupResponse>(initialMockup);
 
 
     const getDataFromNasaApi = () => {
@@ -135,9 +236,26 @@ export default function useSgc() {
                 draggable: true,
                 progress: undefined,
             }))
-
-
     }
 
-    return {filteredNasaData, me, login, logout, addItem, userItems, deleteItem, usernames, register}
+    const makeMockup = (imageUrl: string) => {
+        const imageOgject = {"image_url": imageUrl}
+        axios.post("api/sgc/make-mockups", imageOgject)
+            .then(response => response.data)
+            .then(setMockup)
+    }
+
+    return {
+        filteredNasaData,
+        me,
+        login,
+        logout,
+        addItem,
+        userItems,
+        deleteItem,
+        usernames,
+        register,
+        mockup,
+        makeMockup
+    }
 }

@@ -4,6 +4,7 @@ import "./MyAccount.css"
 import {Button} from "@mui/material";
 import React from "react";
 import {NewUserType} from "../type/NewUserType";
+import Footer from "../components/Footer";
 
 type MyAccountProps = {
     me: string,
@@ -33,5 +34,6 @@ export default function MyAccount(props: MyAccountProps) {
 
             }
         </div>
+        <Footer/>
     </>
 }

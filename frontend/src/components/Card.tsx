@@ -11,6 +11,7 @@ type CardProps = {
     addItem: (username: string, explanation: string, title: string, url: string) => Promise<AxiosResponse<any>>,
     favouriteBtnDisplay: boolean,
     deleteItem: (id: string) => void,
+    makeMockup: (imageUrl: string) => void,
 }
 
 export default function Card(props: CardProps) {
@@ -24,9 +25,8 @@ export default function Card(props: CardProps) {
 
     return <>
         <div className="cardContainer" style={{'display': `${cardDisplay ? 'inherit' : 'none'}`}}>
-            <div className="cardContainerHead">
-                <h3>{props.filteredNasaData.title}</h3>
-            </div>
+
+            <h3 className="cardTitle">{props.filteredNasaData.title}</h3>
 
             <div className="flip-card">
                 <div className="flip-card-inner">
@@ -50,7 +50,9 @@ export default function Card(props: CardProps) {
                             <MdFavorite/>
                             <span className="btnHoverText">Add to favourite</span>
                         </button>
-                        <button className="cardBtn cartBtn">
+                        <button className="cardBtn cartBtn"
+                                onClick={() => props.makeMockup(props.filteredNasaData.url)}
+                        >
                             <FaShoppingCart/>
                             <span className="btnHoverText">Move it to cart</span>
                         </button>

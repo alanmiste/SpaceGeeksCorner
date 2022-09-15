@@ -11,6 +11,12 @@
     width: 25em;
 }
 
+.cardTitle {
+    text-align: center;
+    margin-bottom: -10px;
+    color: var(--sgcDarkBlue);
+}
+
 .flip-card {
     background-color: transparent;
     width: 300px;
@@ -47,10 +53,10 @@
 }
 
 .flip-card-back {
-    background-color: #dfdfdf;
-    color: black;
+    background-color: var(--sgcWhite);
+    color: var(--sgcBlack);
     transform: rotateY(180deg);
-    height: 300px;
+    height: 20em;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -58,7 +64,7 @@
 .cardImage {
     width: 20em;
     height: 20em;
-    border-radius: 40px 0 80px 0;
+    border-radius: 40px 30px 40px 0;
 }
 
 .explanation {
@@ -80,17 +86,17 @@
 }
 
 .favouriteBtn:hover {
-    color: red;
+    color: var(--sgcOrange);
     cursor: pointer;
 }
 
 .cartBtn:hover {
-    color: lightseagreen;
+    color: var(--sgcMediumBlue);
     cursor: pointer;
 }
 
 .deleteBtn:hover {
-    color: #f57f00;
+    color: var(--sgcOrange);
     cursor: pointer;
 }
 
@@ -99,7 +105,7 @@
     width: 120px;
     background-color: rgba(0, 0, 0, 0.47);
     font-size: 0.5em;
-    color: #ffffff;
+    color: #fff;
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;

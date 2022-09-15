@@ -18,7 +18,6 @@ type RegistrationProps = {
 }
 export default function Registration(props: RegistrationProps) {
 
-    //---MUI things---
     interface TabPanelProps {
         children?: React.ReactNode;
         index: number;
@@ -57,7 +56,6 @@ export default function Registration(props: RegistrationProps) {
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setTabValue(newValue);
     };
-    //---------
 
     return <>
         <div className="registrationContainer">

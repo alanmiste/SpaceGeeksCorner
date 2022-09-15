@@ -1,5 +1,9 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
+import am.alanmiste.spacegeekscorner.sgc.model.ImageObject;
+import am.alanmiste.spacegeekscorner.sgc.model.MockupResponse;
+import am.alanmiste.spacegeekscorner.sgc.model.NasaResponse;
+import am.alanmiste.spacegeekscorner.sgc.model.UserItem;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,5 +44,12 @@ public class SgcController {
     public ResponseEntity<Void> deleteItem(@PathVariable String id) {
         boolean deleteSuccess = sgcService.deleteItem(id);
         return new ResponseEntity<>(deleteSuccess ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/make-mockups")
+    public MockupResponse makeMockups(
+            @RequestBody ImageObject photoUrl
+    ) throws InterruptedException {
+        return sgcService.makeMockups(photoUrl);
     }
 }

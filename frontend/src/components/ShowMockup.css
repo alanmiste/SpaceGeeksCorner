@@ -1,0 +1,96 @@
+.showMockupContainer {
+    display: grid;
+    grid-template-columns:70% 30%;
+    margin-top: 2em;
+}
+
+.showMockupBigImage {
+    width: 100%;
+    height: auto;
+}
+
+.showMockupDetails {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0 1em;
+}
+
+.selectThings {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.showMockupLabelText {
+    padding-right: 1em;
+}
+
+.showMockupSelectColor {
+    padding: 1em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.radioBtn {
+    width: 2em;
+    height: 2em;
+}
+
+.radioWhiteBtn:after {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    background-color: #fff;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 3px gray solid;
+}
+
+.radioWhiteBtn:checked:after {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    content: '✓';
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid black;
+}
+
+.radioBlackBtn:after {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    background-color: #000;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 3px gray solid;
+}
+
+.radioBlackBtn:checked:after {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    background-color: #000;
+    content: '✓';
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    visibility: visible;
+    border: 3px solid black;
+}
+
+@media screen and (max-width: 600px) {
+    .showMockupContainer {
+        display: flex;
+        flex-direction: column;
+    }
+}
