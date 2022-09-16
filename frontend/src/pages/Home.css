@@ -1,0 +1,13 @@
+.homeInfo {
+    margin-top: 16em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1em;
+}
+
+.homeLoading {
+    display: flex;
+    justify-content: center;
+}
