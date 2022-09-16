@@ -14,20 +14,18 @@
 
 .toTop {
     position: fixed;
-    padding: 1rem 1rem;
+    padding: 0.7rem 0.7rem;
     /*fontSize: 1em;*/
-    bottom: 3em;
+    bottom: 1.5em;
     right: 2em;
     border: none;
     border-radius: 15px 15px 0 0;
-    background: rgba(13, 13, 13, 0.58);
+    background: rgba(242, 110, 80, 0.89);
     color: var(--sgcWhite);
     font-weight: bold;
-    /*textAlign: 'center';*/
 }
 
 .toTop:hover {
     cursor: pointer;
-    border-top: var(--sgcOrange) 10px solid;
-    border-radius: 15px 15px 0 0;
+    background: var(--sgcLightBlue);
 }

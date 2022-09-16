@@ -5,6 +5,7 @@ import {UserItemType} from "../type/UserItemType";
 import Footer from "../components/Footer";
 import "./Home.css";
 import EarthAndMoon from "../components/EarthAndMoon";
+import KeyboardDoubleArrowUpOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowUpOutlined';
 
 type HomeProps = {
     sgcHook: {
@@ -35,13 +36,10 @@ export default function Home(props: HomeProps) {
                 </div>
             </div>
         }
-        <button className="toTop"
-                onClick={() => {
-                    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-                }}
-        >
-            To Top
-        </button>
+        <KeyboardDoubleArrowUpOutlinedIcon className="toTop"
+                                           onClick={() => {
+                                               window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+                                           }}/>
         <Footer/>
     </>
 }
