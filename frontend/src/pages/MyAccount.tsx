@@ -28,7 +28,7 @@ export default function MyAccount(props: MyAccountProps) {
                         register={props.register}
                     />
                     : <div className="logout">
-                        <Button type="submit" variant="outlined"
+                        <Button type="submit" variant="outlined" fullWidth
                                 className='btn' onClick={props.logout}>Logout</Button>
                     </div>
 
