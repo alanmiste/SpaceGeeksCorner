@@ -35,6 +35,13 @@ export default function Home(props: HomeProps) {
                 </div>
             </div>
         }
+        <button className="toTop"
+                onClick={() => {
+                    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+                }}
+        >
+            To Top
+        </button>
         <Footer/>
     </>
 }

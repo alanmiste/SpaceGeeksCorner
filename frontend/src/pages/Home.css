@@ -11,3 +11,23 @@
     display: flex;
     justify-content: center;
 }
+
+.toTop {
+    position: fixed;
+    padding: 1rem 1rem;
+    /*fontSize: 1em;*/
+    bottom: 3em;
+    right: 2em;
+    border: none;
+    border-radius: 15px 15px 0 0;
+    background: rgba(13, 13, 13, 0.58);
+    color: var(--sgcWhite);
+    font-weight: bold;
+    /*textAlign: 'center';*/
+}
+
+.toTop:hover {
+    cursor: pointer;
+    border-top: var(--sgcOrange) 10px solid;
+    border-radius: 15px 15px 0 0;
+}
