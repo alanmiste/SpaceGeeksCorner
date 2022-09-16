@@ -123,7 +123,7 @@ export default function SignUp(props: SignUpProps) {
                     Minimum requirements: <br/>4 characters: a-z.<br/>Start with character.<br/>NO symbol.</span>
                 </span>
             </label>
-            <TextField className='formItem' fullWidth id="outlined-basic" label="New Username" variant="outlined"
+            <TextField className='formItem' fullWidth id="outlined-basic1" label="New Username" variant="outlined"
                        onChange={handleUsernameChange}/>
             <span style={{display: "block", color: usernameCheckTextColor}}>{usernameValidationText}</span>
 
@@ -137,7 +137,7 @@ export default function SignUp(props: SignUpProps) {
             </label>
             <FormControl fullWidth variant="outlined" className='formItem'>
                 <InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
-                <OutlinedInput type={showPassword ? 'text' : 'password'} id="outlined-basic"
+                <OutlinedInput type={showPassword ? 'text' : 'password'} id="outlined-basic2"
                                label="New Password"
                                onChange={handlePasswordChange}
                                endAdornment={

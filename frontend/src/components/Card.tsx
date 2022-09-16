@@ -4,6 +4,9 @@ import {MdDeleteForever, MdFavorite} from "react-icons/md";
 import {AxiosResponse} from "axios";
 import {UserItemType} from "../type/UserItemType";
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
+import {wait} from "@testing-library/user-event/dist/utils";
 
 type CardProps = {
     filteredNasaData: UserItemType,
@@ -22,6 +25,8 @@ export default function Card(props: CardProps) {
         props.addItem(props.me, props.filteredNasaData.explanation, props.filteredNasaData.title, props.filteredNasaData.url)
             .then(() => setCardDisplay(!cardDisplay))
     }
+
+    const navigate = useNavigate();
 
     return <>
         <div className="cardContainer" style={{'display': `${cardDisplay ? 'inherit' : 'none'}`}}>
@@ -51,7 +56,19 @@ export default function Card(props: CardProps) {
                             <span className="btnHoverText">Add to favourite</span>
                         </button>
                         <button className="cardBtn cartBtn"
-                                onClick={() => props.makeMockup(props.filteredNasaData.url)}
+                                onClick={() => {
+                                    props.makeMockup(props.filteredNasaData.url)
+                                    toast.info('Please wait ⏳, processing ⚙️, you\'ll be redirected to "T-Shirts".', {
+                                        position: "top-center",
+                                        autoClose: 15000,
+                                        hideProgressBar: false,
+                                        closeOnClick: false,
+                                        pauseOnHover: false,
+                                        draggable: false,
+                                        progress: undefined,
+                                    });
+                                    wait(5000).then(() => navigate('/t-shirt'))
+                                }}
                         >
                             <FaShoppingCart/>
                             <span className="btnHoverText">Move it to cart</span>

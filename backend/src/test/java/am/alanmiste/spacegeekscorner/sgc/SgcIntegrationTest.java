@@ -257,7 +257,6 @@ class SgcIntegrationTest {
                                 }
                                         """)));
 
-
         mockMvc.perform(MockMvcRequestBuilders.post("/api/sgc/make-mockups")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""

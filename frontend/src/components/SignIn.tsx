@@ -33,12 +33,12 @@ export default function SignIn(props: SignInProps) {
 
             <h3>Sign In</h3>
 
-            <TextField className='formItem' fullWidth id="outlined-basic" label="Username" variant="outlined"
+            <TextField className='formItem' fullWidth id="outlined-basic4" label="Username" variant="outlined"
                        onChange={event => setUsername(event.target.value)}/>
 
             <FormControl fullWidth variant="outlined" className='formItem'>
                 <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                <OutlinedInput type={showPassword ? 'text' : 'password'} id="outlined-basic"
+                <OutlinedInput type={showPassword ? 'text' : 'password'} id="outlined-basic5"
                                label="Password"
                                onChange={event => setPassword(event.target.value)}
                                endAdornment={
