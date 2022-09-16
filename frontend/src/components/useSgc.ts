@@ -248,6 +248,15 @@ export default function useSgc() {
         axios.post("api/sgc/make-mockups", imageOgject)
             .then(response => response.data)
             .then(setMockup)
+            .catch(() => toast.warn('Server is busy ⏳, please try again in 30 second!', {
+                position: "top-center",
+                autoClose: 10000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+            }))
     }
 
     return {
