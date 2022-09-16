@@ -67,7 +67,7 @@ export default function Card(props: CardProps) {
                                         draggable: false,
                                         progress: undefined,
                                     });
-                                    wait(5000).then(() => navigate('/shop'))
+                                    wait(5000).then(() => navigate('/t-shirt'))
                                 }}
                         >
                             <FaShoppingCart/>
