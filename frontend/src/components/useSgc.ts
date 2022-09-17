@@ -6,6 +6,7 @@ import {SavedUserItemType, UserItemToSave, UserItemType} from "../type/UserItemT
 import {NewUserType} from "../type/NewUserType";
 import {MockupResponse} from "../type/MockupResponse";
 import {TshirtsType} from "../type/TshirtsType";
+import {TshirtToSave, TshirtWithUsername} from "../type/TshirtToSave";
 
 export default function useSgc() {
 
@@ -125,6 +126,41 @@ export default function useSgc() {
     });
     const [tshirtNumber, setTshirtNumber] = useState<number>(0);
 
+
+    const successToast = (message: string) => {
+        toast.success(message, {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+        })
+    }
+    const warnToast = (message: string) => {
+        toast.warn(message, {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+        })
+    }
+    const errorToast = (message: string) => {
+        toast.warn(message, {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+        })
+    }
+
     const getDataFromNasaApi = () => {
         axios.get("/api/sgc/nasaapi")
             .then(response => {
@@ -147,28 +183,12 @@ export default function useSgc() {
 
     const login = (username: string, password: string) => {
         if (username === "" || password === "")
-            toast.warn("Username and Password shouldn't be empty!", {
-                position: "top-center",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                progress: undefined,
-            })
+            warnToast("Username and Password shouldn't be empty!")
         else
             axios.get("/api/users/login", {auth: {username, password}})
                 .then(response => response.data)
                 .then(setMe)
-                .catch(() => toast.error("Username or password is incorrect.", {
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    draggable: true,
-                    progress: undefined,
-                }))
+                .catch(() => errorToast("Username or password is incorrect."))
     }
 
     const fetchMe = () => {
@@ -191,20 +211,17 @@ export default function useSgc() {
 
     const addItem = (username: string, explanation: string, title: string, url: string) => {
         const userItem: UserItemToSave = {username: username, explanation: explanation, title: title, url: url}
-        toast.success('Added to favorites successfully!', {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-        });
+
         return axios.post("/api/sgc", userItem)
             .then((savedUserItem) => {
                 setUserItems([...userItems, savedUserItem.data])
                 return savedUserItem
             })
+            .catch(error => {
+                errorToast(error.message)
+                return error
+            })
+            .finally(() => successToast('Added to favorites successfully!'))
     }
 
     const deleteItem = (url: string) => {
@@ -212,15 +229,7 @@ export default function useSgc() {
         const id = selectedItem?.id
         return axios.delete(`/api/sgc/${id}`)
             .then(listUserItems)
-            .catch(error => toast.error(error.message, {
-                position: "top-center",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                progress: undefined,
-            }))
+            .catch(error => errorToast(error.message))
     }
 
     const fetchUsernames = () => {
@@ -232,15 +241,7 @@ export default function useSgc() {
     const register = (newUser: NewUserType) => {
         axios.post("/api/users", newUser)
             .then(response => setUsernames([...usernames, response.data]))
-            .then(() => toast.success('Congratulations 🚀' + newUser.username + ' You Signed up successfully! ✅', {
-                position: "top-center",
-                autoClose: 10000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: false,
-                draggable: true,
-                progress: undefined,
-            }))
+            .then(() => successToast('Congratulations 🚀' + newUser.username + ' You Signed up successfully! ✅'))
     }
 
     const makeMockup = (imageUrl: string) => {
@@ -259,6 +260,13 @@ export default function useSgc() {
             }))
     }
 
+    const saveMockup = (username: string, tshirtToSave: TshirtToSave) => {
+        const tshirtWithUsername: TshirtWithUsername = {username: username, tshirtToSave: tshirtToSave}
+        axios.post("api/sgc/save-mockup", tshirtWithUsername)
+            .then(response => response.data)
+            .catch(error => errorToast(error.message))
+    }
+
     return {
         filteredNasaData,
         me,
@@ -273,6 +281,7 @@ export default function useSgc() {
         makeMockup,
         mockupList,
         tshirtNumber,
-        setTshirtNumber
+        setTshirtNumber,
+        saveMockup
     }
 }
