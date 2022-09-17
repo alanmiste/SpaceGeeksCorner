@@ -1,27 +1,61 @@
 import "./ShowMockup.css";
 import {Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
 import {useState} from "react";
+import {TshirtToSave} from "../type/TshirtToSave";
+import {toast} from "react-toastify";
 
 type ShowMockupProps = {
     imageUrl: string,
     placement: string,
+    me: string,
+    saveMockup: (username: string, tshirtToSave: TshirtToSave) => void,
 }
 
 export default function ShowMockup(props: ShowMockupProps) {
 
-    const [size, setSize] = useState('');
+    const [tshirtSize, setTshirtSize] = useState('');
 
     const handleChange = (event: SelectChangeEvent) => {
-        setSize(event.target.value);
+        setTshirtSize(event.target.value);
     };
 
-    const [color, setColor] = useState('black');
+    const [tshirtColor, setTshirtColor] = useState('black');
     const [colorChecked, setColorChecked] = useState(false);
 
     const handleColorChange = () => {
         setColorChecked(!colorChecked);
-        setColor(colorChecked ? 'black' : 'white')
+        setTshirtColor(colorChecked ? 'black' : 'white')
     };
+
+    const addToCart = () => {
+        if (tshirtSize && tshirtColor) {
+            props.saveMockup(props.me, {
+                color: tshirtColor,
+                size: tshirtSize,
+                mockupUrl: props.imageUrl,
+                placement: props.placement
+            })
+            toast.success('Item saved successfully!', {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            })
+        } else {
+            toast.warn('Please select Size and Color.', {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+            })
+        }
+    }
 
     return <div className="showMockupContainer">
         <img className="showMockupBigImage"
@@ -40,7 +74,7 @@ export default function ShowMockup(props: ShowMockupProps) {
                     <Select
                         labelId="demo-simple-select-required-label"
                         id="demo-simple-select-required"
-                        value={size}
+                        value={tshirtSize}
                         label="Size *"
                         onChange={handleChange}
                         sx={{minWidth: 90, height: 50}}
@@ -63,7 +97,9 @@ export default function ShowMockup(props: ShowMockupProps) {
                 <input checked={!colorChecked} type="radio" onChange={handleColorChange} value="black"
                        className="radioBlackBtn radioBtn"/>
             </div>
-            <Button size="small" onClick={() => console.log(color, size)}>Add to Cart</Button>
+            <Button size="small" onClick={() => {
+                addToCart()
+            }}>Add to Cart</Button>
         </div>
     </div>
 }

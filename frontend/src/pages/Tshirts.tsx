@@ -5,6 +5,7 @@ import {MockupResponse} from "../type/MockupResponse";
 import "./Tshirts.css"
 import Footer from "../components/Footer";
 import {TshirtsType} from "../type/TshirtsType";
+import {TshirtToSave} from "../type/TshirtToSave";
 
 type TshirtsProps = {
     me: string,
@@ -12,13 +13,15 @@ type TshirtsProps = {
     mockupList: TshirtsType[],
     tshirtNumber: number,
     setTshirtNumber: (id: number) => void,
+    saveMockup: (username: string, tshirtToSave: TshirtToSave) => void,
 }
 export default function Tshirts(props: TshirtsProps) {
     return <>
         <Header me={props.me}/>
         <div className="mockupContainer">
             <ShowMockup imageUrl={props.mockupList[props.tshirtNumber].mockupUrl}
-                        placement={props.mockupList[props.tshirtNumber].placement}/>
+                        placement={props.mockupList[props.tshirtNumber].placement} me={props.me}
+                        saveMockup={props.saveMockup}/>
             <MockupCardList mockupList={props.mockupList} setTshirtNumber={props.setTshirtNumber}/>
         </div>
         <Footer/>
