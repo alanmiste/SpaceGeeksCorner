@@ -3,6 +3,7 @@ package am.alanmiste.spacegeekscorner.sgc;
 import am.alanmiste.spacegeekscorner.sgc.model.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,11 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class SgcService {
     private final SgcRepository sgcRepository;
+    private final TshirtsRepository tshirtsRepository;
 
-    public SgcService(SgcRepository sgcRepository) {
+    public SgcService(SgcRepository sgcRepository, TshirtsRepository tshirtsRepository) {
         this.sgcRepository = sgcRepository;
+        this.tshirtsRepository = tshirtsRepository;
     }
 
     @Value("${nasaApiUrl}")
@@ -108,5 +111,34 @@ public class SgcService {
         if (mockupGenerator == null)
             return null;
         return mockupGenerator.getBody();
+    }
+
+    public MockupToSave saveMockup(TshirtWithUsername tshirtWithUsername) throws ChangeSetPersister.NotFoundException {
+        TshirtToSave newTshirtToSave = new TshirtToSave(
+                tshirtWithUsername.tshirtToSave().color(),
+                tshirtWithUsername.tshirtToSave().size(),
+                tshirtWithUsername.tshirtToSave().mockupUrl(),
+                tshirtWithUsername.tshirtToSave().placement()
+        );
+
+        List<TshirtToSave> toSaveList = List.of(
+                newTshirtToSave
+        );
+
+        MockupToSave mockupToSave = new MockupToSave(
+                tshirtWithUsername.username(), toSaveList
+        );
+
+        if (!tshirtsRepository.existsById(tshirtWithUsername.username())) {
+            return tshirtsRepository.save(mockupToSave);
+        } else {
+            if (tshirtsRepository.findById(tshirtWithUsername.username()).isEmpty()) {
+                throw new ChangeSetPersister.NotFoundException();
+            }
+            MockupToSave existedUser = tshirtsRepository.findById(tshirtWithUsername.username()).get();
+            existedUser.tshirtList().add(existedUser.tshirtList().size(), tshirtWithUsername.tshirtToSave());
+
+            return tshirtsRepository.save(existedUser);
+        }
     }
 }
