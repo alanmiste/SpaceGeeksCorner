@@ -1,9 +1,7 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
-import am.alanmiste.spacegeekscorner.sgc.model.ImageObject;
-import am.alanmiste.spacegeekscorner.sgc.model.MockupResponse;
-import am.alanmiste.spacegeekscorner.sgc.model.NasaResponse;
-import am.alanmiste.spacegeekscorner.sgc.model.UserItem;
+import am.alanmiste.spacegeekscorner.sgc.model.*;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,5 +49,15 @@ public class SgcController {
             @RequestBody ImageObject photoUrl
     ) throws InterruptedException {
         return sgcService.makeMockups(photoUrl);
+    }
+
+    @PostMapping("/save-mockup")
+    public ResponseEntity<MockupToSave> saveMockup(
+            @RequestBody TshirtWithUsername tshirtWithUsername
+    ) throws ChangeSetPersister.NotFoundException {
+        MockupToSave savedTshirt = sgcService.saveMockup(tshirtWithUsername);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(savedTshirt);
     }
 }
