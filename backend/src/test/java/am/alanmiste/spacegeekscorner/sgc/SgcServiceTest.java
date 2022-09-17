@@ -12,7 +12,8 @@ import static org.mockito.Mockito.*;
 class SgcServiceTest {
 
     SgcRepository sgcRepository = mock(SgcRepository.class);
-    SgcService sgcService = new SgcService(sgcRepository);
+    TshirtsRepository tshirtsRepository = mock(TshirtsRepository.class);
+    SgcService sgcService = new SgcService(sgcRepository, tshirtsRepository);
 
     @Test
     void addItem() {
