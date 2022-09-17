@@ -3,7 +3,6 @@ package am.alanmiste.spacegeekscorner.sgc;
 import am.alanmiste.spacegeekscorner.sgc.model.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -113,7 +109,7 @@ public class SgcService {
         return mockupGenerator.getBody();
     }
 
-    public MockupToSave saveMockup(TshirtWithUsername tshirtWithUsername) throws ChangeSetPersister.NotFoundException {
+    public MockupToSave saveMockup(TshirtWithUsername tshirtWithUsername) {
         TshirtToSave newTshirtToSave = new TshirtToSave(
                 tshirtWithUsername.tshirtToSave().color(),
                 tshirtWithUsername.tshirtToSave().size(),
@@ -129,16 +125,17 @@ public class SgcService {
                 tshirtWithUsername.username(), toSaveList
         );
 
-        if (!tshirtsRepository.existsById(tshirtWithUsername.username())) {
-            return tshirtsRepository.save(mockupToSave);
-        } else {
-            if (tshirtsRepository.findById(tshirtWithUsername.username()).isEmpty()) {
-                throw new ChangeSetPersister.NotFoundException();
-            }
-            MockupToSave existedUser = tshirtsRepository.findById(tshirtWithUsername.username()).get();
-            existedUser.tshirtList().add(existedUser.tshirtList().size(), tshirtWithUsername.tshirtToSave());
 
-            return tshirtsRepository.save(existedUser);
+        if (tshirtsRepository.existsById(tshirtWithUsername.username())) {
+            Optional<MockupToSave> existedUser = tshirtsRepository.findById(tshirtWithUsername.username());
+            if (existedUser.isPresent()) {
+                MockupToSave userMockup = existedUser.get();
+                userMockup.tshirtList().add(userMockup.tshirtList().size(), tshirtWithUsername.tshirtToSave());
+                return tshirtsRepository.save(userMockup);
+            } else return tshirtsRepository.save(existedUser.orElse(mockupToSave));
+        } else {
+            return tshirtsRepository.save(mockupToSave);
+
         }
     }
 }
