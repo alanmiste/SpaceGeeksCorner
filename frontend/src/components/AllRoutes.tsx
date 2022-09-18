@@ -23,11 +23,7 @@ export default function AllRoutes() {
             <Route path={'/t-shirt'} element={<Tshirts me={sgcHook.me} mockup={sgcHook.mockup}
                                                        mockupList={sgcHook.mockupList}
                                                        tshirtNumber={sgcHook.tshirtNumber}
-                                                       setTshirtNumber={sgcHook.setTshirtNumber}
-                                                       saveMockup={sgcHook.saveMockup}
-                                                       savedMockupList={sgcHook.savedMockupList}
-                                                       mockupListLength={sgcHook.mockupListLength}
-                                                       deleteMockup={sgcHook.deleteMockup}/>}/>
+                                                       setTshirtNumber={sgcHook.setTshirtNumber}/>}/>
             <Route path={'/my-account'} element={<MyAccount login={sgcHook.login}
                                                             logout={sgcHook.logout}
                                                             me={sgcHook.me}

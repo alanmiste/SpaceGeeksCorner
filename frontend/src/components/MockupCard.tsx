@@ -27,6 +27,7 @@ export default function MockupCard(props: MockupCardProps) {
                 </Typography>
             </CardContent>
             <CardActions className="MockupCardAction">
+                <Button size="small">Add to Cart</Button>
                 <Button size="small" onClick={() => {
                     props.setTshirtNumber(props.imageId)
                     window.scrollTo({top: 0, behavior: 'smooth'});

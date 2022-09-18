@@ -10,17 +10,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Service
 public class SgcService {
     private final SgcRepository sgcRepository;
-    private final TshirtsRepository tshirtsRepository;
 
-    public SgcService(SgcRepository sgcRepository, TshirtsRepository tshirtsRepository) {
+    public SgcService(SgcRepository sgcRepository) {
         this.sgcRepository = sgcRepository;
-        this.tshirtsRepository = tshirtsRepository;
     }
 
     @Value("${nasaApiUrl}")
@@ -107,53 +108,5 @@ public class SgcService {
         if (mockupGenerator == null)
             return null;
         return mockupGenerator.getBody();
-    }
-
-    public MockupToSave saveMockup(TshirtWithUsername tshirtWithUsername) {
-        TshirtToSave newTshirtToSave = new TshirtToSave(
-                tshirtWithUsername.tshirtToSave().color(),
-                tshirtWithUsername.tshirtToSave().size(),
-                tshirtWithUsername.tshirtToSave().mockupUrl(),
-                tshirtWithUsername.tshirtToSave().placement()
-        );
-
-        List<TshirtToSave> toSaveList = List.of(
-                newTshirtToSave
-        );
-
-        MockupToSave mockupToSave = new MockupToSave(
-                tshirtWithUsername.username(), toSaveList
-        );
-
-
-        if (tshirtsRepository.existsById(tshirtWithUsername.username())) {
-            Optional<MockupToSave> existedUser = tshirtsRepository.findById(tshirtWithUsername.username());
-            if (existedUser.isPresent()) {
-                MockupToSave userMockup = existedUser.get();
-                userMockup.tshirtList().add(userMockup.tshirtList().size(), tshirtWithUsername.tshirtToSave());
-                return tshirtsRepository.save(userMockup);
-            } else return tshirtsRepository.save(existedUser.orElse(mockupToSave));
-        } else {
-            return tshirtsRepository.save(mockupToSave);
-
-        }
-    }
-
-    public Optional<MockupToSave> listMockup(String username) {
-        return tshirtsRepository.findById(username);
-    }
-
-    public boolean deleteOneSavedMockup(String username, int index) {
-        if (tshirtsRepository.existsById(username)) {
-            Optional<MockupToSave> existedUser = tshirtsRepository.findById(username);
-            if (existedUser.isPresent()) {
-                existedUser.get().tshirtList().remove(index);
-                MockupToSave use1 = new MockupToSave(existedUser.get().username(), existedUser.get().tshirtList());
-                tshirtsRepository.save(use1);
-                return true;
-            }
-            return true;
-        }
-        return false;
     }
 }
