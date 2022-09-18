@@ -67,7 +67,6 @@ export default function ShowMockup(props: ShowMockupProps) {
              src={props.imageUrl}
              alt={props.placement + "view of the shirt"}/>
         <div className="showMockupDetails">
-
             <SavedItemDialog savedMockupList={props.savedMockupList}
                              mockupListLength={props.mockupListLength}
                              deleteMockup={props.deleteMockup}/>
