@@ -453,4 +453,70 @@ class SgcIntegrationTest {
                         }
                         """));
     }
+
+    @DirtiesContext
+    @Test
+    void listMockupExistedUserTest() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/sgc/save-mockup")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                        {
+                            "username": "testUser",
+                            "tshirtToSave":{
+                                "color": "White",
+                                "size": "M",
+                                "mockupUrl": "https://www.example.com",
+                                "placement": "front"
+                            }
+                        }
+                        """)
+                .with(testUser()).with(csrf()));
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/sgc/list-mockup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"username":"testUser"}
+                                 """)
+                        .with(testUser()).with(csrf())
+                ).andExpect(status().is(200))
+                .andExpect(content().json("""
+                        {
+                                    "username": "testUser",
+                                    "tshirtList":[{
+                                        "color": "White",
+                                        "size": "M",
+                                        "mockupUrl": "https://www.example.com",
+                                        "placement": "front"
+                                    }]
+                                }
+                        """));
+    }
+
+    @DirtiesContext
+    @Test
+    void listMockupNotExistedUserTest() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/sgc/save-mockup")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                        {
+                            "username": "testUser",
+                            "tshirtToSave":{
+                                "color": "White",
+                                "size": "M",
+                                "mockupUrl": "https://www.example.com",
+                                "placement": "front"
+                            }
+                        }
+                        """)
+                .with(testUser()).with(csrf()));
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/sgc/list-mockup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {"username":"testUserNotExisted"}
+                                 """)
+                        .with(testUser()).with(csrf())
+                ).andExpect(status().is(200))
+                .andReturn();
+    }
 }
