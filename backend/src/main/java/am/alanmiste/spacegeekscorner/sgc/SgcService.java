@@ -138,4 +138,22 @@ public class SgcService {
 
         }
     }
+
+    public Optional<MockupToSave> listMockup(String username) {
+        return tshirtsRepository.findById(username);
+    }
+
+    public boolean deleteOneSavedMockup(String username, int index) {
+        if (tshirtsRepository.existsById(username)) {
+            Optional<MockupToSave> existedUser = tshirtsRepository.findById(username);
+            if (existedUser.isPresent()) {
+                existedUser.get().tshirtList().remove(index);
+                MockupToSave use1 = new MockupToSave(existedUser.get().username(), existedUser.get().tshirtList());
+                tshirtsRepository.save(use1);
+                return true;
+            }
+            return true;
+        }
+        return false;
+    }
 }
