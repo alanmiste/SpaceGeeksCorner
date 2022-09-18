@@ -3,12 +3,17 @@ import {Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} fr
 import {useState} from "react";
 import {TshirtToSave} from "../type/TshirtToSave";
 import {toast} from "react-toastify";
+import SavedItemDialog from "./SavedItemDialog";
+import {SavedMockupResponse} from "../type/SavedMockupResponse";
 
 type ShowMockupProps = {
     imageUrl: string,
     placement: string,
     me: string,
     saveMockup: (username: string, tshirtToSave: TshirtToSave) => void,
+    savedMockupList: SavedMockupResponse,
+    mockupListLength: number,
+    deleteMockup: (key: number) => void,
 }
 
 export default function ShowMockup(props: ShowMockupProps) {
@@ -62,6 +67,10 @@ export default function ShowMockup(props: ShowMockupProps) {
              src={props.imageUrl}
              alt={props.placement + "view of the shirt"}/>
         <div className="showMockupDetails">
+
+            <SavedItemDialog savedMockupList={props.savedMockupList}
+                             mockupListLength={props.mockupListLength}
+                             deleteMockup={props.deleteMockup}/>
             <p>The Unisex Staple T-Shirt feels soft and light with just the right amount of stretch. It's comfortable
                 and flattering for all. We can't compliment this shirt enough–it's one of our crowd favorites, and it's
                 sure to be your next favorite too!

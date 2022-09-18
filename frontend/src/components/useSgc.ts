@@ -7,6 +7,8 @@ import {NewUserType} from "../type/NewUserType";
 import {MockupResponse} from "../type/MockupResponse";
 import {TshirtsType} from "../type/TshirtsType";
 import {TshirtToSave, TshirtWithUsername} from "../type/TshirtToSave";
+import {SavedMockupResponse} from "../type/SavedMockupResponse";
+import {DeleteMockup} from "../type/DeleteMockup";
 
 export default function useSgc() {
 
@@ -126,6 +128,7 @@ export default function useSgc() {
     });
     const [tshirtNumber, setTshirtNumber] = useState<number>(0);
 
+    const [savedMockupList, setSavedMockupList] = useState<SavedMockupResponse>({username: me, tshirtList: []});
 
     const successToast = (message: string) => {
         toast.success(message, {
@@ -176,6 +179,7 @@ export default function useSgc() {
             listUserItems()
             fetchMe()
             fetchUsernames()
+            // calculateMockupListLength()
         }, []
     )
 
@@ -264,6 +268,38 @@ export default function useSgc() {
         const tshirtWithUsername: TshirtWithUsername = {username: username, tshirtToSave: tshirtToSave}
         axios.post("api/sgc/save-mockup", tshirtWithUsername)
             .then(response => response.data)
+            .then(listMockup)
+            .then(() => setMockupListLength(mockupListLength + 1))
+            .catch(error => errorToast(error.message))
+    }
+
+    const [mockupListLength, setMockupListLength] = useState<number>(savedMockupList.tshirtList.length)
+
+    useEffect(
+        () => calculateMockupListLength()
+        , [mockupListLength])
+
+    const calculateMockupListLength = () => {
+        if (savedMockupList.tshirtList) {
+            setMockupListLength(savedMockupList.tshirtList.length)
+        } else {
+            setMockupListLength(0)
+        }
+
+    }
+    const listMockup = () => {
+        axios.post("api/sgc/list-mockup", {username: me})
+            .then(response => response.data)
+            .then(setSavedMockupList)
+            .then(() => setMockupListLength(savedMockupList.tshirtList.length))
+            .catch(error => errorToast(error.message))
+    }
+
+    const deleteMockup = (index: number) => {
+        const deleteMockup1: DeleteMockup = {username: me, index: index}
+        axios.put("api/sgc/list-mockup", deleteMockup1)
+            .then(listMockup)
+            .then(() => setMockupListLength(savedMockupList.tshirtList.length - 1))
             .catch(error => errorToast(error.message))
     }
 
@@ -282,6 +318,10 @@ export default function useSgc() {
         mockupList,
         tshirtNumber,
         setTshirtNumber,
-        saveMockup
+        saveMockup,
+        savedMockupList,
+        listMockup,
+        mockupListLength,
+        deleteMockup
     }
 }
