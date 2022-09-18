@@ -10,16 +10,22 @@
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=alanmiste_SpaceGeeksCorner-backend)
 
+<p align="center" style="width:600px">
+ <img width="250" height="250" src="https://raw.githubusercontent.com/alanmiste/plants/master/SGCLogoGIF.gif" alt="Space Geeks Corner Logo"/>
+</p>
 
  <font size="5"> **Why?**</font> 
 
  <font size="5">In my free time I design photos, and sometimes the design takes a long time, so I always wished it would be easier. Hence the idea to create an application that creates designs in the fewest steps possible, and I don't think there is less than one click.
 And since I'm a space geek, I couldn't find a better than space photo to be the hero of this app.
 </font>
+
  <font size="5"> **What?!**</font> 
+ 
  <font size="5">It is an application that allows viewing of various images fetched from NASA via its API. The logged in user can add photos to his favourites or delete them if he no longer wants them. He can also create T-shirts Mockup from the photos he likes with just one click!</font> 
 
-<font size="5"> **How?!**</font> 
+<font size="5">**How?!**</font> 
+
  <font size="5">Using the following techniques I was able to create this application:
 `Java` `Spring` `Maven` `Typescript` `React` `HTML` `CSS` `MongoDB` `Git/Github` `Docker` `Heroku` `CI/CD` `Junit` `Mocking` `SonarCloud` `RestAPI` 
 </font> 
