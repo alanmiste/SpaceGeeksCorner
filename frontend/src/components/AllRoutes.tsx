@@ -27,7 +27,8 @@ export default function AllRoutes() {
                                                        saveMockup={sgcHook.saveMockup}
                                                        savedMockupList={sgcHook.savedMockupList}
                                                        mockupListLength={sgcHook.mockupListLength}
-                                                       deleteMockup={sgcHook.deleteMockup}/>}/>
+                                                       deleteMockup={sgcHook.deleteMockup}
+                                                       setMockupListLength={sgcHook.setMockupListLength}/>}/>
             <Route path={'/my-account'} element={<MyAccount login={sgcHook.login}
                                                             logout={sgcHook.logout}
                                                             me={sgcHook.me}

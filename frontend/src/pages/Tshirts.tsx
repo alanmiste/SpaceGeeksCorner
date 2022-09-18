@@ -17,6 +17,7 @@ type TshirtsProps = {
     saveMockup: (username: string, tshirtToSave: TshirtToSave) => void,
     savedMockupList: SavedMockupResponse,
     mockupListLength: number,
+    setMockupListLength: (number: number) => void,
     deleteMockup: (key: number) => void,
 }
 export default function Tshirts(props: TshirtsProps) {
@@ -26,7 +27,8 @@ export default function Tshirts(props: TshirtsProps) {
             <ShowMockup imageUrl={props.mockupList[props.tshirtNumber].mockupUrl}
                         placement={props.mockupList[props.tshirtNumber].placement} me={props.me}
                         saveMockup={props.saveMockup} savedMockupList={props.savedMockupList}
-                        mockupListLength={props.mockupListLength} deleteMockup={props.deleteMockup}/>
+                        mockupListLength={props.mockupListLength} deleteMockup={props.deleteMockup}
+                        setMockupListLength={props.setMockupListLength}/>
             <MockupCardList mockupList={props.mockupList} setTshirtNumber={props.setTshirtNumber}/>
         </div>
         <Footer/>

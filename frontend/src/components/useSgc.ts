@@ -179,7 +179,6 @@ export default function useSgc() {
             listUserItems()
             fetchMe()
             fetchUsernames()
-            // calculateMockupListLength()
         }, []
     )
 
@@ -275,23 +274,10 @@ export default function useSgc() {
 
     const [mockupListLength, setMockupListLength] = useState<number>(savedMockupList.tshirtList.length)
 
-    useEffect(
-        () => calculateMockupListLength()
-        , [mockupListLength])
-
-    const calculateMockupListLength = () => {
-        if (savedMockupList.tshirtList) {
-            setMockupListLength(savedMockupList.tshirtList.length)
-        } else {
-            setMockupListLength(0)
-        }
-
-    }
     const listMockup = () => {
         axios.post("api/sgc/list-mockup", {username: me})
             .then(response => response.data)
             .then(setSavedMockupList)
-            .then(() => setMockupListLength(savedMockupList.tshirtList.length))
             .catch(error => errorToast(error.message))
     }
 
@@ -323,6 +309,7 @@ export default function useSgc() {
         savedMockupList,
         listMockup,
         mockupListLength,
-        deleteMockup
+        deleteMockup,
+        setMockupListLength
     }
 }
