@@ -183,7 +183,6 @@ export default function useSgc() {
     )
 
 
-
     const login = (username: string, password: string) => {
         if (username === "" || password === "")
             warnToast("Username and Password shouldn't be empty!")
