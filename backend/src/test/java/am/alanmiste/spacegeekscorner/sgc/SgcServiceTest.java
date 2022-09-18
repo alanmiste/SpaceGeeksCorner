@@ -1,9 +1,13 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
+import am.alanmiste.spacegeekscorner.sgc.model.MockupToSave;
+import am.alanmiste.spacegeekscorner.sgc.model.TshirtToSave;
 import am.alanmiste.spacegeekscorner.sgc.model.UserItem;
+import am.alanmiste.spacegeekscorner.sgc.model.UsernameType;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -86,5 +90,23 @@ class SgcServiceTest {
 
         sgcService.deleteItem(userItem.id());
         verify(sgcRepository, times(0)).deleteById(userItem.id());
+    }
+
+    @Test
+    void listMockup() {
+        MockupToSave mockupToSave = new MockupToSave("testUser", List.of(
+                new TshirtToSave("Black", "M", "https://www.example.com", "front"),
+                new TshirtToSave("White", "S", "https://www.example.com", "back")
+        ));
+        UsernameType testUser = new UsernameType("testUser");
+        when(tshirtsRepository.findById(testUser.username())).thenReturn(Optional.of(mockupToSave));
+
+        Optional<MockupToSave> actual = sgcService.listMockup("testUser");
+        Optional<MockupToSave> expected = Optional.of(new MockupToSave("testUser", List.of(
+                new TshirtToSave("Black", "M", "https://www.example.com", "front"),
+                new TshirtToSave("White", "S", "https://www.example.com", "back")
+        )));
+
+        assertThat(actual).isEqualTo(expected);
     }
 }
