@@ -108,7 +108,6 @@ export default function ShowMockup(props: ShowMockupProps) {
             </div>
             <Button size="small" onClick={() => {
                 addToCart()
-                props.setMockupListLength(props.mockupListLength + 1)
             }}>Add to Cart</Button>
         </div>
     </div>
