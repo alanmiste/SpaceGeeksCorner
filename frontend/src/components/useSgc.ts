@@ -300,6 +300,7 @@ export default function useSgc() {
         axios.put("api/sgc/list-mockup", deleteMockup1)
             .then(listMockup)
             .then(() => setMockupListLength(savedMockupList.tshirtList.length - 1))
+            .then(() => successToast('One Item deleted successfully! ❎'))
             .catch(error => errorToast(error.message))
     }
 
