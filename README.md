@@ -68,3 +68,27 @@ The project is available on the link below via Heroku: <br>
 As long as the app is all about space images, I thought it best for the app's colors to be inspired by space, so I adopted the following color palette.
 
 <img width="600" src="https://raw.githubusercontent.com/alanmiste/plants/master/sgcColorpalettePNG.png" alt="Space Geeks Corner Color Palette" />
+
+
+## Photos.
+These are some photos from the app.
+
+<img width="800" src="https://raw.githubusercontent.com/alanmiste/plants/master/SgcScreenshot-7.png" alt="SGC Desktop screenshot" />
+<img width="500" src="https://raw.githubusercontent.com/alanmiste/plants/master/SgcScreenshot-6.png" alt="SGC IpadAir Sign up screenshot" />
+<img width="500" src="https://raw.githubusercontent.com/alanmiste/plants/master/SgcScreenshot-5.png" alt="Sgc IpadAir T-Shirts tap sreenshot" />
+<div display="flex">
+<img width="400" src="https://raw.githubusercontent.com/alanmiste/plants/master/SgcScreenshot-4.png" alt="SGC mobile Loading page screenshot" />
+<img width="400" src="https://raw.githubusercontent.com/alanmiste/plants/master/SgcScreenshot-3.png" alt="SGC mobile Favourite page screenshot" />
+ </div>
+
+
+
+## Mockups.
+These are some of the Mockups that can be generated via the app.
+
+<div display="flex">
+<img width="400" src="https://raw.githubusercontent.com/alanmiste/plants/master/sgc-staple-t-shirt-black-front-1.jpeg" alt="SGC T-Shit Black Front 1 Mockup" />
+<img width="400" src="https://raw.githubusercontent.com/alanmiste/plants/master/sgc-staple-t-shirt-black-front-2.jpeg" alt="SGC T-Shit Black Front 2 Mockup" />
+ <img width="400" src="https://raw.githubusercontent.com/alanmiste/plants/master/sgc-staple-t-shirt-white-front-1.jpeg" alt="SGC T-Shit White Front 2 Mockup" />
+ <img width="400" src="https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtBF.jpeg" alt="SGCLogo T-Shit Black Front Mockup" />
+ </div>
