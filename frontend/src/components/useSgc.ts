@@ -9,6 +9,8 @@ import {TshirtsType} from "../type/TshirtsType";
 import {TshirtToSave, TshirtWithUsername} from "../type/TshirtToSave";
 import {SavedMockupResponse} from "../type/SavedMockupResponse";
 import {DeleteMockup} from "../type/DeleteMockup";
+import {wait} from "@testing-library/user-event/dist/utils";
+import {useNavigate} from "react-router-dom";
 
 export default function useSgc() {
 
@@ -246,11 +248,24 @@ export default function useSgc() {
             .then(() => successToast('Congratulations 🚀' + newUser.username + ' You Signed up successfully! ✅'))
     }
 
+    const navigate = useNavigate();
     const makeMockup = (imageUrl: string) => {
         const imageOgject = {"image_url": imageUrl}
         axios.post("api/sgc/make-mockups", imageOgject)
             .then(response => response.data)
             .then(setMockup)
+            .then(() => {
+                toast.info('Please wait ⏳, processing ⚙️, you\'ll be redirected to "T-Shirts".', {
+                    position: "top-center",
+                    autoClose: 10000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: false,
+                    draggable: false,
+                    progress: undefined,
+                });
+                wait(5000).then(() => navigate('/t-shirt'))
+            })
             .catch(() => toast.warn('Server is busy ⏳, please try again in 30 second!', {
                 position: "top-center",
                 autoClose: 10000,
