@@ -63,3 +63,8 @@ The project is available on the link below via Heroku: <br>
 -   The App will run on  [http://localhost:3000](http://localhost:3000/)  in the browser.  
     
     
+## Colors.
+
+As long as the app is all about space images, I thought it best for the app's colors to be inspired by space, so I adopted the following color palette.
+
+<img width="600" src="https://raw.githubusercontent.com/alanmiste/plants/master/sgcColorpalettePNG.png" alt="Space Geeks Corner Color Palette" />
