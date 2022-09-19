@@ -14,6 +14,12 @@
  <img width="250" height="250" src="https://raw.githubusercontent.com/alanmiste/plants/master/SGCLogoGIF.gif" alt="Space Geeks Corner Logo"/>
 </p>
 
+---
+
+[API](#api) | [Available](#available) | [Installation](#installation) | [Colors](#colors) | [Photos](#photos) | [Mockups](#mockups) | [Tack a Tour](#take-a-tour)
+
+---
+
  <font size="5"> **Why?**</font> 
 
  <font size="5">In my free time I design photos, and sometimes the design takes a long time, so I always wished it would be easier. Hence the idea to create an application that creates designs in the fewest steps possible, and I don't think there is less than one click.
@@ -30,17 +36,21 @@ And since I'm a space geek, I couldn't find a better than space photo to be the 
 `Java` `Spring` `Maven` `Typescript` `React` `HTML` `CSS` `MongoDB` `Git/Github` `Docker` `Heroku` `CI/CD` `Junit` `Mocking` `SonarCloud` `RestAPI` 
 </font> 
 
+---
 
 ## API
 **NASA API**  and **Printful API**
  you can read more about it in the  [Space Geeks Corner wiki](https://github.com/alanmiste/SpaceGeeksCorner/wiki) ).
 
+---
 
 ## Available
 
 The project is available on the link below via Heroku: <br>
 [Live Link](https://spacegeekscorner.herokuapp.com)
 > **Note:** Within the free Heroku hosting service, the application is put to sleep about half an hour after the last activity, so it may take a few seconds to work sometimes.
+
+---
 
 ## Installation
 
@@ -62,13 +72,16 @@ The project is available on the link below via Heroku: <br>
     
 -   The App will run on  [http://localhost:3000](http://localhost:3000/)  in the browser.  
     
-    
+ 
+---
+ 
 ## Colors.
 
 As long as the app is all about space images, I thought it best for the app's colors to be inspired by space, so I adopted the following color palette.
 
 <img width="600" src="https://raw.githubusercontent.com/alanmiste/plants/master/sgcColorpalettePNG.png" alt="Space Geeks Corner Color Palette" />
 
+---
 
 ## Photos.
 These are some photos from the app.
@@ -82,6 +95,7 @@ These are some photos from the app.
  </div>
 
 
+---
 
 ## Mockups.
 These are some of the Mockups that can be generated via the app.
@@ -92,3 +106,13 @@ These are some of the Mockups that can be generated via the app.
  <img width="400" src="https://raw.githubusercontent.com/alanmiste/plants/master/sgc-staple-t-shirt-white-front-1.jpeg" alt="SGC T-Shit White Front 2 Mockup" />
  <img width="400" src="https://raw.githubusercontent.com/alanmiste/plants/master/SgcDefaultTshirtBF.jpeg" alt="SGCLogo T-Shit Black Front Mockup" />
  </div>
+ 
+---
+
+## Take a Tour
+
+You can watch a very quick tour through the app
+> Unfortunately I couldn't create a **GIF** that was more than 30 seconds long.
+
+<br>
+<img src="https://raw.githubusercontent.com/alanmiste/plants/master/Sgc-Tour-gif.gif" alt="Sgc Tour" />
