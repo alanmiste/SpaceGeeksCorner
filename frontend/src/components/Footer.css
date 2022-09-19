@@ -20,3 +20,10 @@ footer {
 span {
     padding-right: 2em;
 }
+
+.footerLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
