@@ -1,7 +1,7 @@
 .infoBtn .infoSpan {
     visibility: hidden;
     width: 15em;
-    background-color: rgba(0, 0, 0, 0.47);
+    background-color: rgba(0, 0, 0, 0.65);
     font-size: 0.5em;
     color: #ffffff;
     text-align: left;
@@ -19,7 +19,7 @@
     position: absolute;
     bottom: 100%;
     left: 80%;
-    margin-left: -5px;
+    margin-left: -45px;
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent black transparent;
