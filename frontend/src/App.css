@@ -13,7 +13,7 @@
 body {
     font-family: 'MuseoModerno', cursive;
     background-image: url('/src/materials/backgroundSgc.svg');
-    background-size: contain;
+    background-size: cover;
     background-position: center;
-    padding-top: 10em;
+    padding-top: 9em;
 }

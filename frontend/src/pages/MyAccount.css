@@ -3,14 +3,14 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding-top: 5em;
+    padding-top: 2em;
 }
 
 .logout {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 10em;
+    padding-top: 8em;
 }
 
 .btn {
