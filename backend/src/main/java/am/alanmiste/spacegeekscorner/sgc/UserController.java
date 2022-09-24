@@ -50,4 +50,10 @@ public class UserController {
                 .status(HttpStatus.CREATED)
                 .body(savedUser.username());
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String id) {
+        boolean deleteSuccess = appUserDetailsService.deleteUser(id);
+        return new ResponseEntity<>(deleteSuccess ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND);
+    }
 }
