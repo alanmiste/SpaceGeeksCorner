@@ -106,4 +106,30 @@ class AuthenticationIntegrationTest {
                         """));
 
     }
+
+    @DirtiesContext
+    @Test
+    void deleteUserTestNotExistedUser() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                { "username": "testuser",
+                                "password": "password"}
+                                """).with(testUser()).with(csrf())
+                ).andReturn()
+                .getResponse()
+                .getContentAsString();
+
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("http://localhost:8080/api/users/" + "notExistedUser")
+                        .with(testUser()).with(csrf()))
+                .andExpect(status().isNotFound());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080/api/users/listusers"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        ["testuser"]
+                        """));
+
+    }
 }
