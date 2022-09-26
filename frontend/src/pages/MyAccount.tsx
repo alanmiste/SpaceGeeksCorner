@@ -5,6 +5,7 @@ import {Button} from "@mui/material";
 import React from "react";
 import {NewUserType} from "../type/NewUserType";
 import Footer from "../components/Footer";
+import DeleteUserDialog from "../components/DeleteUserDialog";
 
 type MyAccountProps = {
     me: string,
@@ -30,6 +31,7 @@ export default function MyAccount(props: MyAccountProps) {
                     : <div className="logout">
                         <Button type="submit" variant="outlined" fullWidth
                                 className='btn' onClick={props.logout}>Logout</Button>
+                        <DeleteUserDialog/>
                     </div>
 
             }
