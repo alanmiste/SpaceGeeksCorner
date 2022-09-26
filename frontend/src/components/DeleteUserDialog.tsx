@@ -34,14 +34,14 @@ export default function DeleteUserDialog() {
                         margin="dense"
                         id="name"
                         label="Enter your password"
-                        type="email"
+                        type="password"
                         fullWidth
                         variant="standard"
                     />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Yes, I'm sure!</Button>
+                    <Button color="error" onClick={handleClose}>Yes, I'm sure!</Button>
                 </DialogActions>
             </Dialog>
         </div>
