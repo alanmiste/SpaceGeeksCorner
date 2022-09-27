@@ -13,6 +13,7 @@ type MyAccountProps = {
     logout: () => void,
     usernames: string[],
     register: (newUser: NewUserType) => void,
+    deleteUser: (username: string) => void,
 }
 
 export default function MyAccount(props: MyAccountProps) {
@@ -31,7 +32,7 @@ export default function MyAccount(props: MyAccountProps) {
                     : <div className="logout">
                         <Button type="submit" variant="outlined" fullWidth
                                 className='btn' onClick={props.logout}>Logout</Button>
-                        <DeleteUserDialog/>
+                        <DeleteUserDialog deleteUser={props.deleteUser} me={props.me} logout={props.logout}/>
                     </div>
 
             }

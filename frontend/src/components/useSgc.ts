@@ -304,6 +304,13 @@ export default function useSgc() {
             .catch(error => errorToast(error.message))
     }
 
+    const deleteUser = (username: string) => {
+        axios.delete("/api/users/" + username)
+            .then(() => successToast('Your account is deleted successfully! ❎'))
+            .then(fetchUsernames)
+            .catch(() => errorToast("The TEXT is incorrect."))
+    }
+
     return {
         filteredNasaData,
         me,
@@ -324,6 +331,7 @@ export default function useSgc() {
         listMockup,
         mockupListLength,
         deleteMockup,
-        setMockupListLength
+        setMockupListLength,
+        deleteUser
     }
 }
