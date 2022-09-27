@@ -8,9 +8,11 @@
 
 .logout {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    flex-direction: column;
     padding-top: 8em;
+    height: 10em;
 }
 
 .btn {

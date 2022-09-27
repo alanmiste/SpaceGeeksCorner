@@ -9,8 +9,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class AppUserDetailsServiceTest {
 
@@ -43,5 +42,27 @@ class AppUserDetailsServiceTest {
         AppUser actual = appUserDetailsService.register(new NewUser("testUser", "password"));
 
         assertThat(actual).isEqualTo(appUser);
+    }
+
+    @Test
+    void deleteUserExisted() {
+        AppUser appUser = new AppUser("testUser", "hashedPassword");
+
+        when(appUserRepository.existsById(appUser.username())).thenReturn(true);
+        doNothing().when(appUserRepository).deleteById(appUser.username());
+
+        appUserDetailsService.deleteUser(appUser.username());
+        verify(appUserRepository).deleteById(appUser.username());
+    }
+
+    @Test
+    void deleteUserNotExisted() {
+        AppUser appUser = new AppUser("testUser", "hashedPassword");
+
+        when(appUserRepository.existsById(appUser.username())).thenReturn(false);
+        doNothing().when(appUserRepository).deleteById(appUser.username());
+
+        appUserDetailsService.deleteUser(appUser.username());
+        verify(appUserRepository, times(0)).deleteById(appUser.username());
     }
 }

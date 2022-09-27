@@ -1,5 +1,6 @@
 package am.alanmiste.spacegeekscorner.sgc;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,6 +23,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AuthenticationIntegrationTest {
     @Autowired
     MockMvc mockMvc;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     @Test
     void unauthorized() throws Exception {
@@ -75,5 +79,57 @@ class AuthenticationIntegrationTest {
 
                 ).andExpect(status().is(201))
                 .andExpect(content().string("testuser"));
+    }
+
+    @DirtiesContext
+    @Test
+    void deleteUserTestExistedUser() throws Exception {
+        String savedResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                { "username": "testuser",
+                                "password": "password"}
+                                """).with(testUser()).with(csrf())
+                ).andReturn()
+                .getResponse()
+                .getContentAsString();
+
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("http://localhost:8080/api/users/" + savedResult)
+                        .with(testUser()).with(csrf()))
+                .andExpect(status().isNoContent());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080/api/users/listusers"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        []
+                        """));
+
+    }
+
+    @DirtiesContext
+    @Test
+    void deleteUserTestNotExistedUser() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/users")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                { "username": "testuser",
+                                "password": "password"}
+                                """).with(testUser()).with(csrf())
+                ).andReturn()
+                .getResponse()
+                .getContentAsString();
+
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("http://localhost:8080/api/users/" + "notExistedUser")
+                        .with(testUser()).with(csrf()))
+                .andExpect(status().isNotFound());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080/api/users/listusers"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        ["testuser"]
+                        """));
+
     }
 }

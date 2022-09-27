@@ -40,4 +40,12 @@ public class AppUserDetailsService implements UserDetailsService {
                 new BCryptPasswordEncoder()
                         .encode(newUser.password())));
     }
+
+    public boolean deleteUser(String id) {
+        if (appUserRepository.existsById(id)) {
+            appUserRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }

@@ -34,6 +34,7 @@ export default function AllRoutes() {
                                                             me={sgcHook.me}
                                                             usernames={sgcHook.usernames}
                                                             register={sgcHook.register}
+                                                            deleteUser={sgcHook.deleteUser}
             />}/>
         </Routes>
     </>)
