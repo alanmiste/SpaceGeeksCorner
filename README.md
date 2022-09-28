@@ -1,5 +1,4 @@
-
-# <h1 align="center">Space Geeks Corner</h1>
+<h1 align="center">Space Geeks Corner</h1>
 ---
 
 
